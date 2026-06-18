@@ -104,44 +104,69 @@ if (!prefersReducedMotion) {
 }
 
 /* ============================================================
-   CONTACT FORM — demo handler
+   CONTACT FORM — Web3Forms
    ============================================================ */
-const contactForm   = document.getElementById('contact-form');
-const formSuccess   = document.getElementById('form-success');
+const contactForm     = document.getElementById('contact-form');
+const formSuccess     = document.getElementById('form-success');
+const formSubmitError = document.getElementById('form-submit-error');
 
 if (contactForm && formSuccess) {
 
-  function getField(id)      { return document.getElementById(id); }
-  function getError(id)      { return document.getElementById(id + '-error'); }
+  let isSubmitting   = false;
+  let lastSubmitTime = 0;
+  const RATE_LIMIT_MS = 60_000; // one submission per minute
+
+  /* ── helpers ── */
+  const getField = id => document.getElementById(id);
+  const getError = id => document.getElementById(id + '-error');
+
   function setError(id, msg) {
     const field = getField(id);
     const err   = getError(id);
-    if (!field || !err) return false;
+    if (!field || !err) return !msg;
     if (msg) {
       field.classList.add('is-invalid');
+      field.setAttribute('aria-describedby', id + '-error');
       err.textContent = msg;
       return false;
     }
     field.classList.remove('is-invalid');
+    field.removeAttribute('aria-describedby');
     err.textContent = '';
     return true;
   }
 
+  function showFormError(msg) {
+    if (!formSubmitError) return;
+    formSubmitError.textContent = msg;
+    formSubmitError.hidden = false;
+  }
+
+  function clearFormError() {
+    if (!formSubmitError) return;
+    formSubmitError.textContent = '';
+    formSubmitError.hidden = true;
+  }
+
+  /* ── validation ── */
   function validateForm() {
     let valid = true;
 
     const name    = getField('name');
     const email   = getField('email');
+    const phone   = getField('phone');
     const message = getField('message');
 
-    if (!name || !name.value.trim()) {
+    // Name — required
+    if (!name?.value.trim()) {
       setError('name', 'Please enter your full name.');
       valid = false;
     } else {
       setError('name', '');
     }
 
-    if (!email || !email.value.trim()) {
+    // Email — required, format check
+    if (!email?.value.trim()) {
       setError('email', 'Please enter your email address.');
       valid = false;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
@@ -151,7 +176,21 @@ if (contactForm && formSuccess) {
       setError('email', '');
     }
 
-    if (!message || !message.value.trim()) {
+    // Phone — optional, validate format if provided
+    if (phone?.value.trim()) {
+      const digits = phone.value.replace(/\D/g, '');
+      if (digits.length < 10 || digits.length > 11) {
+        setError('phone', 'Please enter a valid 10-digit phone number.');
+        valid = false;
+      } else {
+        setError('phone', '');
+      }
+    } else {
+      setError('phone', '');
+    }
+
+    // Message — required
+    if (!message?.value.trim()) {
       setError('message', 'Please describe how I can help.');
       valid = false;
     } else {
@@ -161,50 +200,74 @@ if (contactForm && formSuccess) {
     return valid;
   }
 
-  // Clear error on input
-  ['name', 'email', 'message'].forEach(id => {
-    const field = getField(id);
-    if (field) {
-      field.addEventListener('input', () => setError(id, ''));
-    }
+  // Clear field error as user types
+  ['name', 'email', 'phone', 'message'].forEach(id => {
+    getField(id)?.addEventListener('input', () => setError(id, ''));
   });
 
+  /* ── submit button state ── */
+  function setSubmitState(loading) {
+    const btn = contactForm.querySelector('button[type="submit"]');
+    if (!btn) return;
+    if (loading) {
+      btn._originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      btn.textContent = 'Sending…';
+    } else {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      btn.innerHTML = btn._originalHTML || 'Send Message';
+    }
+  }
+
+  /* ── submit handler ── */
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    clearFormError();
 
-    if (!validateForm()) {
-      // Focus first invalid field
-      const firstInvalid = contactForm.querySelector('.is-invalid');
-      if (firstInvalid) firstInvalid.focus();
+    // Prevent duplicate submissions
+    if (isSubmitting) return;
+
+    // Client-side rate limiting
+    const now = Date.now();
+    if (now - lastSubmitTime < RATE_LIMIT_MS) {
+      const wait = Math.ceil((RATE_LIMIT_MS - (now - lastSubmitTime)) / 1000);
+      showFormError(`Please wait ${wait} second${wait !== 1 ? 's' : ''} before submitting again.`);
       return;
     }
 
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
+    if (!validateForm()) {
+      contactForm.querySelector('.is-invalid')?.focus();
+      return;
     }
+
+    isSubmitting = true;
+    setSubmitState(true);
 
     try {
       const res  = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: new FormData(contactForm)
+        method : 'POST',
+        headers: { 'Accept': 'application/json' },
+        body   : new FormData(contactForm)
       });
       const data = await res.json();
 
       if (data.success) {
+        lastSubmitTime = Date.now();
         contactForm.hidden = true;
         formSuccess.hidden = false;
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        throw new Error(data.message || 'Submission failed');
+        throw new Error(data.message || 'Submission failed.');
       }
     } catch {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Message';
-      }
-      alert('Something went wrong. Please email yilmmazburak@gmail.com or call (619) 689-8903.');
+      showFormError(
+        'Something went wrong. Please email yap.itsupport@gmail.com or call (619) 333-8350.'
+      );
+      setSubmitState(false);
+    } finally {
+      isSubmitting = false;
     }
   });
 }
