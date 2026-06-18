@@ -255,8 +255,8 @@ if (contactForm && formSuccess) {
 
       if (data.success) {
         lastSubmitTime = Date.now();
-        contactForm.hidden = true;
-        formSuccess.hidden = false;
+        contactForm.style.display = 'none';
+        formSuccess.style.display = 'block';
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         throw new Error(data.message || 'Submission failed.');
@@ -265,9 +265,9 @@ if (contactForm && formSuccess) {
       showFormError(
         'Something went wrong. Please email yap.itsupport@gmail.com or call (619) 333-8350.'
       );
-      setSubmitState(false);
     } finally {
       isSubmitting = false;
+      setSubmitState(false);
     }
   });
 }
