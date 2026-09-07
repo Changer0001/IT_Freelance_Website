@@ -73,8 +73,8 @@
   <!-- Prevent flash of wrong theme -->
   <script>
     (function(){
-      var t = localStorage.getItem('theme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      // Dark is the primary theme for this palette; a saved toggle choice still wins.
+      var t = localStorage.getItem('theme') || 'dark';
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
@@ -104,13 +104,13 @@
     <div class="container header__inner">
       <a href="#hero" class="logo" aria-label="YAP-IT — Home">
         <svg width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <rect width="40" height="40" rx="10" fill="#c8683a" fill-opacity="0.13"/>
-          <rect width="40" height="40" rx="10" stroke="#c8683a" stroke-opacity="0.28" stroke-width="1" fill="none"/>
-          <path d="M11 8L20 20M29 8L20 20M20 20V32" stroke="#c8683a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="11" cy="8" r="3.5" fill="#c8683a"/>
-          <circle cx="29" cy="8" r="3.5" fill="#c8683a"/>
-          <circle cx="20" cy="32" r="3.5" fill="#c8683a"/>
-          <circle cx="20" cy="20" r="5.5" fill="#c8683a"/>
+          <rect width="40" height="40" rx="10" fill="#6366f1" fill-opacity="0.13"/>
+          <rect width="40" height="40" rx="10" stroke="#6366f1" stroke-opacity="0.28" stroke-width="1" fill="none"/>
+          <path d="M11 8L20 20M29 8L20 20M20 20V32" stroke="#6366f1" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="11" cy="8" r="3.5" fill="#6366f1"/>
+          <circle cx="29" cy="8" r="3.5" fill="#6366f1"/>
+          <circle cx="20" cy="32" r="3.5" fill="#6366f1"/>
+          <circle cx="20" cy="20" r="5.5" fill="#6366f1"/>
           <circle cx="20" cy="20" r="2.5" fill="white" fill-opacity="0.28"/>
         </svg>
         <span>YAP-IT</span>
@@ -153,7 +153,7 @@
       <div class="hero__nodes" aria-hidden="true">
         <svg class="hero__svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <!-- Network connection lines -->
-          <g stroke="#c8683a" stroke-opacity="0.12" stroke-width="1" fill="none">
+          <g stroke="#6366f1" stroke-opacity="0.12" stroke-width="1" fill="none">
             <line x1="100" y1="120" x2="340" y2="200"/>
             <line x1="340" y1="200" x2="580" y2="140"/>
             <line x1="580" y1="140" x2="820" y2="260"/>
@@ -171,7 +171,7 @@
             <line x1="480" y1="430" x2="820" y2="260"/>
           </g>
           <!-- Network nodes -->
-          <g fill="#c8683a">
+          <g fill="#6366f1">
             <circle cx="100" cy="120" r="3.5" fill-opacity="0.45"/>
             <circle cx="340" cy="200" r="5" fill-opacity="0.60"/>
             <circle cx="580" cy="140" r="4" fill-opacity="0.50"/>
@@ -685,13 +685,13 @@
       <div class="footer__brand">
         <a href="#hero" class="logo" aria-label="YAP-IT — Back to top">
           <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect width="40" height="40" rx="10" fill="#c8683a" fill-opacity="0.13"/>
-            <rect width="40" height="40" rx="10" stroke="#c8683a" stroke-opacity="0.28" stroke-width="1" fill="none"/>
-            <path d="M11 8L20 20M29 8L20 20M20 20V32" stroke="#c8683a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="11" cy="8" r="3.5" fill="#c8683a"/>
-            <circle cx="29" cy="8" r="3.5" fill="#c8683a"/>
-            <circle cx="20" cy="32" r="3.5" fill="#c8683a"/>
-            <circle cx="20" cy="20" r="5.5" fill="#c8683a"/>
+            <rect width="40" height="40" rx="10" fill="#6366f1" fill-opacity="0.13"/>
+            <rect width="40" height="40" rx="10" stroke="#6366f1" stroke-opacity="0.28" stroke-width="1" fill="none"/>
+            <path d="M11 8L20 20M29 8L20 20M20 20V32" stroke="#6366f1" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="11" cy="8" r="3.5" fill="#6366f1"/>
+            <circle cx="29" cy="8" r="3.5" fill="#6366f1"/>
+            <circle cx="20" cy="32" r="3.5" fill="#6366f1"/>
+            <circle cx="20" cy="20" r="5.5" fill="#6366f1"/>
             <circle cx="20" cy="20" r="2.5" fill="white" fill-opacity="0.28"/>
           </svg>
           <span>YAP-IT</span>
