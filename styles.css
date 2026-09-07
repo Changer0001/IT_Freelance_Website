@@ -1708,3 +1708,483 @@ a.contact__value:hover { color: var(--color-accent); }
     color 0.3s ease,
     box-shadow 0.3s ease !important;
 }
+
+/* ============================================================
+   AI VOICE — hero split layout, live call card
+   ============================================================ */
+.hero__content--split {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero__eyebrow-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  animation: yap-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes yap-pulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 7px rgba(74,222,128,0.9); }
+  50%      { opacity: 0.5; box-shadow: 0 0 16px rgba(74,222,128,0.5); }
+}
+
+/* Understated pointer to the IT/cabling side of the business */
+.hero__also {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-size: var(--size-sm);
+  color: var(--color-text-faint);
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.hero__also a {
+  color: var(--color-text-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-accent);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.hero__also a:hover { color: var(--color-accent); }
+
+/* ---- Live call card ---- */
+.hero__visual { display: flex; flex-direction: column; gap: 0.875rem; }
+
+.call-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-mid);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-lg, 0 12px 40px rgba(0,0,0,0.12));
+  overflow: hidden;
+}
+
+.call-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.call-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: var(--size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #16a34a;
+}
+
+.call-card__dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: yap-pulse 1.8s ease-in-out infinite;
+}
+
+.call-card__time {
+  font-size: var(--size-xs);
+  color: var(--color-text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.call-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1.25rem;
+}
+
+.chat-bubble {
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-lg);
+  font-size: var(--size-sm);
+  line-height: 1.6;
+}
+
+.chat-bubble__meta {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.chat-bubble--caller {
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+}
+.chat-bubble--caller .chat-bubble__meta { color: var(--color-text-faint); }
+
+.chat-bubble--ai {
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  border-bottom-right-radius: var(--radius-sm);
+  color: var(--color-text);
+}
+.chat-bubble--ai .chat-bubble__meta { color: var(--color-accent); }
+
+.ai-badge {
+  display: inline-block;
+  padding: 0.05rem 0.32rem;
+  margin-left: 0.2rem;
+  background: var(--color-accent);
+  border-radius: 0.28rem;
+  font-size: 0.56rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.06em;
+  vertical-align: middle;
+}
+
+@keyframes yap-typing {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0.35; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+.chat-bubble__typing { display: flex; gap: 3px; margin-top: 0.6rem; }
+.chat-bubble__typing span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: yap-typing 1.4s ease-in-out infinite;
+}
+.chat-bubble__typing span:nth-child(2) { animation-delay: 0.18s; }
+.chat-bubble__typing span:nth-child(3) { animation-delay: 0.36s; }
+
+.call-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.call-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--size-xs);
+  color: var(--color-text-faint);
+}
+
+.call-tags { display: flex; gap: 0.4rem; }
+
+.call-tag {
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+/* Spam filter mini-card */
+.filter-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-mid);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.filter-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: var(--radius-sm);
+  background: rgba(74,222,128,0.13);
+  border: 1px solid rgba(74,222,128,0.3);
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.filter-card__text { display: flex; flex-direction: column; line-height: 1.4; }
+.filter-card__text strong { font-size: var(--size-xs); color: var(--color-text); }
+.filter-card__text span   { font-size: 0.68rem; color: var(--color-text-faint); }
+
+/* ============================================================
+   AI VOICE — capability grid
+   ============================================================ */
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.ai-card {
+  padding: 2rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.ai-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-accent);
+  box-shadow: 0 10px 34px rgba(0,0,0,0.10);
+}
+
+.ai-card--wide {
+  grid-column: span 2;
+  background: var(--color-featured);
+  border-color: var(--color-border-accent);
+}
+
+.ai-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px; height: 52px;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  color: var(--color-accent);
+}
+
+.ai-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.ai-card p {
+  font-size: var(--size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.72;
+}
+
+.ai-card__tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.25rem; }
+
+.ai-card__tags span {
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.how-it-works { background: var(--color-bg-surface); }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.step {
+  padding: 2rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+
+.step:hover { transform: translateY(-3px); border-color: var(--color-border-accent); }
+
+.step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--gradient-btn);
+  font-family: var(--font-display);
+  font-size: var(--size-base);
+  font-weight: 700;
+  color: #fff;
+}
+
+.step h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin-bottom: 0.6rem;
+}
+
+.step p {
+  font-size: var(--size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.72;
+}
+
+/* ============================================================
+   SERVICES — compact secondary treatment (IT & cabling)
+   ============================================================ */
+.services-compact { background: var(--color-bg); }
+
+.section__header--compact { margin-bottom: 2.5rem; max-width: 620px; }
+
+.section__title--compact {
+  font-size: clamp(var(--size-xl), 2.6vw, var(--size-2xl));
+  letter-spacing: -0.02em;
+}
+
+.section__sub--compact { font-size: var(--size-sm); line-height: 1.7; }
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.85fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.svc-col {
+  padding: 1.5rem;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.22s ease, transform 0.22s ease;
+}
+
+.svc-col:hover { border-color: var(--color-border-accent); transform: translateY(-2px); }
+
+.svc-col__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.svc-col__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.svc-col__head h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-sm);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.svc-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.svc-list li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: var(--size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.svc-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.6em;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  opacity: 0.65;
+}
+
+.svc-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--color-featured);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-lg);
+}
+
+.svc-cta p {
+  font-family: var(--font-display);
+  font-size: var(--size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.btn--sm { padding: 0.5rem 1.1rem; font-size: var(--size-xs); }
+
+.svc-cta__phone {
+  font-size: var(--size-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.svc-cta__phone:hover { text-decoration: underline; }
+
+/* ============================================================
+   AI VOICE — responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .hero__content--split { grid-template-columns: 1fr; gap: 3rem; }
+  .hero__visual { max-width: 480px; }
+
+  .ai-grid { grid-template-columns: repeat(2, 1fr); }
+  .ai-card--wide { grid-column: span 2; }
+
+  .steps { grid-template-columns: 1fr; }
+
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .svc-cta { grid-column: span 2; flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .svc-cta p { flex: 1; }
+}
+
+@media (max-width: 768px) {
+  .ai-grid { grid-template-columns: 1fr; }
+  .ai-card--wide { grid-column: span 1; }
+
+  .svc-grid { grid-template-columns: 1fr; }
+  .svc-cta { grid-column: span 1; }
+
+  .call-card__footer { flex-direction: column; align-items: flex-start; }
+  .hero__also { margin-top: 1.5rem; }
+}

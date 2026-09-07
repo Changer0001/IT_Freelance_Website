@@ -277,3 +277,20 @@ if (contactForm && formSuccess) {
    ============================================================ */
 const yearEl = document.getElementById('footer-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ============================================================
+   HERO — live call timer on the AI voice demo card
+   ============================================================ */
+(function () {
+  var timer = document.getElementById('call-timer');
+  if (!timer) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var seconds = 7;
+  setInterval(function () {
+    seconds += 1;
+    var m = Math.floor(seconds / 60);
+    var s = String(seconds % 60).padStart(2, '0');
+    timer.textContent = m + ':' + s;
+  }, 1000);
+})();
