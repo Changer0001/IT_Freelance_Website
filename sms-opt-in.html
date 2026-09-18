@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How business owners opt in to SMS notifications from YAP VOICE: where the number is entered, the consent shown at that point, the messages sent, and how to stop them." />
+  <title>SMS Opt-In — How Business Owners Consent — YAP VOICE</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function(){
+      var t = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <style>
+    .policy-page { max-width: 760px; margin-inline: auto; padding: 5rem var(--container-pad); }
+    .policy-page h1 { font-size: var(--size-3xl); margin-bottom: 0.5rem; }
+    .policy-page .updated { font-size: var(--size-sm); color: var(--color-text-muted); margin-bottom: 3rem; }
+    .policy-page h2 { font-size: var(--size-lg); font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--color-text); }
+    .policy-page p, .policy-page li { color: var(--color-text-muted); line-height: 1.75; }
+    .policy-page ul, .policy-page ol { padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
+    .policy-page a { color: var(--color-accent); }
+    .policy-page strong { color: var(--color-text); font-weight: 700; }
+    .policy-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--size-sm); color: var(--color-text-muted); margin-bottom: 2rem; transition: color var(--transition); }
+    .policy-back:hover { color: var(--color-text); }
+
+    /* The opt-in form, reproduced exactly as it appears in the dashboard so
+       that the consent wording can be read without an account. */
+    .optin-demo {
+      border: 1px solid var(--color-border, rgba(148,163,184,0.28));
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      background: var(--color-surface, rgba(148,163,184,0.06));
+    }
+    .optin-demo__label { display: block; font-size: var(--size-sm); font-weight: 600; color: var(--color-text); margin-bottom: 0.4rem; }
+    .optin-demo__input {
+      width: 100%; max-width: 20rem; padding: 0.65rem 0.8rem;
+      border: 1px solid var(--color-border, rgba(148,163,184,0.4));
+      border-radius: 9px; background: transparent; color: var(--color-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1rem;
+    }
+    .optin-demo__consent { display: flex; gap: 0.65rem; align-items: flex-start; margin-top: 1.1rem; }
+    .optin-demo__consent input { margin-top: 0.3rem; flex-shrink: 0; width: 1rem; height: 1rem; }
+    .optin-demo__consent label { font-size: var(--size-sm); line-height: 1.65; color: var(--color-text-muted); }
+    .optin-demo__note { font-size: var(--size-sm); color: var(--color-text-muted); margin-top: 1rem; font-style: italic; }
+    .sample-msg {
+      border-left: 3px solid var(--color-accent);
+      padding: 0.9rem 1.1rem; margin-top: 1rem;
+      background: var(--color-surface, rgba(148,163,184,0.06));
+      border-radius: 0 10px 10px 0;
+      font-size: var(--size-sm); line-height: 1.7; color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <main class="policy-page">
+    <a href="index.html" class="policy-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Home
+    </a>
+
+    <h1>SMS Opt-In</h1>
+    <p class="updated">How business owners consent to receive text messages from YAP VOICE · Last updated: September 18, 2026</p>
+
+    <p>This page documents, in full and without requiring an account, how a business owner opts in to the text messages YAP VOICE sends them. It exists so that the consent wording and the point at which it is shown can be read by anyone, including mobile carriers reviewing this messaging programme.</p>
+
+    <h2>Program name</h2>
+    <p>YAP VOICE AI Receptionist Notifications.</p>
+
+    <h2>Who receives messages</h2>
+    <p><strong>Only the account holder.</strong> Messages go solely to the mobile number that a business owner enters themselves in their own YAP VOICE account, and only about enquiries the AI receptionist took for that owner's own business.</p>
+    <p>No numbers are ever imported, purchased, or collected from any other source. <strong>We never send a message to a caller, to a customer of the business, or to any third party.</strong> There is exactly one recipient per business: the owner who typed the number in.</p>
+
+    <h2>The only way to opt in</h2>
+    <p>There is a single opt-in path. A business owner signs up for the YAP VOICE service, opens the settings page of their account, and types their own mobile number into the field below. The field is <strong>empty by default</strong>, and the consent checkbox is <strong>unticked by default</strong>. Nothing is sent unless the owner completes both, which is an active, affirmative action taken by the account holder about their own handset.</p>
+    <p>Opting in by text message is not supported, and there is no keyword to text in — the number has to be attached to a specific business account, so it can only be entered inside that account.</p>
+
+    <h2>The form, exactly as the account holder sees it</h2>
+    <p>This is a copy of the opt-in form from the account settings page, reproduced here so the wording can be read without logging in. It is for reference only and does not submit anything.</p>
+
+    <div class="optin-demo">
+      <span class="optin-demo__label" id="demo-number-label">Business number — where messages the assistant takes are sent</span>
+      <input class="optin-demo__input" type="tel" placeholder="+1XXXXXXXXXX" aria-labelledby="demo-number-label" disabled />
+
+      <div class="optin-demo__consent">
+        <input type="checkbox" id="demo-consent" disabled />
+        <label for="demo-consent">
+          I agree to receive SMS notifications from YAP VOICE at this number about enquiries taken for my business.
+          Message frequency varies with call volume. <strong>Message and data rates may apply.</strong>
+          Reply <strong>STOP</strong> to opt out or <strong>HELP</strong> for help.
+          See the <a href="terms.html">SMS Terms and Conditions</a> and <a href="privacy-policy.html">Privacy Policy</a>.
+        </label>
+      </div>
+
+      <p class="optin-demo__note">Shown for reference. This copy is disabled and sends nothing.</p>
+    </div>
+
+    <h2>What the messages say</h2>
+    <p>Every message is a transactional notification about an enquiry the AI receptionist has just taken for that owner's business. They contain no marketing, no promotions and no links. A typical message:</p>
+
+    <div class="sample-msg">
+      New enquiry for Cedar Grill about catering: Maria Lopez, +16195550132. They said: asking whether you cater private events
+    </div>
+
+    <h2>Message frequency</h2>
+    <p>One message per enquiry the assistant takes, so frequency follows how many calls the business receives — typically a few messages per day. There is no recurring or scheduled send, and no message is sent when there is nothing to report.</p>
+
+    <h2>How to stop</h2>
+    <p>Reply <strong>STOP</strong> to any message to stop receiving them. One confirmation is sent and nothing further goes to that number.</p>
+    <p>The owner can also clear the number from the same settings field at any time, which stops the notifications immediately. To resume after replying STOP, reply <strong>START</strong> from the same handset.</p>
+
+    <h2>How to get help</h2>
+    <p>Reply <strong>HELP</strong> to any message, or contact us directly:</p>
+    <ul>
+      <li>Email: <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a></li>
+      <li>Phone: <a href="tel:6193338350">(619) 333-8350</a></li>
+    </ul>
+
+    <h2>Related documents</h2>
+    <ul>
+      <li><a href="terms.html">SMS Terms and Conditions</a> — the full programme terms</li>
+      <li><a href="privacy-policy.html">Privacy Policy</a> — what is collected and how it is handled</li>
+    </ul>
+  </main>
+</body>
+</html>
