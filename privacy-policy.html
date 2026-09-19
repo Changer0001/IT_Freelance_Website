@@ -68,6 +68,33 @@
     <h2>Form Submission Service</h2>
     <p>Contact form submissions are processed through <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>, a third-party service that forwards form submissions to my email. Please review their <a href="https://web3forms.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> for details on how they handle form data.</p>
 
+    <!--
+      LEGAL REVIEW REQUIRED on the wording of this section before it is
+      merged to main and published.
+
+      It exists because the assistant tells every caller "we write down
+      what's said on this call" and this policy did not mention phone
+      calls at all — the spoken disclosure was ahead of the written
+      policy, which is the honest direction to be wrong in and still
+      wrong. Every statement below is checkable against the code:
+
+        no audio recording      - no TwiML carries <Record>, and nothing
+                                  calls the telephony provider's
+                                  record_call()
+        conversation not stored - settings.STORE_CALL_TRANSCRIPTS, off
+        24 months               - CALL_RECORD_RETENTION_DAYS = 730. IF
+                                  THAT SETTING CHANGES, THIS NUMBER MUST
+                                  CHANGE WITH IT.
+        deletion on closure     - retention_service.close_account
+    -->
+    <h2>Phone Calls Answered by the AI Assistant</h2>
+    <p>When you call a business that uses YAP VOICE, the call may be answered by an automated assistant rather than a person. The assistant says so at the start of the call.</p>
+    <p><strong>The call is not recorded.</strong> No audio of the conversation is captured, stored, or kept anywhere.</p>
+    <p><strong>The conversation itself is not stored either.</strong> What you say is used during the call to understand what you need, and is not written down or kept afterwards.</p>
+    <p>What the business does keep is the outcome of the call and the details you gave for it to act on — typically your name, your phone number, and what you asked about. That is the information it needs in order to call you back, and it is covered in the section below.</p>
+    <p>To understand what you say, the assistant sends the audio of the call to a speech-recognition service and the text of what you said to a language model, both operated by third parties, for the duration of the call. These services are used to process the call as it happens.</p>
+    <p>If you would prefer to speak to a person, say so and the assistant will put you through or take a message for someone to call you back.</p>
+
     <h2>SMS Notifications for AI Receptionist Clients</h2>
     <p>Businesses that use the YAP VOICE AI phone receptionist can choose to be notified by text message when the assistant takes an enquiry for them. This section covers that separately, because it involves information the website contact form does not.</p>
     <p>For that service I collect and store:</p>
@@ -82,6 +109,7 @@
     <h2>Data Retention</h2>
     <p>Your contact information is retained only as long as needed to address your inquiry. It is stored in my email inbox and is not copied to any additional database or CRM.</p>
     <p>For the AI receptionist service, enquiry records and the owner's notification number are retained while the business holds an active account, and are deleted on request or when the account is closed.</p>
+    <p>Calls are not recorded and conversations are not stored, so there is nothing of either to retain. A record that a call happened — when it was, how long it lasted, and how it ended — is kept for up to 24 months so the business has its own history; it contains none of what was said.</p>
 
     <h2>Your Rights</h2>
     <p>You may request that I delete any personal information you have submitted by contacting me directly at <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>. I will respond within 30 days.</p>
