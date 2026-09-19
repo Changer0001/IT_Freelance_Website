@@ -26,6 +26,9 @@
     .policy-page a { color: var(--color-accent); }
     .policy-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--size-sm); color: var(--color-text-muted); margin-bottom: 2rem; transition: color var(--transition); }
     .policy-back:hover { color: var(--color-text); }
+    /* Two of these sit side by side now; inline-flex leaves only a
+       word-space between them. */
+    .policy-back + .policy-back { margin-left: 1.25rem; }
   </style>
 </head>
 <body>
@@ -33,6 +36,10 @@
     <a href="index.html" class="policy-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       Back to Home
+    </a>
+    <a href="login.html" class="policy-back">
+      Business Login
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
     </a>
 
     <h1>Privacy Policy</h1>

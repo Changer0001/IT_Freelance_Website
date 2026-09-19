@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Owner Login — YAP VOICE</title>
+  <meta name="description" content="Sign in to your YAP VOICE business dashboard to manage your phone line, AI receptionist settings, notifications and enquiries." />
+  <!-- NOINDEX, ON PURPOSE. This is a door for existing customers, not a
+       page that should compete with the homepage in search results. It
+       is still crawlable so the link from the site is not treated as
+       dangling. -->
+  <meta name="robots" content="noindex, follow" />
+  <link rel="canonical" href="https://yap-itsupport.com/login.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0b12" media="(prefers-color-scheme: dark)" />
+</head>
+<body>
+  <main class="portal">
+    <div class="portal__card">
+      <a href="index.html" class="portal__brand" aria-label="YAP VOICE — Home">
+        <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="yapMarkPortal" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="55%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="11" fill="url(#yapMarkPortal)"/>
+          <g fill="#ffffff">
+            <rect x="6.5" y="16" width="3" height="8" rx="1.5"/>
+            <rect x="12.5" y="12" width="3" height="16" rx="1.5"/>
+            <rect x="18.5" y="8" width="3" height="24" rx="1.5"/>
+            <rect x="24.5" y="13" width="3" height="14" rx="1.5"/>
+            <rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/>
+          </g>
+        </svg>
+        <span>YAP VOICE</span>
+      </a>
+
+      <h1 class="portal__title">Business Owner Login</h1>
+      <p class="portal__lede">
+        Your dashboard is where you set who answers your phone, the number
+        enquiries are texted and emailed to, your hours, and what the
+        assistant knows about your business — and where you read the
+        enquiries it has taken for you.
+      </p>
+
+      <div class="portal__actions">
+        <!--
+          THE ONE PLACE THE DASHBOARD ADDRESS IS WRITTEN.
+
+          The dashboard is a separate application: it needs a running API
+          and a database, and this site is static files on GitHub Pages
+          that cannot host either. So this page links out to wherever the
+          dashboard is served, and that address lives here and nowhere
+          else — one href to change rather than five.
+
+          Until the dashboard has a public address, this points at a
+          subdomain that does not resolve yet. That is deliberate and
+          visible: see the note below, which says so to the person
+          clicking it rather than leaving them at a browser error with no
+          explanation.
+        -->
+        <a class="btn btn--primary" id="dashboard-link" href="https://app.yap-itsupport.com/login">
+          Open the dashboard
+        </a>
+        <a class="btn btn--outline" href="index.html#contact">Contact support</a>
+      </div>
+
+      <div class="portal__note">
+        <h2>Don't have an account yet?</h2>
+        <p>
+          Accounts are set up for you when your business is onboarded — get
+          in touch and we will create your login and send it to you.
+        </p>
+      </div>
+
+      <div class="portal__note">
+        <h2>Forgotten your password?</h2>
+        <p>
+          Passwords are stored hashed, so nobody here can read yours back to
+          you. Contact support and a new one will be issued for your account.
+        </p>
+      </div>
+
+      <div class="portal__note">
+        <h2>If the dashboard does not open</h2>
+        <p>
+          The dashboard is hosted separately from this website. If the button
+          above does not load, the address has not been published yet —
+          contact support and we will send you the link to sign in.
+        </p>
+      </div>
+
+      <a href="index.html" class="portal__back">&larr; Back to yap-itsupport.com</a>
+    </div>
+  </main>
+</body>
+</html>

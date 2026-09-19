@@ -10,11 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="canonical" href="https://yap-itsupport.com/" />
+  <!-- Matches the two themes the stylesheet defines, so the browser
+       chrome stops being white above a dark page. -->
+  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0b0b12" media="(prefers-color-scheme: dark)" />
   <!-- Open Graph (social sharing previews) -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="YAP VOICE — AI Voice Agent for Business Calls | San Diego, CA" />
   <meta property="og:description" content="AI voice agent that answers every business call 24/7 — reservations, hours, and FAQs handled automatically, spam filtered out. Plus onsite network installation and structured cabling in San Diego, CA." />
   <meta property="og:site_name" content="YAP VOICE" />
+  <meta property="og:url" content="https://yap-itsupport.com/" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="YAP VOICE — AI Voice Agent for Business Calls | San Diego, CA" />
@@ -80,6 +86,10 @@
   </script>
 </head>
 <body>
+  <!-- First thing in the tab order, visible only once focused. Without
+       it a keyboard or screen-reader user walks the whole header and nav
+       before reaching the page on every visit. -->
+  <a class="skip-link" href="#hero">Skip to main content</a>
 
   <!-- ========== TOP BAR ========== -->
   <div class="topbar" role="banner">
@@ -130,6 +140,15 @@
           <li><a href="#services" class="nav__link">IT &amp; Cabling</a></li>
           <li><a href="#about" class="nav__link">About</a></li>
           <li><a href="#contact" class="nav__link">Contact</a></li>
+          <!-- THE DOOR CUSTOMERS COULD NOT FIND. The published terms and
+               privacy policy both tell a business owner to change their
+               own notification number "in their YAP VOICE dashboard",
+               and until now nothing on this site said where that was.
+               Inside the list rather than beside it, so the mobile menu
+               carries it too. -->
+          <li class="nav__item--login">
+            <a href="login.html" class="nav__link nav__link--login">Business Login</a>
+          </li>
         </ul>
       </nav>
 
@@ -749,6 +768,7 @@
           <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="login.html">Business Login</a></li>
           <li><a href="privacy-policy.html">Privacy Policy</a></li>
           <li><a href="terms.html">SMS Terms</a></li>
           <li><a href="sms-opt-in.html">SMS Opt-In</a></li>
