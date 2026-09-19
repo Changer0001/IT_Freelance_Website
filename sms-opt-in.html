@@ -112,8 +112,29 @@
     <h2>What the messages say</h2>
     <p>Every message is a transactional notification about an enquiry the AI receptionist has just taken for that owner's business. They contain no marketing, no promotions and no links. A typical message:</p>
 
+    <!--
+      RENDERED FROM THE CODE, NOT WRITTEN FOR THIS PAGE. This read
+
+        New enquiry for Cedar Grill about catering: Maria Lopez,
+        +16195550132. They said: asking whether you cater private events
+
+      which quoted the caller's own sentence back — and the assistant
+      stopped doing that on 19 September 2026, because an inbox has no
+      retention policy anyone here controls. A sample message that does
+      not match real traffic is wrong twice over: it is untrue on a
+      public page, and a carrier reviewing this programme compares the
+      sample against what actually sends.
+
+      Keep this in step with conversation/tools.py::enquiry_message.
+      The name and number are fictional; the shape is exact.
+    -->
     <div class="sample-msg">
-      New enquiry for Cedar Grill about catering: Maria Lopez, +16195550132. They said: asking whether you cater private events
+      New enquiry for Cedar Grill<br />
+      Services: Catering<br />
+      Name: Maria Lopez<br />
+      Phone: +16195550132<br />
+      preferred date: Saturday<br />
+      preferred time: morning
     </div>
 
     <h2>Message frequency</h2>
