@@ -94,10 +94,24 @@ if (!prefersReducedMotion) {
         }
       });
     },
-    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    // Expanded, not shrunk: a NEGATIVE bottom margin (the -40px this used
+    // to have) makes the trigger zone smaller than the viewport, which
+    // means a fast or programmatic scroll can jump an element straight
+    // past it without ever rendering a frame where it intersects — the
+    // element then sits at `.reveal`'s opacity:0 forever. A positive
+    // margin fires the reveal before the element is strictly on screen,
+    // which is the safer direction to be wrong in.
+    { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
   );
 
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => {
+    revealObserver.observe(el);
+    // BELT AND SUSPENDERS. Content that never appears is a broken page,
+    // not a missing animation — so if the observer hasn't fired within
+    // 1.2s of load (a tab backgrounded mid-load, a layout the observer
+    // mis-measures, anything else unanticipated), reveal it anyway.
+    setTimeout(() => el.classList.add('is-visible'), 1200);
+  });
 } else {
   // Skip animation for reduced-motion users — show everything immediately
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
