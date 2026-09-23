@@ -1,48 +1,14 @@
 /* ============================================================
-   THEME TOGGLE — dark / light with localStorage + system pref
-   ============================================================ */
-const themeToggle = document.getElementById('theme-toggle');
-const htmlEl      = document.documentElement;
-
-function applyTheme(theme, animate) {
-  if (animate) {
-    htmlEl.classList.add('theme-transitioning');
-    setTimeout(() => htmlEl.classList.remove('theme-transitioning'), 350);
-  }
-  htmlEl.setAttribute('data-theme', theme);
-  localStorage.setItem('theme', theme);
-  if (themeToggle) {
-    themeToggle.setAttribute(
-      'aria-label',
-      theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-    );
-  }
-}
-
-if (themeToggle) {
-  // Sync aria-label with initial theme
-  const initial = htmlEl.getAttribute('data-theme') || 'light';
-  themeToggle.setAttribute(
-    'aria-label',
-    initial === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-  );
-
-  themeToggle.addEventListener('click', () => {
-    const next = htmlEl.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    applyTheme(next, true);
-  });
-}
-
-/* ============================================================
    MOBILE NAV TOGGLE
    ============================================================ */
-const hamburger = document.getElementById('hamburger');
+const hamburger = document.getElementById('menu-btn');
 const mainNav   = document.getElementById('main-nav');
 
 if (hamburger && mainNav) {
   hamburger.addEventListener('click', () => {
     const isOpen = mainNav.classList.toggle('is-open');
     hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
@@ -77,44 +43,6 @@ if (siteHeader) {
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll(); // run once on load
-}
-
-/* ============================================================
-   SCROLL REVEAL — IntersectionObserver
-   ============================================================ */
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if (!prefersReducedMotion) {
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    // Expanded, not shrunk: a NEGATIVE bottom margin (the -40px this used
-    // to have) makes the trigger zone smaller than the viewport, which
-    // means a fast or programmatic scroll can jump an element straight
-    // past it without ever rendering a frame where it intersects — the
-    // element then sits at `.reveal`'s opacity:0 forever. A positive
-    // margin fires the reveal before the element is strictly on screen,
-    // which is the safer direction to be wrong in.
-    { threshold: 0.1, rootMargin: '0px 0px 200px 0px' }
-  );
-
-  document.querySelectorAll('.reveal').forEach(el => {
-    revealObserver.observe(el);
-    // BELT AND SUSPENDERS. Content that never appears is a broken page,
-    // not a missing animation — so if the observer hasn't fired within
-    // 1.2s of load (a tab backgrounded mid-load, a layout the observer
-    // mis-measures, anything else unanticipated), reveal it anyway.
-    setTimeout(() => el.classList.add('is-visible'), 1200);
-  });
-} else {
-  // Skip animation for reduced-motion users — show everything immediately
-  document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
 }
 
 /* ============================================================
@@ -269,15 +197,15 @@ if (contactForm && formSuccess) {
 
       if (data.success) {
         lastSubmitTime = Date.now();
-        contactForm.style.display = 'none';
-        formSuccess.style.display = 'block';
+        contactForm.hidden = true;
+        formSuccess.hidden = false;
         formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         throw new Error(data.message || 'Submission failed.');
       }
     } catch {
       showFormError(
-        'Something went wrong. Please email yap.itsupport@gmail.com or call (619) 333-8350.'
+        'Something went wrong sending that. Please email yap.itsupport@gmail.com instead.'
       );
     } finally {
       isSubmitting = false;
@@ -291,20 +219,3 @@ if (contactForm && formSuccess) {
    ============================================================ */
 const yearEl = document.getElementById('footer-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* ============================================================
-   HERO — live call timer on the AI voice demo card
-   ============================================================ */
-(function () {
-  var timer = document.getElementById('call-timer');
-  if (!timer) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var seconds = 7;
-  setInterval(function () {
-    seconds += 1;
-    var m = Math.floor(seconds / 60);
-    var s = String(seconds % 60).padStart(2, '0');
-    timer.textContent = m + ':' + s;
-  }, 1000);
-})();

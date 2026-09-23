@@ -3,771 +3,415 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI voice agent that answers every business call 24/7 — reservations, hours, and FAQs handled automatically, spam filtered out. Plus onsite network installation and structured cabling in San Diego, CA." />
-  <title>YAP VOICE — AI Voice Agent for Business Calls | San Diego, CA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <title>YAP Voice — AI phone receptionist for local businesses | San Diego</title>
+  <meta name="description" content="YAP Voice answers your business line when you can't. It answers callers' questions, takes their name, number and what they need, and texts and emails it to you. Onsite networking and IT support in San Diego too." />
   <link rel="canonical" href="https://yap-itsupport.com/" />
-  <!-- Matches the two themes the stylesheet defines, so the browser
-       chrome stops being white above a dark page. -->
-  <meta name="theme-color" content="#fbfbfd" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0b0b12" media="(prefers-color-scheme: dark)" />
-  <!-- Open Graph (social sharing previews) -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0c0d18" media="(prefers-color-scheme: dark)" />
+
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="YAP VOICE — AI Voice Agent for Business Calls | San Diego, CA" />
-  <meta property="og:description" content="AI voice agent that answers every business call 24/7 — reservations, hours, and FAQs handled automatically, spam filtered out. Plus onsite network installation and structured cabling in San Diego, CA." />
-  <meta property="og:site_name" content="YAP VOICE" />
+  <meta property="og:site_name" content="YAP Voice" />
+  <meta property="og:title" content="YAP Voice — never lose a job to voicemail" />
+  <meta property="og:description" content="An AI receptionist that answers your business line, takes the caller's details and texts them to you." />
   <meta property="og:url" content="https://yap-itsupport.com/" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="YAP VOICE — AI Voice Agent for Business Calls | San Diego, CA" />
-  <meta name="twitter:description" content="AI voice agent that answers every business call 24/7. Plus onsite network installation and structured cabling in San Diego, CA." />
-  <!-- LocalBusiness JSON-LD (Google local SEO) -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+
+  <!-- What search engines are told. Only what the product does: no
+       spam filtering and no daily recap, because it has neither. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "YAP VOICE",
-    "description": "AI voice agent that answers business phone calls 24/7 — handling reservations, hours, and FAQs while filtering spam. Also provides onsite network installation, structured cabling, and Wi-Fi setup for homes and small businesses in San Diego, CA.",
-    "makesOffer": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "AI Voice Agent",
-          "description": "24/7 AI phone answering for restaurants and small businesses. Handles reservations, hours, and menu questions; filters spam and robocalls; escalates calls that need a human."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Network Installation & Structured Cabling",
-          "description": "Onsite Cat6 structured cabling, patch panels, router and switch configuration, and Wi-Fi setup for homes and small businesses."
-        }
-      }
-    ],
+    "name": "YAP Voice",
+    "url": "https://yap-itsupport.com/",
     "email": "yap.itsupport@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "San Diego",
-      "addressRegion": "CA",
-      "addressCountry": "US"
-    },
+    "description": "AI phone receptionist for local businesses: answers the business line, answers callers' questions, takes enquiries and texts and emails them to the owner. Also onsite network installation, structured cabling and IT support in San Diego, CA.",
+    "address": { "@type": "PostalAddress", "addressLocality": "San Diego", "addressRegion": "CA", "addressCountry": "US" },
     "areaServed": { "@type": "City", "name": "San Diego" },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "17:00",
-        "closes": "21:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday","Sunday"],
-        "opens": "09:00",
-        "closes": "18:00"
-      }
-    ],
-    "priceRange": "$60–$125"
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI phone receptionist", "description": "Answers business calls, answers questions from the business's own information, takes callers' details and sends them to the owner by text and email." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Network installation & structured cabling", "description": "Onsite Cat6 cabling, patch panels, router and switch setup, and Wi-Fi for homes and small businesses." } }
+    ]
   }
-  </script>
-  <!-- Prevent flash of wrong theme -->
-  <script>
-    (function(){
-      // Dark is the primary theme for this palette; a saved toggle choice still wins.
-      var t = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
   </script>
 </head>
 <body>
-  <!-- First thing in the tab order, visible only once focused. Without
-       it a keyboard or screen-reader user walks the whole header and nav
-       before reaching the page on every visit. -->
-  <a class="skip-link" href="#hero">Skip to main content</a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- ========== TOP BAR ========== -->
-  <div class="topbar" role="banner">
-    <span class="topbar__location">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      Serving San Diego &amp; Surrounding Areas
-    </span>
-    <div class="topbar__contact">
-      <a href="mailto:yap.itsupport@gmail.com" class="topbar__email">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        yap.itsupport@gmail.com
-      </a>
-    </div>
-  </div>
-
-  <!-- ========== STICKY HEADER ========== -->
+  <!-- ================= HEADER ================= -->
   <header class="site-header" id="site-header">
-    <div class="container header__inner">
-      <a href="#hero" class="logo" aria-label="YAP VOICE — Home">
-        <svg width="36" height="36" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+    <div class="wrap header__row">
+      <a href="#top" class="brand" aria-label="YAP Voice — home">
+        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" aria-hidden="true">
           <defs>
-            <linearGradient id="yapMark" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stop-color="#6366f1"/>
-              <stop offset="55%" stop-color="#8b5cf6"/>
-              <stop offset="100%" stop-color="#06b6d4"/>
+            <linearGradient id="mark" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6366f1"/><stop offset="55%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#06b6d4"/>
             </linearGradient>
           </defs>
-          <rect width="40" height="40" rx="11" fill="url(#yapMark)"/>
-          <g fill="#ffffff">
-            <rect x="6.5" y="16" width="3" height="8" rx="1.5"/>
-            <rect x="12.5" y="12" width="3" height="16" rx="1.5"/>
-            <rect x="18.5" y="8" width="3" height="24" rx="1.5"/>
-            <rect x="24.5" y="13" width="3" height="14" rx="1.5"/>
-            <rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/>
-          </g>
+          <rect width="40" height="40" rx="11" fill="url(#mark)"/>
+          <g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g>
         </svg>
-        <span>YAP VOICE</span>
+        <span>YAP Voice</span>
       </a>
 
-      <nav class="main-nav" id="main-nav" aria-label="Primary navigation">
-        <ul class="nav__list">
-          <li><a href="#ai-voice" class="nav__link">AI Voice</a></li>
-          <li><a href="#how-it-works" class="nav__link">How It Works</a></li>
-          <li><a href="#services" class="nav__link">IT &amp; Cabling</a></li>
-          <li><a href="#about" class="nav__link">About</a></li>
-          <li><a href="#contact" class="nav__link">Contact</a></li>
-          <!-- THE DOOR CUSTOMERS COULD NOT FIND. The published terms and
-               privacy policy both tell a business owner to change their
-               own notification number "in their YAP VOICE dashboard",
-               and until now nothing on this site said where that was.
-               Inside the list rather than beside it, so the mobile menu
-               carries it too. -->
-          <li class="nav__item--login">
-            <a href="login.html" class="nav__link nav__link--login">Business Login</a>
-          </li>
-        </ul>
+      <nav class="nav" id="main-nav" aria-label="Primary">
+        <a href="#how" class="nav__link">How it works</a>
+        <a href="#features" class="nav__link">What it does</a>
+        <a href="#dashboard" class="nav__link">Your dashboard</a>
+        <a href="#faq" class="nav__link">FAQ</a>
+        <a href="#it" class="nav__link">IT &amp; cabling</a>
+        <!-- THE OWNERS' DOOR. The published terms and privacy policy both
+             send a business owner to "their YAP VOICE dashboard"; this is
+             how they find it. Inside the nav so the phone menu carries it. -->
+        <a href="login.html" class="nav__link nav__link--login">Business login</a>
       </nav>
 
-      <button class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
-        <!-- Moon: shown in light mode -->
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <!-- Sun: shown in dark mode -->
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </button>
+      <a href="#contact" class="btn btn--primary header__cta">Book a free demo</a>
 
-      <a href="#contact" class="btn btn--primary header__cta">Get a Free Quote</a>
-
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="main-nav">
-        <span class="hamburger__bar"></span>
-        <span class="hamburger__bar"></span>
-        <span class="hamburger__bar"></span>
+      <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
-
-    <!-- ========== HERO ========== -->
-    <section class="hero" id="hero" aria-label="Hero">
-      <div class="hero__grid-bg" aria-hidden="true"></div>
-      <div class="hero__orb" aria-hidden="true"></div>
-      <div class="hero__smoke" aria-hidden="true"></div>
-      <div class="hero__nodes" aria-hidden="true">
-        <svg class="hero__svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <!-- Network connection lines -->
-          <g stroke="#6366f1" stroke-opacity="0.12" stroke-width="1" fill="none">
-            <line x1="100" y1="120" x2="340" y2="200"/>
-            <line x1="340" y1="200" x2="580" y2="140"/>
-            <line x1="580" y1="140" x2="820" y2="260"/>
-            <line x1="820" y1="260" x2="1060" y2="180"/>
-            <line x1="100" y1="120" x2="200" y2="380"/>
-            <line x1="340" y1="200" x2="480" y2="430"/>
-            <line x1="580" y1="140" x2="640" y2="360"/>
-            <line x1="820" y1="260" x2="760" y2="480"/>
-            <line x1="1060" y1="180" x2="1100" y2="420"/>
-            <line x1="200" y1="380" x2="480" y2="430"/>
-            <line x1="480" y1="430" x2="640" y2="360"/>
-            <line x1="640" y1="360" x2="760" y2="480"/>
-            <line x1="760" y1="480" x2="1100" y2="420"/>
-            <line x1="200" y1="380" x2="340" y2="200"/>
-            <line x1="480" y1="430" x2="820" y2="260"/>
-          </g>
-          <!-- Network nodes -->
-          <g fill="#6366f1">
-            <circle cx="100" cy="120" r="3.5" fill-opacity="0.45"/>
-            <circle cx="340" cy="200" r="5" fill-opacity="0.60"/>
-            <circle cx="580" cy="140" r="4" fill-opacity="0.50"/>
-            <circle cx="820" cy="260" r="6" fill-opacity="0.70"/>
-            <circle cx="1060" cy="180" r="3.5" fill-opacity="0.45"/>
-            <circle cx="200" cy="380" r="4" fill-opacity="0.50"/>
-            <circle cx="480" cy="430" r="5" fill-opacity="0.60"/>
-            <circle cx="640" cy="360" r="3.5" fill-opacity="0.45"/>
-            <circle cx="760" cy="480" r="4" fill-opacity="0.50"/>
-            <circle cx="1100" cy="420" r="3.5" fill-opacity="0.45"/>
-            <!-- Pulsing center node -->
-            <circle cx="820" cy="260" r="14" fill-opacity="0.07" class="pulse-ring"/>
-          </g>
-        </svg>
-      </div>
-
-      <div class="container hero__content hero__content--split">
-        <div class="hero__text">
-          <p class="hero__eyebrow">
-            <span class="hero__eyebrow-dot" aria-hidden="true"></span>
-            AI Voice Agent · San Diego, CA
-          </p>
-          <h1 class="hero__headline">Never Miss<br /><span class="highlight">Another Call.</span></h1>
-          <p class="hero__sub">
-            An AI voice agent that answers your business phone 24/7 — reservations,
-            hours, menu questions, directions — and filters out spam before it ever
-            reaches your staff. Set up in minutes, no new hardware.
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow">AI phone receptionist · San Diego</p>
+          <h1 id="hero-title" class="hero__title">Never lose a job to voicemail.</h1>
+          <p class="hero__lede">
+            YAP Voice answers your business line when you can't — on a job, after hours,
+            with a customer in front of you. It answers the caller's questions, takes their
+            name, number and what they need, and <strong>texts it straight to you</strong>.
           </p>
           <div class="hero__actions">
-            <a href="#contact" class="btn btn--primary btn--lg">Get a Free Demo</a>
-            <a href="mailto:yap.itsupport@gmail.com" class="btn btn--outline btn--lg">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Email Me
-            </a>
+            <a href="#contact" class="btn btn--primary btn--lg">Book a free demo</a>
+            <a href="#how" class="btn btn--ghost btn--lg">See how a call goes</a>
           </div>
-          <div class="hero__badges">
-            <span class="badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Answers 24/7
-            </span>
-            <span class="badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              Blocks Spam Calls
-            </span>
-            <span class="badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              5-Minute Setup
-            </span>
-          </div>
-
-          <!-- Secondary: the IT/cabling side of the business, deliberately understated -->
-          <p class="hero__also">
-            Also offering
-            <a href="#services">network installation, structured cabling &amp; onsite IT support</a>
-            across San Diego County.
-          </p>
+          <ul class="hero__facts" role="list">
+            <li>Keep your number</li>
+            <li>Tells callers it's an assistant</li>
+            <li>Every enquiry in your dashboard</li>
+          </ul>
         </div>
 
-        <!-- Live call mockup -->
-        <div class="hero__visual">
-          <div class="call-card">
-            <div class="call-card__header">
-              <span class="call-card__status">
-                <span class="call-card__dot" aria-hidden="true"></span>
-                Live Call
-              </span>
-              <span class="call-card__time" id="call-timer">0:07</span>
-            </div>
+        <!-- THE PRODUCT'S ACTUAL OUTPUT. What an owner gets after a call is a
+             text in exactly this shape (see sms-opt-in.html's sample, and the
+             backend's enquiry_message). Invented business, invented caller,
+             a 555 number — labelled as an example underneath. -->
+        <figure class="phone" aria-label="Example: the text an owner receives after a call">
+          <div class="phone__screen">
+            <p class="phone__clock" aria-hidden="true">4:12</p>
+            <p class="phone__date" aria-hidden="true">Thursday</p>
 
-            <div class="call-card__body">
-              <div class="chat-bubble chat-bubble--caller">
-                <span class="chat-bubble__meta">Caller</span>
-                <p>Hi, are you open on Sunday evenings? And do you take walk-ins?</p>
-              </div>
-              <div class="chat-bubble chat-bubble--ai">
-                <span class="chat-bubble__meta">
-                  YAP VOICE AI <span class="ai-badge">AI</span>
-                </span>
-                <p>Yes! We're open Sunday from 4pm to 10pm, and we do take walk-ins — though reservations are recommended after 6pm. Would you like me to book a table?</p>
-                <span class="chat-bubble__typing" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                </span>
-              </div>
-            </div>
-
-            <div class="call-card__footer">
-              <span class="call-info">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4C1.6 2.33 2.38 1.4 3.44 1.4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.32a16 16 0 0 0 6.29 6.29l1.28-1.28a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                Inbound call
-              </span>
-              <span class="call-tags">
-                <span class="call-tag">Hours</span>
-                <span class="call-tag">Reservation</span>
-              </span>
-            </div>
-          </div>
-
-          <div class="filter-card">
-            <span class="filter-card__icon" aria-hidden="true">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </span>
-            <span class="filter-card__text">
-              <strong>Spam blocked</strong>
-              <span>Telemarketer filtered · just now</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== AI VOICE — WHAT IT HANDLES ========== -->
-    <section class="section ai-voice" id="ai-voice" aria-labelledby="ai-voice-heading">
-      <div class="container">
-        <header class="section__header reveal">
-          <p class="section__eyebrow">AI Voice Agent</p>
-          <h2 id="ai-voice-heading" class="section__title">Every call answered.<br />Every time.</h2>
-          <p class="section__sub">Your phone rings during the dinner rush, after closing, on a holiday. The AI picks up on the first ring — every single time.</p>
-        </header>
-
-        <div class="ai-grid">
-
-          <article class="ai-card ai-card--wide reveal">
-            <div class="ai-card__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-            </div>
-            <h3>Natural Conversation</h3>
-            <p>Not a phone tree. Callers ask questions however they want — "you guys open late?", "do you do gluten free?" — and get a clear, accurate answer. It handles follow-up questions in the same call.</p>
-            <div class="ai-card__tags">
-              <span>Understands accents</span>
-              <span>Multi-question calls</span>
-              <span>No menus to press</span>
-            </div>
-          </article>
-
-          <article class="ai-card reveal">
-            <div class="ai-card__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Spam &amp; Robocall Filter</h3>
-            <p>Telemarketers get identified in the first few seconds and hung up on. Your staff never hears the phone ring for a junk call again.</p>
-          </article>
-
-          <article class="ai-card reveal">
-            <div class="ai-card__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <h3>Takes Reservations</h3>
-            <p>Collects name, party size, date, time, and special requests — then logs it where you can see it, or sends it straight to your booking system.</p>
-          </article>
-
-          <article class="ai-card reveal">
-            <div class="ai-card__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <h3>Knows When to Get You</h3>
-            <p>A complaint, a large catering order, something genuinely urgent — those get transferred to a real person right away, with context on what the caller already said.</p>
-          </article>
-
-          <article class="ai-card reveal">
-            <div class="ai-card__icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            </div>
-            <h3>Daily Call Recap</h3>
-            <p>Each morning you get a summary: how many calls came in, what people asked about, bookings taken, spam blocked, and anything that needs your attention.</p>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== HOW IT WORKS ========== -->
-    <section class="section how-it-works" id="how-it-works" aria-labelledby="how-heading">
-      <div class="container">
-        <header class="section__header reveal">
-          <p class="section__eyebrow">How It Works</p>
-          <h2 id="how-heading" class="section__title">Live in about five minutes.</h2>
-          <p class="section__sub">No new phone system, no hardware to install, nothing to learn. I set it up with you on a single call.</p>
-        </header>
-
-        <div class="steps">
-          <div class="step reveal">
-            <span class="step__num">1</span>
-            <h3>Forward your number</h3>
-            <p>Keep the number your customers already know. We just point it at the AI — either all the time, or only after hours and during rushes. Takes a couple of minutes with your phone provider.</p>
-          </div>
-          <div class="step reveal">
-            <span class="step__num">2</span>
-            <h3>Tell it about your business</h3>
-            <p>Hours, menu, location, parking, reservation policy, the questions you're tired of answering. I load all of it in for you — you don't have to configure anything yourself.</p>
-          </div>
-          <div class="step reveal">
-            <span class="step__num">3</span>
-            <h3>It starts answering</h3>
-            <p>From that point on every call gets picked up. You'll get the daily recap, and I'll check in after the first week to tune anything that needs adjusting.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== TRUST STRIP ========== -->
-    <section class="trust-strip" aria-label="Trust indicators">
-      <div class="container trust-strip__grid">
-
-        <div class="trust-item">
-          <span class="trust-item__icon" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </span>
-          <div>
-            <strong>Evenings &amp; Weekends</strong>
-            <span>Available when you're home</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-item__icon" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </span>
-          <div>
-            <strong>Free Quotes</strong>
-            <span>No surprises, ever</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-item__icon" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M17 7l-5 5-5-5"/></svg>
-          </span>
-          <div>
-            <strong>Always On-Site</strong>
-            <span>I come to your location</span>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-item__icon" aria-hidden="true">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </span>
-          <div>
-            <strong>Homes &amp; Businesses</strong>
-            <span>Residential and commercial</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========== SERVICES (secondary — onsite IT & cabling) ========== -->
-    <section class="services-compact section" id="services" aria-labelledby="services-heading">
-      <div class="container">
-        <header class="section__header section__header--compact reveal">
-          <p class="section__eyebrow">Also Available</p>
-          <h2 id="services-heading" class="section__title section__title--compact">Onsite Networking, Cabling &amp; IT Support</h2>
-          <p class="section__sub section__sub--compact">The hands-on side of the business. Cat6 runs, patch panels, router and switch configuration, Wi-Fi coverage — done clean and tested before I leave.</p>
-        </header>
-
-        <div class="svc-grid">
-
-          <article class="svc-col reveal">
-            <div class="svc-col__head">
-              <span class="svc-col__icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-              </span>
-              <h3>Small Business</h3>
-            </div>
-            <ul class="svc-list">
-              <li>Router &amp; switch installation</li>
-              <li>Structured cabling &amp; patch panels</li>
-              <li>Wi-Fi setup &amp; coverage optimization</li>
-              <li>Office network &amp; POS connectivity</li>
-            </ul>
-          </article>
-
-          <article class="svc-col reveal">
-            <div class="svc-col__head">
-              <span class="svc-col__icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </span>
-              <h3>Home &amp; Home Office</h3>
-            </div>
-            <ul class="svc-list">
-              <li>Ethernet (Cat5e/Cat6) installation</li>
-              <li>Wi-Fi router setup &amp; optimization</li>
-              <li>Computer, printer &amp; smart TV setup</li>
-              <li>Internet &amp; network troubleshooting</li>
-            </ul>
-          </article>
-
-          <div class="svc-cta reveal">
-            <p>Need cabling or a network set up?</p>
-            <a href="#contact" class="btn btn--outline btn--sm">Get a Free Quote</a>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== WHY ME ========== -->
-    <section class="why-me section" id="why-me" aria-labelledby="why-heading">
-      <div class="container">
-        <header class="section__header reveal">
-          <p class="section__eyebrow">Why Choose Me</p>
-          <h2 id="why-heading" class="section__title">Hands-On Work. Done Right.</h2>
-          <p class="section__sub">You get a skilled onsite technician who shows up prepared, works carefully, and doesn't leave until everything is tested and working.</p>
-        </header>
-
-        <div class="why-grid">
-
-          <div class="why-card reveal" aria-label="Hands-On Experience">
-            <div class="why-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h3>Hands-On Experience</h3>
-            <p>Two-plus years installing, configuring, and troubleshooting real networks for homes and businesses — I know how gear behaves once it's actually live, not just how it's supposed to work on paper.</p>
-          </div>
-
-          <div class="why-card reveal" aria-label="Networking Done Right">
-            <div class="why-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            </div>
-            <h3>Clean, Professional Installations</h3>
-            <p>From routing and terminating Cat6 cable to organizing patch panels, I do the work properly — no shortcuts, no cable mess, no exposed runs left for someone else to fix later.</p>
-          </div>
-
-          <div class="why-card reveal" aria-label="Honest Pricing">
-            <div class="why-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <h3>Honest Pricing</h3>
-            <p>Free quotes with no obligation. Flat-rate or hourly options, no hidden fees. You'll know the full price before I pick up a single tool.</p>
-          </div>
-
-          <div class="why-card reveal" aria-label="Local and Responsive">
-            <div class="why-card__icon" aria-hidden="true">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <h3>Local &amp; Responsive</h3>
-            <p>Based in San Diego, I serve homes and businesses across the county. Call or text me directly — no hold queues, no automated replies, no waiting days to hear back.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== ABOUT ========== -->
-    <section class="about section" id="about" aria-labelledby="about-heading">
-      <div class="container about__inner">
-
-        <div class="about__text reveal">
-          <p class="section__eyebrow">About Me</p>
-          <h2 id="about-heading" class="section__title">A Local IT Professional You Can Count On</h2>
-          <p>
-            Hi — I'm an onsite IT specialist based in San Diego, CA. With hands-on experience in network installation, structured cabling, and device setup, I help homes and businesses get their technology working properly.
-          </p>
-          <p>
-            I started out doing onsite network and cabling work after seeing too many clients stuck with sloppy cable runs, misconfigured routers, and spotty Wi-Fi that nobody ever fixed right. YAP VOICE grew out of the same idea applied to the phone: small businesses were losing calls they never even knew about. My approach either way is simple — show up prepared, do the job properly, and explain everything in plain language.
-          </p>
-          <p>
-            Whether you're opening a new office, adding wired Ethernet to a room, or troubleshooting a network that's been unreliable for months — I'll come to your location and handle it from start to finish.
-          </p>
-          <a href="#contact" class="btn btn--primary" style="margin-top:1.5rem;">Let's Talk About Your Project</a>
-        </div>
-
-        <aside class="about__credentials reveal" aria-label="Highlights">
-          <h3 class="credentials__title">Highlights</h3>
-          <ul class="credentials__list" role="list">
-            <li class="credentials__item">
-              <span class="credentials__icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <div class="note note--call">
+              <span class="note__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
               </span>
               <div>
-                <strong>Free, No-Obligation Quotes</strong>
-                <span>You know the full price before I start</span>
+                <p class="note__app">Phone · 4:09</p>
+                <p class="note__title">Missed call</p>
+                <p class="note__body">(555) 010-0142</p>
               </div>
+            </div>
+
+            <div class="note note--sms">
+              <span class="note__icon note__icon--sms" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <div>
+                <p class="note__app">Messages · now</p>
+                <p class="note__title">New enquiry for Harbor View Handyman</p>
+                <p class="note__body note__body--mono">
+                  Services: TV mounting<br />
+                  Name: Jordan Blake<br />
+                  Phone: +15550100142<br />
+                  preferred date: Friday<br />
+                  preferred time: morning
+                </p>
+              </div>
+            </div>
+          </div>
+          <figcaption class="phone__caption">Example. The business and the caller are made up.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= HOW A CALL GOES ================= -->
+    <!-- Numbered because it IS a sequence: this is the order things
+         happen on a real call. -->
+    <section class="section" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title" class="section__title">What happens when someone calls</h2>
+        </header>
+        <ol class="steps" role="list">
+          <li class="step">
+            <span class="step__n">1</span>
+            <h3>Your phone rings first</h3>
+            <p>Calls reach you as they do today. If you don't pick up in the time you choose — or you're closed — the assistant answers. Or let it take every call.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">2</span>
+            <h3>It answers like your front desk</h3>
+            <p>It says it's your business's automated assistant, then answers from what you've told it: hours, services, the area you cover.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">3</span>
+            <h3>It takes the details</h3>
+            <p>Name, the best number to call back, what they need, and your own questions for that job — like which day suits them.</p>
+          </li>
+          <li class="step">
+            <span class="step__n">4</span>
+            <h3>You get a text and an email</h3>
+            <p>When the call ends, the enquiry is sent to you. It also waits in your dashboard with a button to call them back.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= WHAT IT DOES ================= -->
+    <section class="section section--tint" id="features" aria-labelledby="features-title">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="eyebrow">What it does</p>
+          <h2 id="features-title" class="section__title">A receptionist that never puts anyone on hold</h2>
+          <p class="section__lede">Every item here is something it does on calls today. You choose which of them your line uses.</p>
+        </header>
+        <div class="features">
+          <article class="feature">
+            <h3>Answers questions</h3>
+            <p>Hours, services, the area you cover — from the information you give it. When it doesn't know, it says so and takes a message instead of guessing.</p>
+          </article>
+          <article class="feature">
+            <h3>Takes enquiries your way</h3>
+            <p>Set the questions for each service — "what size is the TV?", "which day suits you?" — and every enquiry arrives with the answers.</p>
+          </article>
+          <article class="feature">
+            <h3>Reads the number back</h3>
+            <p>When a caller gives a callback number, it's read back to them to confirm, so you don't ring a stranger over one misheard digit.</p>
+          </article>
+          <article class="feature">
+            <h3>Puts callers through</h3>
+            <p>If someone asks for a person, it can pass the call to your phone — only if you've switched that on and given a number.</p>
+          </article>
+          <article class="feature">
+            <h3>Takes bookings, if you want</h3>
+            <p>Restaurants can let it take table bookings — name, party size, date and time — for you to confirm in the dashboard.</p>
+          </article>
+          <article class="feature">
+            <h3>Honest with callers</h3>
+            <p>It tells every caller it's an automated assistant, and tells anyone describing an emergency to hang up and call 911.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="section" id="dashboard" aria-labelledby="dashboard-title">
+      <div class="wrap split">
+        <div class="split__copy">
+          <p class="eyebrow">Your dashboard</p>
+          <h2 id="dashboard-title" class="section__title">Everyone waiting on you, one tap from a call back</h2>
+          <ul class="ticks" role="list">
+            <li>Who left an enquiry, what they need, and a button to ring them</li>
+            <li>Every call your assistant answered, and how it ended</li>
+            <li>Your hours, services and answers — change them and the next call uses them</li>
+            <li>Works on your phone as well as your computer</li>
+          </ul>
+          <a href="login.html" class="btn btn--ghost">Business login</a>
+        </div>
+
+        <!-- Drawn in HTML, not a screenshot: it stays sharp, reads in both
+             themes and is the same shape as the real Enquiries page. -->
+        <figure class="mock" aria-label="Example of the Enquiries page in the dashboard">
+          <div class="mock__bar"><span></span><span></span><span></span><em>Enquiries</em></div>
+          <ul class="mock__list" role="list">
+            <li>
+              <span class="mock__av">JB</span>
+              <div><strong>Jordan Blake</strong><small>TV mounting · Today 4:12 PM</small></div>
+              <span class="mock__call">(555) 010-0142</span>
             </li>
-            <li class="credentials__item">
-              <span class="credentials__icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </span>
-              <div>
-                <strong>2+ Years IT Experience</strong>
-                <span>Hands-on network installation &amp; onsite support</span>
-              </div>
+            <li>
+              <span class="mock__av">PN</span>
+              <div><strong>Priya Natarajan</strong><small>Drywall repair · Yesterday</small></div>
+              <span class="mock__call">(555) 010-0187</span>
             </li>
-            <li class="credentials__item">
-              <span class="credentials__icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </span>
-              <div>
-                <strong>Clean, Tested Installations</strong>
-                <span>Nothing left for someone else to fix later</span>
-              </div>
-            </li>
-            <li class="credentials__item">
-              <span class="credentials__icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </span>
-              <div>
-                <strong>San Diego, CA</strong>
-                <span>Serving SD County &amp; surrounding areas</span>
-              </div>
+            <li>
+              <span class="mock__av">SO</span>
+              <div><strong>Sam Okafor</strong><small>Basic plumbing · Mon</small></div>
+              <span class="mock__call">(555) 010-0163</span>
             </li>
           </ul>
-        </aside>
-
+          <figcaption class="phone__caption">Example with made-up callers.</figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- ========== CONTACT ========== -->
-    <section class="contact section" id="contact" aria-labelledby="contact-heading">
-      <div class="container">
-        <header class="section__header reveal">
-          <p class="section__eyebrow">Get In Touch</p>
-          <h2 id="contact-heading" class="section__title">Let's Get Your Phone Answered.</h2>
-          <p class="section__sub">Describe your project or issue and I'll get back to you with a free quote — usually within a few hours.</p>
+    <!-- ================= FAQ ================= -->
+    <section class="section section--tint" id="faq" aria-labelledby="faq-title">
+      <div class="wrap narrow">
+        <header class="section__head">
+          <p class="eyebrow">Questions</p>
+          <h2 id="faq-title" class="section__title">What owners ask first</h2>
         </header>
-
-        <div class="contact__inner">
-
-          <div class="contact__info reveal">
-            <h3>Contact Details</h3>
-            <ul class="contact__details" role="list">
-              <li>
-                <span class="contact__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </span>
-                <div>
-                  <span class="contact__label">Email</span>
-                  <a href="mailto:yap.itsupport@gmail.com" class="contact__value">yap.itsupport@gmail.com</a>
-                </div>
-              </li>
-              <li>
-                <span class="contact__icon" aria-hidden="true">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                </span>
-                <div>
-                  <span class="contact__label">Service Area</span>
-                  <span class="contact__value">San Diego, CA</span>
-                </div>
-              </li>
-            </ul>
-
-            <div class="response-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              Free quote. I typically respond within a few hours.
-            </div>
-          </div>
-
-          <div class="contact__form-wrap reveal">
-            <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
-              <!-- Web3Forms — replace YOUR_KEY with your key from web3forms.com -->
-              <input type="hidden" name="access_key" value="25c22fe2-7b0a-4654-8579-d129772a999d" />
-              <input type="hidden" name="subject" value="New Inquiry — YAP VOICE" />
-              <input type="hidden" name="from_name" value="YAP VOICE Website" />
-              <!-- Honeypot: bots fill this, humans don't -->
-              <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="name">Full Name <span aria-hidden="true">*</span></label>
-                  <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name" />
-                  <span class="form-error" id="name-error" role="alert" aria-live="polite"></span>
-                </div>
-                <div class="form-group">
-                  <label for="email">Email Address <span aria-hidden="true">*</span></label>
-                  <input type="email" id="email" name="email" placeholder="jane@example.com" required autocomplete="email" />
-                  <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="(619) 555-0000" autocomplete="tel" />
-                <span class="form-error" id="phone-error" role="alert" aria-live="polite"></span>
-              </div>
-              <div class="form-group">
-                <label for="message">How Can I Help? <span aria-hidden="true">*</span></label>
-                <textarea id="message" name="message" rows="5" placeholder="Describe your project or issue — what you need done, your location, and any details that help me give you an accurate quote." required></textarea>
-                <span class="form-error" id="message-error" role="alert" aria-live="polite"></span>
-              </div>
-              <button type="submit" class="btn btn--primary btn--full">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Send Message
-              </button>
-              <div class="form-error" id="form-submit-error" role="alert" aria-live="assertive" hidden></div>
-              <p class="form-note">* Required fields. Your information is never shared.</p>
-            </form>
-            <div class="form-success" id="form-success" role="alert" aria-live="assertive" hidden>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              <h3>Message Sent!</h3>
-              <p>Thanks! I'll be in touch soon with your free quote.</p>
-            </div>
-          </div>
-
+        <div class="faq">
+          <details>
+            <summary>Will callers know it's not a person?</summary>
+            <p>Yes. Every call starts with it saying it's your business's automated assistant. If someone asks whether they're talking to a robot, it answers plainly.</p>
+          </details>
+          <details>
+            <summary>Do I have to change my phone number?</summary>
+            <p>No. You keep the number your customers know and forward the calls you want it to answer — every call, after hours only, or when you don't pick up.</p>
+          </details>
+          <details>
+            <summary>What if it can't answer a question?</summary>
+            <p>It says it doesn't know rather than making something up, takes the caller's details, and you get them by text and email like any other enquiry.</p>
+          </details>
+          <details>
+            <summary>Are calls recorded?</summary>
+            <p>No. There's no audio recording and no transcript is kept. You get the details the caller gave — name, number, what they need — and a short note of what they asked for. The <a href="privacy-policy.html">privacy policy</a> has the full detail.</p>
+          </details>
+          <details>
+            <summary>How is it set up, and what does it cost?</summary>
+            <p>We set it up with you: your services, hours, the questions you want asked, and where enquiries should go. Pricing depends on your call volume — book a demo and you'll get a quote before anything is switched on.</p>
+          </details>
         </div>
       </div>
     </section>
 
+    <!-- ================= IT & CABLING ================= -->
+    <section class="section" id="it" aria-labelledby="it-title">
+      <div class="wrap">
+        <div class="it">
+          <div>
+            <p class="eyebrow">Also available</p>
+            <h2 id="it-title" class="section__title section__title--sm">Onsite networking, cabling &amp; IT support</h2>
+            <p class="section__lede">The hands-on side of the business, across San Diego County. Cat6 runs, patch panels, router and switch setup, Wi-Fi coverage — done clean and tested before I leave.</p>
+            <ul class="facts" role="list">
+              <li>Free, no-obligation quotes</li>
+              <li>2+ years hands-on IT experience</li>
+              <li>Evenings and weekends, by appointment</li>
+            </ul>
+          </div>
+          <div class="it__cols">
+            <div>
+              <h3>Small business</h3>
+              <ul role="list">
+                <li>Router &amp; switch installation</li>
+                <li>Structured cabling &amp; patch panels</li>
+                <li>Wi-Fi setup &amp; coverage</li>
+                <li>Office network &amp; POS connectivity</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Home &amp; home office</h3>
+              <ul role="list">
+                <li>Ethernet (Cat5e/Cat6) installation</li>
+                <li>Wi-Fi router setup</li>
+                <li>Computer, printer &amp; smart TV setup</li>
+                <li>Internet &amp; network troubleshooting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="section section--ink" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact">
+        <div class="contact__copy">
+          <p class="eyebrow eyebrow--light">Get in touch</p>
+          <h2 id="contact-title" class="section__title">Hear it answer your calls</h2>
+          <p class="section__lede">Tell me about your business and I'll set up a free demo on a test line, or send a quote for IT and cabling work. I usually reply within a few hours.</p>
+          <p class="contact__email">
+            Or email <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="contact__card">
+          <form class="form" id="contact-form" novalidate aria-label="Contact form">
+            <!-- Web3Forms' public form key: it identifies the inbox, it is
+                 not a secret, and it has to be in the page to work. -->
+            <input type="hidden" name="access_key" value="25c22fe2-7b0a-4654-8579-d129772a999d" />
+            <input type="hidden" name="subject" value="New Inquiry — YAP Voice" />
+            <input type="hidden" name="from_name" value="YAP Voice Website" />
+            <!-- Honeypot: bots fill this, people don't. -->
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+            <div class="form__row">
+              <label class="field">
+                <span>Name</span>
+                <input type="text" id="name" name="name" required autocomplete="name" />
+                <span class="field__error" id="name-error" role="alert" aria-live="polite"></span>
+              </label>
+              <label class="field">
+                <span>Email</span>
+                <input type="email" id="email" name="email" required autocomplete="email" />
+                <span class="field__error" id="email-error" role="alert" aria-live="polite"></span>
+              </label>
+            </div>
+            <div class="form__row">
+              <label class="field">
+                <span>Phone <em>(optional)</em></span>
+                <input type="tel" id="phone" name="phone" autocomplete="tel" />
+                <span class="field__error" id="phone-error" role="alert" aria-live="polite"></span>
+              </label>
+              <label class="field">
+                <span>About</span>
+                <select name="topic" id="topic">
+                  <option>AI phone receptionist</option>
+                  <option>IT, networking or cabling</option>
+                  <option>Something else</option>
+                </select>
+              </label>
+            </div>
+            <label class="field">
+              <span>Your business and what you need</span>
+              <textarea id="message" name="message" rows="4" required></textarea>
+              <span class="field__error" id="message-error" role="alert" aria-live="polite"></span>
+            </label>
+            <button type="submit" class="btn btn--primary btn--lg btn--full">Send message</button>
+            <div class="field__error field__error--form" id="form-submit-error" role="alert" aria-live="assertive" hidden></div>
+            <p class="form__note">Your details are only used to reply to you.</p>
+          </form>
+          <div class="form-done" id="form-success" role="status" aria-live="polite" hidden>
+            <h3>Message sent</h3>
+            <p>Thanks — I'll be in touch soon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer" aria-label="Site footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <a href="#hero" class="logo" aria-label="YAP VOICE — Back to top">
-          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="yapMarkFooter" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="#6366f1"/>
-                <stop offset="55%" stop-color="#8b5cf6"/>
-                <stop offset="100%" stop-color="#06b6d4"/>
-              </linearGradient>
-            </defs>
-            <rect width="40" height="40" rx="11" fill="url(#yapMarkFooter)"/>
-            <g fill="#ffffff">
-              <rect x="6.5" y="16" width="3" height="8" rx="1.5"/>
-              <rect x="12.5" y="12" width="3" height="16" rx="1.5"/>
-              <rect x="18.5" y="8" width="3" height="24" rx="1.5"/>
-              <rect x="24.5" y="13" width="3" height="14" rx="1.5"/>
-              <rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/>
-            </g>
-          </svg>
-          <span>YAP VOICE</span>
-        </a>
-        <p class="footer__tagline">Onsite IT Support &amp; Network Installation<br />San Diego, CA</p>
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <div>
+        <p class="brand brand--footer"><span>YAP Voice</span></p>
+        <p class="footer__small">AI phone receptionist · Onsite IT &amp; networking<br />San Diego, CA</p>
       </div>
-
-      <div class="footer__credentials">
-        <h4>Highlights</h4>
-        <ul role="list">
-          <li>Free, No-Obligation Quotes</li>
-          <li>2+ Years IT Experience</li>
-          <li>Clean, Tested Installations</li>
-        </ul>
-      </div>
-
-      <div class="footer__contact">
-        <h4>Contact</h4>
-        <ul role="list">
-          <li><a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a></li>
-          <li>San Diego, CA &amp; Surrounding Areas</li>
-        </ul>
-      </div>
-
-      <div class="footer__hours">
-        <h4>Availability</h4>
-        <ul role="list">
-          <li>Mon–Fri: After 5:00 PM</li>
-          <li>Saturday: All Day</li>
-          <li>Sunday: All Day</li>
-          <li class="footer__hours-note">By appointment</li>
-        </ul>
-      </div>
-
-      <div class="footer__nav">
-        <h4>Navigation</h4>
-        <ul role="list">
-          <li><a href="#services">IT &amp; Cabling</a></li>
-          <li><a href="#ai-voice">AI Voice</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="login.html">Business Login</a></li>
-          <li><a href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">SMS Terms</a></li>
-          <li><a href="sms-opt-in.html">SMS Opt-In</a></li>
-        </ul>
-      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="login.html">Business login</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms.html">SMS terms</a>
+        <a href="sms-opt-in.html">SMS opt-in</a>
+        <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>
+      </nav>
     </div>
-
-    <div class="footer__bottom">
-      <div class="container">
-        <p>&copy; <span id="footer-year"></span> YAP VOICE. All rights reserved. San Diego, CA.</p>
-        <a href="#hero" class="back-to-top" aria-label="Back to top">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-          Back to top
-        </a>
-      </div>
+    <div class="wrap footer__legal">
+      <p>&copy; <span id="footer-year"></span> YAP Voice. San Diego, CA.</p>
     </div>
   </footer>
 
