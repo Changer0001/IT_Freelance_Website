@@ -123,6 +123,28 @@
     <p>Caller details are stored so the business can return the call, and are shown only to that business. A caller's information is never shared with any other business on the platform, and is never used for marketing.</p>
     <p>Text messages are delivered through <a href="https://www.twilio.com" target="_blank" rel="noopener">Twilio</a>, which carries the message to the recipient's mobile carrier. See Twilio's <a href="https://www.twilio.com/legal/privacy" target="_blank" rel="noopener">Privacy Notice</a> for how they handle message data. Full <a href="terms.html">SMS Terms and Conditions</a> are published separately, and the <a href="sms-opt-in.html">SMS Opt-In page</a> shows exactly how and where a business owner consents.</p>
 
+    <!--
+      DRAFT, FOR THE OWNER'S APPROVAL — publish only together with the
+      switch to Cloudflare Tunnel, because it names Cloudflare. Until that
+      switch the connection is an ngrok tunnel, which this policy never
+      named either.
+
+      Why it is here: once the dashboard has a public address, two kinds
+      of traffic pass through the tunnel provider on the way to the
+      machine that runs the system — the live call audio Twilio streams
+      to the assistant (the media-stream WebSocket), and owners' dashboard
+      pages, which show callers' names and numbers. The policy names every
+      other outside service that handles that data (Twilio, the speech and
+      language services, Web3Forms). Every statement below is true of the
+      system as built: the tunnel carries traffic and stores none of the
+      records, which live in the system's own database.
+
+      On publishing: update "Last updated" at the top of this page.
+    -->
+    <h2>Where the Service Runs</h2>
+    <p>The YAP VOICE phone assistant and the business dashboard run on equipment I operate. Connections to it — a business owner opening their dashboard, and the phone network passing a call to the assistant — travel through <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>, which provides the encrypted connection between the internet and that equipment. This means the audio of a call answered by the assistant, and the pages of the dashboard, pass through Cloudflare's network as they happen. The enquiry records themselves are stored only in the YAP VOICE system, not by Cloudflare. See Cloudflare's <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> for how it handles data passing through its network.</p>
+    <p>Dashboard accounts are created by me for each business. Each is protected by a password the account holder can change at any time from their dashboard, and a business owner's account shows only their own business's calls and enquiries.</p>
+
     <h2>Data Retention</h2>
     <p>Your contact information is retained only as long as needed to address your inquiry. It is stored in my email inbox and is not copied to any additional database or CRM.</p>
     <p>For the AI receptionist service, enquiry records and the owner's notification number are retained while the business holds an active account, and are deleted on request or when the account is closed.</p>
