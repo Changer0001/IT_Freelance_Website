@@ -297,32 +297,6 @@ p { margin: 0; }
 .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
 .faq details p { padding-bottom: 20px; color: var(--ink-2); }
 
-/* Try it: a chat whose answers are written in advance (script.js).
-   The assistant's side reads as the page's accent; the caller's as
-   the page itself. The sample text wears the one SMS colour, as the
-   hero's does — it is the same message. */
-.demo { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
-.demo__bar { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-weight: 600; font-size: 0.95rem; }
-.demo__bar em { margin-left: auto; font-style: normal; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; }
-.demo__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--sms); }
-.demo__log { list-style: none; margin: 0; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-height: 180px; max-height: 420px; overflow-y: auto; }
-.bubble { max-width: 85%; padding: 11px 15px; border-radius: 16px; line-height: 1.5; font-size: 0.975rem; overflow-wrap: anywhere; }
-.bubble--them { align-self: flex-start; background: var(--accent-soft); color: var(--ink); border-bottom-left-radius: 6px; }
-.bubble--you { align-self: flex-end; background: var(--accent); color: var(--on-accent); border-bottom-right-radius: 6px; }
-.bubble--typing { color: var(--ink-3); letter-spacing: 0.2em; }
-.bubble--sample { display: grid; gap: 2px; background: var(--surface); border: 1px solid var(--sms); font: 500 0.875rem/1.45 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; }
-.bubble--sample span:first-child { font-family: var(--font-body); font-weight: 600; color: var(--sms); }
-.demo__chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 18px; border-top: 1px solid var(--line); background: var(--tint); }
-.chip { font: 500 0.9rem/1.3 var(--font-body); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; text-decoration: none; }
-.chip:hover { border-color: var(--accent); color: var(--accent); }
-.chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.chip[disabled] { opacity: 0.45; cursor: default; }
-.chip[disabled]:hover { border-color: var(--line); color: var(--ink); }
-.chip--go { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
-.chip--go:hover { background: var(--accent-hover); color: var(--on-accent); }
-.demo__note { margin: 0; padding: 10px 18px 14px; font-size: 0.8125rem; color: var(--ink-3); background: var(--tint); }
-.demo__note a { color: var(--accent); }
-
 /* IT & cabling: deliberately quieter than the product above it. */
 .it { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; }
 .facts { margin-top: 20px; display: grid; gap: 6px; color: var(--ink-2); font-size: 0.975rem; }
