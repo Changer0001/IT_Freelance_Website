@@ -215,6 +215,80 @@ if (contactForm && formSuccess) {
 }
 
 /* ============================================================
+   TRY IT — a chat whose answers are written in advance
+   Nothing is sent anywhere: each chip shows its question and the
+   answer below, which is wording already on this page. Text is set
+   with textContent, never innerHTML.
+   ============================================================ */
+const DEMO_ANSWERS = {
+  calls: [
+    "Your phone rings first. If you don't pick up in the time you choose — or you're closed — I answer.",
+    "I say I'm your business's automated assistant, answer from what you've told me — hours, services, the area you cover — then take their name, number and what they need, and text it to you.",
+  ],
+  person: [
+    "Yes. Every call starts with me saying I'm your business's automated assistant. If someone asks whether they're talking to a robot, I answer plainly.",
+  ],
+  after: [
+    "A text and an email as soon as the call ends, with the essentials — something like this:",
+    { sample: ['New enquiry for Harbor View Handyman', 'Services: TV mounting', 'Name: Jordan Blake', 'Phone: +15550100142', 'preferred date: Friday'] },
+    "It also waits in your dashboard with a button to call them back. (That one's an example — made-up business, made-up caller.)",
+  ],
+  number: [
+    "No. You keep the number your customers know and forward the calls you want me to answer — every call, after hours only, or when you don't pick up.",
+  ],
+  cost: [
+    "Pricing depends on your call volume. We set it up with you — your services, hours and the questions you want asked — and you get a quote before anything is switched on.",
+  ],
+};
+
+const demoLog = document.getElementById('demo-log');
+const demoChips = document.getElementById('demo-chips');
+
+if (demoLog && demoChips) {
+  const quiet = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const bubble = (who, content) => {
+    const li = document.createElement('li');
+    li.className = `bubble bubble--${who}`;
+    if (typeof content === 'string') {
+      li.textContent = content;
+    } else {
+      li.classList.add('bubble--sample');
+      content.sample.forEach(line => {
+        const row = document.createElement('span');
+        row.textContent = line;
+        li.appendChild(row);
+      });
+    }
+    demoLog.appendChild(li);
+    demoLog.scrollTop = demoLog.scrollHeight;
+    return li;
+  };
+
+  let busy = false;
+  demoChips.querySelectorAll('button[data-q]').forEach(chip => {
+    chip.addEventListener('click', async () => {
+      const answer = DEMO_ANSWERS[chip.dataset.q];
+      if (busy || !answer) return;
+      busy = true;
+      chip.disabled = true;
+      bubble('you', chip.textContent);
+      for (const part of answer) {
+        if (!quiet) {
+          const typing = bubble('them', '…');
+          typing.classList.add('bubble--typing');
+          typing.setAttribute('aria-hidden', 'true');
+          await new Promise(done => setTimeout(done, 650));
+          typing.remove();
+        }
+        bubble('them', part);
+      }
+      busy = false;
+    });
+  });
+}
+
+/* ============================================================
    FOOTER — dynamic year
    ============================================================ */
 const yearEl = document.getElementById('footer-year');
