@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="How business owners opt in to SMS notifications from YAP VOICE: where the number is entered, the consent shown at that point, the messages sent, and how to stop them." />
-  <title>SMS Opt-In — How Business Owners Consent — YAP VOICE</title>
+  <meta name="description" content="How business owners opt in to SMS notifications from YAP VOICE, how callers come to receive one confirmation text, what the messages say, and how to stop them." />
+  <title>SMS Opt-In — YAP VOICE</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -72,7 +72,7 @@
     </a>
 
     <h1>SMS Opt-In</h1>
-    <p class="updated">How business owners consent to receive text messages from YAP VOICE · Last updated: September 18, 2026</p>
+    <p class="updated">How business owners and callers come to receive text messages from YAP VOICE · Last updated: September 29, 2026</p>
 
     <p>This page documents, in full and without requiring an account, how a business owner opts in to the text messages YAP VOICE sends them. It exists so that the consent wording and the point at which it is shown can be read by anyone, including mobile carriers reviewing this messaging programme.</p>
 
@@ -82,8 +82,12 @@
     <p>YAP VOICE AI Receptionist Notifications.</p>
 
     <h2>Who receives messages</h2>
-    <p><strong>Only the account holder.</strong> Messages go solely to the mobile number that a business owner enters themselves in their own YAP VOICE account, and only about enquiries the AI receptionist took for that owner's own business.</p>
-    <p>No numbers are ever imported, purchased, or collected from any other source. <strong>We never send a message to a caller, to a customer of the business, or to any third party.</strong> There is exactly one recipient per business: the owner who typed the number in.</p>
+    <p>Two people, and nobody else:</p>
+    <ul>
+      <li><strong>The business owner</strong>, at the mobile number they enter themselves in their own YAP VOICE account, about enquiries the AI receptionist took for their own business. How they opt in is shown below.</li>
+      <li><strong>A caller</strong> who has just phoned that business and given the assistant a number to be called back on, when the business has turned caller confirmations on. They receive <strong>one</strong> text confirming their message was taken (and the visit time, if one was booked on the call). How that consent works is described under <a href="#callers">Callers: the confirmation text</a>.</li>
+    </ul>
+    <p>No numbers are ever imported, purchased, or collected from any other source. <strong>We never send marketing, and never text anyone who has not contacted the business themselves.</strong></p>
 
     <h2>The only way to opt in</h2>
     <p>There is a single opt-in path. A business owner signs up for the YAP VOICE service, opens the settings page of their account, and types their own mobile number into the field below. The field is <strong>empty by default</strong>, and the consent checkbox is <strong>unticked by default</strong>. Nothing is sent unless the owner completes both, which is an active, affirmative action taken by the account holder about their own handset.</p>
@@ -139,8 +143,30 @@
       preferred time: morning
     </div>
 
+    <h2 id="callers">Callers: the confirmation text</h2>
+    <p>A caller is texted only when all of these are true:</p>
+    <ul>
+      <li>they phoned the business themselves;</li>
+      <li>they gave the assistant a number to be called back on, for their own enquiry;</li>
+      <li>the business has turned caller confirmations on (they are off by default); and</li>
+      <li>the assistant has told them on the call that a confirmation text will be sent to that number.</li>
+    </ul>
+    <p>They receive one transactional message per enquiry, from the business line they called. It carries no marketing, no offers and no links, and no follow-up messages are sent. What it says:</p>
+    <!--
+      RENDERED FROM THE CODE: app/services/caller_confirmation.py
+      (caller_text). Keep in step with it. The business name is fictional.
+    -->
+    <div class="sample-msg">
+      Cedar Grill: thanks for calling. We have your message about Catering and will call you back on this number. Reply STOP to opt out.
+    </div>
+    <p>When a visit was pencilled in on the call:</p>
+    <div class="sample-msg">
+      Cedar Grill: thanks for calling. Your visit for Catering is pencilled in for Thu 10/01, 10:00 AM; we'll call this number to confirm it. Reply STOP to opt out.
+    </div>
+    <p>Replying <strong>STOP</strong> stops all messages to that number.</p>
+
     <h2>Message frequency</h2>
-    <p>One message per enquiry the assistant takes, so frequency follows how many calls the business receives — typically a few messages per day. There is no recurring or scheduled send, and no message is sent when there is nothing to report.</p>
+    <p>Owners: one message per enquiry the assistant takes, so frequency follows how many calls the business receives — typically a few messages per day. There is no recurring or scheduled send, and no message is sent when there is nothing to report.</p>
 
     <h2>How to stop</h2>
     <p>Reply <strong>STOP</strong> to any message to stop receiving them. One confirmation is sent and nothing further goes to that number.</p>
