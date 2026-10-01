@@ -43,9 +43,9 @@
     </a>
 
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: September 29, 2026</p>
+    <p class="updated">Last updated: October 1, 2026</p>
 
-    <p>YAP VOICE ("I", "me", or "my") operates this website to provide information about IT support services and to allow potential clients to get in touch. This policy explains what information is collected and how it is used.</p>
+    <p>YAP VOICE ("I", "me", or "my") operates this website and the YAP VOICE AI phone receptionist, a service that answers a business's phone calls, takes callers' details, and can book visits into the business owner's own Google Calendar. This policy explains what information is collected and how it is used, including what YAP VOICE does with Google user data.</p>
 
     <h2>Information I Collect</h2>
     <p>The only personal information I collect is what you voluntarily submit through the contact form:</p>
@@ -148,13 +148,57 @@
       system as built: the tunnel carries traffic and stores none of the
       records, which live in the system's own database.
     -->
+    <!--
+      GOOGLE CALENDAR. Written for Google's OAuth verification of the two
+      scopes the dashboard asks for (calendar.events.owned and
+      calendar.freebusy) and checked against what the code does
+      (app/services/calendar/google.py and calendar_service.py in the
+      receptionist repository): busy times are read per call and not
+      stored; the refresh token is encrypted at rest; only events YAP VOICE
+      created are read back, by their id; disconnecting revokes the token
+      at Google and deletes it here. Keep this in step with the code.
+    -->
+    <h2 id="google-calendar">Google Calendar (for business owners)</h2>
+    <p>A business owner can connect their own Google Calendar from their YAP VOICE dashboard, so the phone assistant can offer callers open times and put booked visits into that calendar. Connecting is optional, done by the owner, and can be undone at any time. This section describes exactly what YAP VOICE does with that access.</p>
+
+    <p><strong>What YAP VOICE accesses, and why</strong></p>
+    <ul>
+      <li><strong>When the owner is busy.</strong> While a caller is on the line and a visit is being offered, YAP VOICE asks Google Calendar for the owner's busy and free times, so it only offers times that are actually free. It sees only that a time is busy, never the title, attendees or details of the owner's own events.</li>
+      <li><strong>The visits it books.</strong> When a caller picks a time, YAP VOICE creates an event for that visit in the owner's calendar. The event holds the caller's name, their phone number, the service they asked for and the answers to the business's own questions about the job, so the owner has what they need for the visit.</li>
+      <li><strong>Only the events it created.</strong> YAP VOICE reads back, changes or deletes only the visit events it created itself: to show on the dashboard whether the owner has confirmed, moved or deleted a visit, to move or cancel a visit when the caller asks to, and to keep the event's details correct if the caller corrects them on the call. It does not read, change or delete any other event in the owner's calendar.</li>
+    </ul>
+
+    <p><strong>What is stored</strong></p>
+    <ul>
+      <li>The authorization Google issues when the owner connects (a refresh token), stored encrypted, so visits can be booked while the owner is not at a computer.</li>
+      <li>For each visit YAP VOICE booked: the calendar event's identifier, its start and end time, whether it is pencilled in, confirmed or cancelled, and the service it is for, kept with that caller's enquiry record.</li>
+      <li>The owner's busy times are <strong>not</strong> stored. They are read when a visit is offered, used to work out the open times, and then discarded.</li>
+    </ul>
+
+    <p><strong>How it is used and shared</strong></p>
+    <ul>
+      <li>Google Calendar data is used only to offer callers open times and to book, move, cancel and keep up to date the visits callers book, for that owner's own business.</li>
+      <li>It is never sold, never used for advertising, never used to build profiles of anyone, and never used to train artificial-intelligence or machine-learning models. It is not sent to the language model the assistant uses to understand callers.</li>
+      <li>The times being offered (for example "Thursday at 9 AM") are spoken to the caller, which passes them as words through the speech service that produces the assistant's voice, for the length of the call only.</li>
+      <li>It is not shared with any other business on the platform or any other third party, except where required by law.</li>
+      <li>No person reads it, except the business's own account holders on their dashboard, and me where needed to provide support the owner has asked for, to investigate a security problem, or to comply with the law.</li>
+    </ul>
+
+    <p><strong>Removing access and deleting data</strong></p>
+    <ul>
+      <li>The owner can disconnect Google Calendar at any time from the Phone page of their dashboard. Disconnecting revokes YAP VOICE's access at Google and deletes the stored authorization immediately. Access can also be removed from the owner's Google Account settings at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>.</li>
+      <li>Visit events already in the owner's calendar stay there, because the calendar is the owner's. Visit records kept with enquiries follow the retention described below, and are deleted on request or when the account is closed.</li>
+    </ul>
+
+    <p><strong>Limited Use.</strong> YAP VOICE's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+
     <h2>Where the Service Runs</h2>
     <p>The YAP VOICE phone assistant and the business dashboard run on equipment I operate. Connections to it — a business owner opening their dashboard, and the phone network passing a call to the assistant — travel through <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>, which provides the encrypted connection between the internet and that equipment. This means the audio of a call answered by the assistant, and the pages of the dashboard, pass through Cloudflare's network as they happen. The enquiry records themselves are stored only in the YAP VOICE system, not by Cloudflare. See Cloudflare's <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> for how it handles data passing through its network.</p>
     <p>Dashboard accounts are created by me for each business. Each is protected by a password the account holder can change at any time from their dashboard, and a business owner's account shows only their own business's calls and enquiries.</p>
 
     <h2>Data Retention</h2>
     <p>Your contact information is retained only as long as needed to address your inquiry. It is stored in my email inbox and is not copied to any additional database or CRM.</p>
-    <p>For the AI receptionist service, enquiry records and the owner's notification number are retained while the business holds an active account, and are deleted on request or when the account is closed.</p>
+    <p>For the AI receptionist service, enquiry records (including the record of any visit booked) and the owner's notification number are retained while the business holds an active account, and are deleted on request or when the account is closed. A connected Google Calendar's stored authorization is deleted as soon as the owner disconnects it.</p>
     <p>Calls are not recorded and conversations are not stored, so there is nothing of either to retain. A record that a call happened — when it was, how long it lasted, how it ended, and a short list of what happened on it (for example which service was asked about, whether a message was taken or a visit booked) — is kept for up to 24 months so the business has its own history. It contains none of your own words and not your name.</p>
     <p>Questions the assistant could not answer are kept for up to 90 days, and are deleted sooner on request or when the account is closed.</p>
 
