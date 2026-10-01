@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="How business owners opt in to SMS notifications from YAP VOICE, how callers come to receive one confirmation text, what the messages say, and how to stop them." />
+  <meta name="description" content="How business owners opt in to SMS notifications from YAP VOICE, how callers come to receive one confirmation text or one text after a missed call, what the messages say, and how to stop them." />
   <title>SMS Opt-In — YAP VOICE</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -72,7 +72,7 @@
     </a>
 
     <h1>SMS Opt-In</h1>
-    <p class="updated">How business owners and callers come to receive text messages from YAP VOICE · Last updated: September 29, 2026</p>
+    <p class="updated">How business owners and callers come to receive text messages from YAP VOICE · Last updated: October 1, 2026</p>
 
     <p>This page documents, in full and without requiring an account, how a business owner opts in to the text messages YAP VOICE sends them. It exists so that the consent wording and the point at which it is shown can be read by anyone, including mobile carriers reviewing this messaging programme.</p>
 
@@ -86,6 +86,7 @@
     <ul>
       <li><strong>The business owner</strong>, at the mobile number they enter themselves in their own YAP VOICE account, about enquiries the AI receptionist took for their own business. How they opt in is shown below.</li>
       <li><strong>A caller</strong> who has just phoned that business and given the assistant a number to be called back on, when the business has turned caller confirmations on. They receive <strong>one</strong> text confirming their message was taken (and the visit time, if one was booked on the call). How that consent works is described under <a href="#callers">Callers: the confirmation text</a>.</li>
+      <li><strong>A caller whose call ended before they left a message</strong>, when the business has turned this on. They receive <strong>one</strong> text from the business line they called, asking what they need. See <a href="#missed-callers">Callers who hung up before leaving a message</a>.</li>
     </ul>
     <p>No numbers are ever imported, purchased, or collected from any other source. <strong>We never send marketing, and never text anyone who has not contacted the business themselves.</strong></p>
 
@@ -165,8 +166,27 @@
     </div>
     <p>Replying <strong>STOP</strong> stops all messages to that number.</p>
 
+    <h2 id="missed-callers">Callers who hung up before leaving a message</h2>
+    <p>When a caller hangs up before leaving a message, the business may have chosen to send them one text so their enquiry is not lost. A caller is texted only when all of these are true:</p>
+    <ul>
+      <li>they phoned the business themselves, moments earlier, and spoke to the assistant;</li>
+      <li>their call ended before a message was taken, and they had not said no to leaving one;</li>
+      <li>their number was shown on the call (withheld numbers are never texted); and</li>
+      <li>the business has turned this on (it is off by default).</li>
+    </ul>
+    <p>The number is the one they called from, shown by the phone network on their own call; it is used for this one reply only. At most one such text is sent to a number in any 24 hours, and none if that number was already sent a text by the business in that time. It carries no marketing, no offers and no links, and no follow-up messages are sent. What it says:</p>
+    <!--
+      RENDERED FROM THE CODE: app/services/caller_confirmation.py
+      (missed_caller_text). Keep in step with it. The business name is fictional.
+    -->
+    <div class="sample-msg">
+      Cedar Grill: sorry we missed you about Catering just now. Reply to this text with what you need and we'll help, or call this number back. Reply STOP to opt out.
+    </div>
+    <p>When the text invites a reply, the reply is answered by the same assistant, by text. Replying <strong>STOP</strong> stops all messages to that number.</p>
+
     <h2>Message frequency</h2>
     <p>Owners: one message per enquiry the assistant takes, so frequency follows how many calls the business receives — typically a few messages per day. There is no recurring or scheduled send, and no message is sent when there is nothing to report.</p>
+    <p>Callers: at most one message per enquiry, or one after a call that ended before a message was left, and never more than one such text to a number in 24 hours.</p>
 
     <h2>How to stop</h2>
     <p>Reply <strong>STOP</strong> to any message to stop receiving them. One confirmation is sent and nothing further goes to that number.</p>
