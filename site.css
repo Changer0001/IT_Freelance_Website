@@ -297,6 +297,25 @@ p { margin: 0; }
 .faq details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
 .faq details p { padding-bottom: 20px; color: var(--ink-2); }
 
+/* The demo line under the hero: a sentence, not a button, so the two
+   real actions above it stay the loudest things on the page. */
+.hero__demo { margin-top: 22px; font-size: var(--step--1); color: var(--ink-2); max-width: 34em; }
+.hero__demo a { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* Pricing: one plan, so one card, split into the figure and what it buys. */
+.plan {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 36px; box-shadow: var(--shadow);
+}
+.plan__amount { font: 700 clamp(2.6rem, 2rem + 2.5vw, 3.6rem)/1 var(--font-display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.plan__from { font: 500 1rem/1 var(--font-body); color: var(--ink-3); margin-right: 6px; vertical-align: 0.9em; }
+.plan__per { font: 500 1.125rem/1 var(--font-body); color: var(--ink-2); margin-left: 4px; }
+.plan__sub { margin-top: 12px; color: var(--ink-2); font-size: 0.975rem; }
+.plan__price .btn { margin-top: 24px; }
+.plan__fine { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); max-width: 28em; }
+.plan__list { margin: 0; }
+.plan__note { margin-top: 18px; font-size: 0.9375rem; color: var(--ink-3); }
+
 /* IT & cabling: deliberately quieter than the product above it. */
 .it { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; }
 .facts { margin-top: 20px; display: grid; gap: 6px; color: var(--ink-2); font-size: 0.975rem; }
@@ -347,8 +366,9 @@ p { margin: 0; }
 }
 @media (max-width: 860px) {
   .hero { padding-top: 32px; }
-  .hero__grid, .split, .contact, .it { grid-template-columns: 1fr; gap: 40px; }
+  .hero__grid, .split, .contact, .it, .plan { grid-template-columns: 1fr; gap: 40px; }
   .it { padding: 28px 22px; }
+  .plan { padding: 28px 22px; gap: 28px; }
   .section { padding: 64px 0; }
 }
 @media (max-width: 560px) {
