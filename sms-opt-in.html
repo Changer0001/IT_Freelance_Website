@@ -76,7 +76,7 @@
 
     <p>This page documents, in full and without requiring an account, how a business owner opts in to the text messages YAP VOICE sends them. It exists so that the consent wording and the point at which it is shown can be read by anyone, including mobile carriers reviewing this messaging programme.</p>
 
-    <p>YAP VOICE is the AI receptionist service operated by <strong>YAP-AI Solutions</strong>, San Diego, CA.</p>
+    <p>YAP VOICE is the AI receptionist service operated by <strong>YAP-AI Solutions</strong>, San Diego, CA. YAP VOICE and YAP-AI Solutions are trade names of <strong>Burak Yilmaz</strong>, San Diego, CA, the registered sender of these messages.</p>
 
     <h2>Program name</h2>
     <p>YAP VOICE AI Receptionist Notifications.</p>
@@ -131,17 +131,20 @@
       sample against what actually sends.
 
       Keep this in step with conversation/tools.py::enquiry_message and
-      as_text: every text starts "YAP VOICE:" so the recipient and a
-      carrier reviewer see who is sending before anything else.
+      as_text: every text starts with the registered brand name,
+      "YAP-AI Solutions:", and ends with the opt-out line, so the
+      recipient and a carrier reviewer see who is sending before
+      anything else and how to stop it after.
       The name and number are fictional; the shape is exact.
     -->
     <div class="sample-msg">
-      YAP VOICE: New enquiry for Cedar Grill<br />
+      YAP-AI Solutions: New enquiry for Cedar Grill<br />
       Services: Catering<br />
       Name: Maria Lopez<br />
       Phone: +16195550132<br />
       preferred date: Saturday<br />
-      preferred time: morning
+      preferred time: morning<br />
+      Reply STOP to opt out, HELP for help.
     </div>
 
     <h2 id="callers">Callers: the confirmation text</h2>
