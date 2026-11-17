@@ -244,10 +244,17 @@ p { margin: 0; }
   content: ''; position: absolute; right: 0.9em; top: 0.85em; width: 1em; height: 1em; border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #2b3555, #070a14 70%);
 }
-.handset__status { display: flex; justify-content: space-between; align-items: center; padding: 1.55em 2em 0 2.9em; height: 4.6em; }
-.handset__status b { font-size: 1.55em; font-weight: 600; letter-spacing: -0.01em; }
-.handset__status span { display: flex; align-items: center; gap: 0.4em; }
-.handset__status svg { height: 1.05em; width: auto; fill: #ffffff; }
+/* The status row is the camera cut-out's own row: the same top and height,
+   and three columns with the cut-out's width in the middle. So the time
+   and the icons sit on the cut-out's centre line, each centred in the
+   space to its side, as on the phone itself. */
+.handset__status {
+  display: grid; grid-template-columns: 1fr 7.6em 1fr; align-items: center; justify-items: center;
+  height: 4.6em; padding: 1.1em 0 0.9em;
+}
+.handset__status b { font-size: 1.5em; font-weight: 600; letter-spacing: -0.01em; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+.handset__status span { grid-column: 3; display: flex; align-items: center; gap: 0.42em; }
+.handset__status svg { display: block; height: 1.1em; width: auto; fill: #ffffff; }
 .handset__lock { text-align: center; padding-top: 2.6em; text-shadow: 0 0.05em 0.6em rgba(0, 0, 0, 0.18); }
 .handset__lock small { display: block; font-size: 1.85em; font-weight: 500; opacity: 0.92; }
 .handset__lock strong {
@@ -282,7 +289,7 @@ p { margin: 0; }
 }
 .handset__ring {
   position: absolute; top: 0.9em; left: 0.8em; right: 0.8em; z-index: 4; display: flex; align-items: center; gap: 0.55em;
-  padding: 0.95em 0.85em; border-radius: 2.8em; background: rgba(24, 24, 27, 0.96); color: #ffffff;
+  padding: 0.95em 0.85em; border-radius: 2.8em; background: #18181b; color: #ffffff;
   box-shadow: 0 1em 2.4em -0.8em rgba(0, 0, 0, 0.7);
 }
 /* The caller's number and place each stay on one line: squeezed between the
@@ -307,7 +314,9 @@ p { margin: 0; }
    with reduced motion, the markup's own state stands: both notes, no ring. */
 .handset [data-at] { opacity: 0; transform: translateY(1.2em) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1); }
 .handset [data-at].is-on { opacity: 1; transform: none; }
-.handset .handset__ring { transform: translateY(-140%); }
+/* The call slides down from above the screen, solid from the start: faded
+   in, the time and the battery showed through it on the way. */
+.handset .handset__ring { opacity: 1; transform: translateY(-140%); }
 .handset .handset__ring.is-on { transform: none; }
 .handset__ring.is-on .handset__keys i:last-child { animation: handset-ring 0.9s ease-in-out infinite; }
 @keyframes handset-ring {
