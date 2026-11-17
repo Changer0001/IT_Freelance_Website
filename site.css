@@ -236,7 +236,7 @@ p { margin: 0; }
     linear-gradient(180deg, #123a8c 0%, #0a1e52 55%, #061233 100%);
 }
 .handset__island {
-  position: absolute; top: 1.1em; left: 50%; transform: translateX(-50%); width: 8.4em; height: 2.6em;
+  position: absolute; top: 1.1em; left: 50%; transform: translateX(-50%); width: 7.6em; height: 2.6em;
   border-radius: 2em; background: #000000; z-index: 3;
 }
 .handset__island::after {
