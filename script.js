@@ -99,6 +99,35 @@ const landAt = hash => {
   return Math.max(0, Math.round(top));
 };
 
+// Landed, then checked. A smooth scroll is aimed once, at the start; if the
+// page above the section changes height on the way, or the browser stops
+// the scroll short, the section ends up low with a strip of the one before
+// it showing under the header. So once the page has stopped moving, the
+// place is measured again and put right. The visitor's own scrolling
+// (wheel, touch, keys) calls the check off: the page is theirs.
+let settling = 0;
+const settle = (hash, tries) => {
+  const mine = ++settling;
+  let lastY = window.scrollY, still = 0;
+  const check = () => {
+    if (mine !== settling) return;
+    if (window.scrollY !== lastY) { lastY = window.scrollY; still = 0; }
+    else if (++still >= 12) {
+      const want = landAt(hash);
+      const most = document.documentElement.scrollHeight - window.innerHeight;
+      if (want !== null && tries > 0 && Math.abs(Math.min(want, most) - window.scrollY) > 1) {
+        window.scrollTo({ top: want, behavior: 'auto' });
+        settle(hash, tries - 1);
+      }
+      return;
+    }
+    requestAnimationFrame(check);
+  };
+  requestAnimationFrame(check);
+};
+['wheel', 'touchstart', 'keydown'].forEach(kind =>
+  window.addEventListener(kind, () => { settling += 1; }, { passive: true }));
+
 document.addEventListener('click', e => {
   const link = e.target.closest && e.target.closest('a[href^="#"]');
   if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -109,6 +138,7 @@ document.addEventListener('click', e => {
   e.preventDefault();
   const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top, behavior: calm ? 'auto' : 'smooth' });
+  settle(hash, 3);
   if (hash !== location.hash) history.pushState(null, '', hash);
   // The keyboard goes with the eye: the next Tab starts from the section.
   const target = hash === '#top' ? null : document.querySelector(hash);
@@ -122,7 +152,7 @@ document.addEventListener('click', e => {
 window.addEventListener('load', () => {
   if (location.hash.length < 2) return;
   const top = landAt(location.hash);
-  if (top !== null) window.scrollTo({ top, behavior: 'auto' });
+  if (top !== null) { window.scrollTo({ top, behavior: 'auto' }); settle(location.hash, 3); }
 });
 
 /* ============================================================
