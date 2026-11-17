@@ -33,6 +33,54 @@ if (hamburger && mainNav) {
 }
 
 /* ============================================================
+   THE PHONE IN THE HERO — one call, played on a loop
+   The markup is the last frame (the missed call and the text), so
+   the page is complete with no script and with reduced motion.
+   Otherwise: the lock screen, the call ringing, the missed call,
+   then the text with the job; and round again.
+   ============================================================ */
+const handset = document.getElementById('handset');
+
+if (handset && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const parts = Array.from(handset.querySelectorAll('[data-at]'));
+  // How long each frame is held, in milliseconds: empty, ringing, missed, the text.
+  const holds = [900, 2800, 1500, 6000];
+  let timer = null;
+
+  const show = step => {
+    parts.forEach(part => {
+      const from  = Number(part.dataset.at);
+      const until = part.dataset.until ? Number(part.dataset.until) : Infinity;
+      part.classList.toggle('is-on', step >= from && step < until);
+    });
+  };
+
+  const play = () => {
+    let step = 0;
+    show(step);
+    const next = () => {
+      timer = setTimeout(() => {
+        step += 1;
+        if (step > 3) { play(); return; }
+        show(step);
+        next();
+      }, holds[step]);
+    };
+    next();
+  };
+
+  // Only while it can be seen: a loop running off screen is wasted work.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      clearTimeout(timer);
+      if (entries[0].isIntersecting) play(); else show(3);
+    }, { threshold: 0.35 }).observe(handset);
+  } else {
+    play();
+  }
+}
+
+/* ============================================================
    STICKY HEADER — shrink & add bg on scroll
    ============================================================ */
 const siteHeader = document.getElementById('site-header');
