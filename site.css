@@ -1,9 +1,9 @@
 /* =====================================================================
    yap-itsupport.com — the homepage and the owners' login door.
 
-   The legal pages (privacy-policy, terms, sms-opt-in) and 404 keep
-   styles.css: they are long-form text, already reviewed as published,
-   and nothing about this redesign needed to touch them.
+   The legal pages (privacy-policy, terms, sms-opt-in) and the 404 use it
+   too, with the same header and footer. Their wording is reviewed as
+   published: this file sets how they look and never what they say.
 
    Tokens first. The bare :root is the light palette; dark redefines only
    tokens, under the system preference. Components read tokens and never
@@ -487,3 +487,45 @@ p { margin: 0; }
 .door__back { display: inline-block; margin-top: 28px; font-size: 0.9375rem; color: var(--ink-2); text-decoration: none; }
 .door__back:hover { color: var(--ink); }
 @media (max-width: 480px) { .door__card { padding: 26px 20px; } }
+
+/* ======================================================================
+   The legal pages (privacy-policy.html, terms.html, sms-opt-in.html)
+   Long text, so one measured column under the site's own header.
+   ====================================================================== */
+.policy-page { width: min(720px, 100% - 2 * var(--gutter)); margin-inline: auto; padding: 56px 0 96px; }
+.policy-page > * + * { margin-top: 1em; }
+.policy-page h1 { font-size: var(--step-2); font-weight: 600; }
+.policy-page .updated { margin-top: 12px; padding-bottom: 28px; border-bottom: 1px solid var(--line); font-size: var(--step--1); color: var(--ink-3); }
+.policy-page h2 { font-size: 1.375rem; font-weight: 600; margin-top: 2.2em; }
+.policy-page h2 + * { margin-top: 0.6em; }
+.policy-page p, .policy-page li { color: var(--ink-2); line-height: 1.7; }
+.policy-page ul, .policy-page ol { display: grid; gap: 6px; margin: 0.6em 0 0; padding-left: 1.4rem; }
+.policy-page strong { color: var(--ink); font-weight: 600; }
+.policy-page a { text-underline-offset: 2px; overflow-wrap: anywhere; }
+
+/* The opt-in form, drawn as it appears in the dashboard, so the consent
+   wording can be read without an account. */
+.optin-demo { padding: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.optin-demo__label { display: block; margin-bottom: 6px; font-size: var(--step--1); font-weight: 600; color: var(--ink); }
+.optin-demo__input {
+  width: 100%; max-width: 20rem; padding: 10px 12px;
+  background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 6px;
+  font: 1rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.optin-demo__consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; }
+.optin-demo__consent input { flex-shrink: 0; width: 1rem; height: 1rem; margin: 0.3rem 0 0; accent-color: var(--accent); }
+.optin-demo__consent label { font-size: var(--step--1); line-height: 1.65; color: var(--ink-2); }
+.optin-demo__note { margin-top: 16px; font-size: var(--step--1); font-style: italic; color: var(--ink-3); }
+.sample-msg {
+  padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  font-size: var(--step--1); line-height: 1.7; color: var(--ink-2); overflow-wrap: anywhere;
+}
+
+/* ======================================================================
+   404.html
+   ====================================================================== */
+.error-page { display: grid; justify-items: center; align-content: center; gap: 14px; min-height: 62vh; padding: 72px var(--gutter); text-align: center; }
+.error-page__code { font: 600 clamp(4.5rem, 16vw, 7.5rem)/1 var(--font-display); color: var(--accent); font-variant-numeric: lining-nums; }
+.error-page h1 { font-size: var(--step-2); font-weight: 600; }
+.error-page p:not(.error-page__code) { max-width: 40ch; color: var(--ink-2); }
+.error-page__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }

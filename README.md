@@ -18,7 +18,7 @@ Open each file and replace the following placeholders:
 
 ### Files to update
 - **`index.html`** — search for the placeholders above and replace all occurrences
-- **`styles.css`** — colors are defined as CSS custom properties in `:root` at the top; tweak `--color-accent` or `--color-bg` to rebrand
+- **`site.css`** — the one stylesheet for every page; colors are CSS custom properties in `:root` at the top (`--accent`, `--bg`), with the dark set just below
 - **`script.js`** — see the contact form section below to connect a real form service
 
 ---
@@ -74,7 +74,7 @@ If you haven't already, create a repository on GitHub and push your files:
 
 ```bash
 git init
-git add index.html styles.css script.js README.md
+git add index.html site.css script.js README.md
 git commit -m "Initial website"
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
 git branch -M main
@@ -130,7 +130,7 @@ python3 -m http.server 8000
 ```
 .
 ├── index.html   # Full single-page site structure
-├── styles.css   # All styles (CSS custom properties, responsive grid, animations)
+├── site.css     # All styles, for every page (tokens, light and dark, responsive)
 ├── script.js    # Nav toggle, sticky header, scroll reveal, form handler
 └── README.md    # This file
 ```

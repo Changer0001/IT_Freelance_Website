@@ -8,69 +8,46 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <script>
-    (function(){
-      var t = localStorage.getItem('theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-  <style>
-    .policy-page { max-width: 760px; margin-inline: auto; padding: 5rem var(--container-pad); }
-    .policy-page h1 { font-size: var(--size-3xl); margin-bottom: 0.5rem; }
-    .policy-page .updated { font-size: var(--size-sm); color: var(--color-text-muted); margin-bottom: 3rem; }
-    .policy-page h2 { font-size: var(--size-lg); font-weight: 700; margin-top: 2.5rem; margin-bottom: 0.75rem; color: var(--color-text); }
-    .policy-page p, .policy-page li { color: var(--color-text-muted); line-height: 1.75; }
-    .policy-page ul, .policy-page ol { padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem; }
-    .policy-page a { color: var(--color-accent); }
-    .policy-page strong { color: var(--color-text); font-weight: 700; }
-    .policy-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--size-sm); color: var(--color-text-muted); margin-bottom: 2rem; transition: color var(--transition); }
-    .policy-back:hover { color: var(--color-text); }
-    /* Two of these sit side by side now; inline-flex leaves only a
-       word-space between them. */
-    .policy-back + .policy-back { margin-left: 1.25rem; }
-
-    /* The opt-in form, reproduced exactly as it appears in the dashboard so
-       that the consent wording can be read without an account. */
-    .optin-demo {
-      border: 1px solid var(--color-border, rgba(148,163,184,0.28));
-      border-radius: 14px;
-      padding: 1.5rem;
-      margin-top: 1rem;
-      background: var(--color-surface, rgba(148,163,184,0.06));
-    }
-    .optin-demo__label { display: block; font-size: var(--size-sm); font-weight: 600; color: var(--color-text); margin-bottom: 0.4rem; }
-    .optin-demo__input {
-      width: 100%; max-width: 20rem; padding: 0.65rem 0.8rem;
-      border: 1px solid var(--color-border, rgba(148,163,184,0.4));
-      border-radius: 9px; background: transparent; color: var(--color-text);
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1rem;
-    }
-    .optin-demo__consent { display: flex; gap: 0.65rem; align-items: flex-start; margin-top: 1.1rem; }
-    .optin-demo__consent input { margin-top: 0.3rem; flex-shrink: 0; width: 1rem; height: 1rem; }
-    .optin-demo__consent label { font-size: var(--size-sm); line-height: 1.65; color: var(--color-text-muted); }
-    .optin-demo__note { font-size: var(--size-sm); color: var(--color-text-muted); margin-top: 1rem; font-style: italic; }
-    .sample-msg {
-      border-left: 3px solid var(--color-accent);
-      padding: 0.9rem 1.1rem; margin-top: 1rem;
-      background: var(--color-surface, rgba(148,163,184,0.06));
-      border-radius: 0 10px 10px 0;
-      font-size: var(--size-sm); line-height: 1.7; color: var(--color-text-muted);
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
+  <meta name="theme-color" content="#f4f7fc" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0a101d" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="site.css" />
 </head>
 <body>
-  <main class="policy-page">
-    <a href="index.html" class="policy-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      Back to Home
-    </a>
-    <a href="login.html" class="policy-back">
-      Business Login
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
+  <header class="site-header" id="site-header">
+    <div class="wrap header__row">
+      <a href="index.html" class="brand" aria-label="YAP Voice — home">
+        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="mark" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#1f66e5"/><stop offset="100%" stop-color="#0f47b3"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="11" fill="url(#mark)"/>
+          <g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g>
+        </svg>
+        <span>YAP Voice</span>
+      </a>
+
+      <nav class="nav" id="main-nav" aria-label="Primary">
+        <a href="index.html" class="nav__link">AI receptionist</a>
+        <a href="index.html#pricing" class="nav__link">Pricing</a>
+        <a href="index.html#faq" class="nav__link">FAQ</a>
+        <a href="it-support.html" class="nav__link">IT &amp; cabling</a>
+        <a href="login.html" class="nav__link nav__link--login">Business login</a>
+      </nav>
+
+      <a href="index.html#contact" class="btn btn--primary header__cta">Book a free demo</a>
+
+      <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="policy-page">
     <h1>SMS Opt-In</h1>
     <p class="updated">How business owners come to receive text messages from YAP VOICE · Last updated: November 12, 2026</p>
 
@@ -161,5 +138,27 @@
       <li><a href="privacy-policy.html">Privacy Policy</a> — what is collected and how it is handled</li>
     </ul>
   </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <div>
+        <p class="brand brand--footer"><span>YAP Voice</span></p>
+        <p class="footer__small">AI phone receptionist · Onsite IT &amp; networking<br />San Diego, CA</p>
+      </div>
+      <nav class="footer__links" aria-label="Footer">
+        <a href="it-support.html">IT &amp; cabling</a>
+        <a href="login.html">Business login</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms.html">SMS terms</a>
+        <a href="sms-opt-in.html">SMS opt-in</a>
+        <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>
+      </nav>
+    </div>
+    <div class="wrap footer__legal">
+      <p>&copy; <span id="footer-year"></span> YAP-AI Solutions. YAP Voice is a product of YAP-AI Solutions, San Diego, CA. YAP Voice and YAP-AI Solutions are trade names of Burak Yilmaz, San Diego, CA.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
