@@ -280,23 +280,26 @@ p { margin: 0; }
   border-radius: 0.3em; background: rgba(255, 255, 255, 0.92);
 }
 .handset__ring {
-  position: absolute; top: 1em; left: 0.8em; right: 0.8em; z-index: 4; display: flex; align-items: center; gap: 1em;
-  padding: 1.2em 1.3em; border-radius: 3.2em; background: rgba(24, 24, 27, 0.96); color: #ffffff;
+  position: absolute; top: 0.9em; left: 0.8em; right: 0.8em; z-index: 4; display: flex; align-items: center; gap: 0.55em;
+  padding: 0.95em 0.85em; border-radius: 2.8em; background: rgba(24, 24, 27, 0.96); color: #ffffff;
   box-shadow: 0 1em 2.4em -0.8em rgba(0, 0, 0, 0.7);
 }
-.handset__who { min-width: 0; flex: 1 1 auto; line-height: 1.2; }
-.handset__who b { display: block; font-size: 1.5em; font-weight: 600; white-space: nowrap; }
-.handset__who span { font-size: 1.25em; color: rgba(255, 255, 255, 0.62); }
+/* The caller's number and place each stay on one line: squeezed between the
+   picture and the two keys they wrapped to three and ran under the keys. */
+.handset__who { min-width: 0; flex: 1 1 auto; line-height: 1.25; }
+.handset__who b, .handset__who span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.handset__who b { font-size: 1.18em; font-weight: 600; }
+.handset__who span { font-size: 0.98em; color: rgba(255, 255, 255, 0.62); }
 .handset__avatar {
-  flex: 0 0 auto; width: 4.2em; height: 4.2em; border-radius: 50%; display: grid; place-items: center;
+  flex: 0 0 auto; width: 2.7em; height: 2.7em; border-radius: 50%; display: grid; place-items: center;
   background: linear-gradient(180deg, #a6acb8, #7d8390);
 }
-.handset__avatar svg { width: 2.6em; height: 2.6em; fill: #ffffff; }
-.handset__keys { display: flex; gap: 0.9em; flex: 0 0 auto; }
-.handset__keys i { width: 4.2em; height: 4.2em; border-radius: 50%; display: grid; place-items: center; }
+.handset__avatar svg { width: 1.7em; height: 1.7em; fill: #ffffff; }
+.handset__keys { display: flex; gap: 0.5em; flex: 0 0 auto; }
+.handset__keys i { width: 2.9em; height: 2.9em; border-radius: 50%; display: grid; place-items: center; }
 .handset__keys i:first-child { background: #ff3b30; }
 .handset__keys i:last-child { background: #30d158; }
-.handset__keys svg { width: 2.2em; height: 2.2em; fill: #ffffff; }
+.handset__keys svg { width: 1.55em; height: 1.55em; fill: #ffffff; }
 .handset__keys i:first-child svg { transform: rotate(135deg); }
 
 /* Shown and hidden by script.js as the call plays. With no script, or
