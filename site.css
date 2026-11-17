@@ -184,8 +184,12 @@ p { margin: 0; }
 }
 
 /* ---------------------------------------------------------------- hero */
-.hero { padding: 56px 0 72px; }
-.hero__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+.hero { padding: 40px 0 72px; }
+/* The words start at the phone's top, not at its middle: centred against a
+   phone taller than they are, they stood 160px under the header. The first
+   line (the eyebrow) is level with the time in the phone's status bar. */
+.hero__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; }
+.hero__copy { padding-top: 28px; }
 .hero__title { font-size: var(--step-3); font-weight: 600; letter-spacing: -0.02em; line-height: 1.06; }
 .hero__lede { margin-top: 20px; max-width: 34em; font-size: 1.1875rem; color: var(--ink-2); }
 .hero__lede strong { color: var(--ink); font-weight: 600; }
@@ -476,6 +480,7 @@ p { margin: 0; }
 }
 @media (max-width: 860px) {
   .hero { padding-top: 32px; }
+  .hero__copy { padding-top: 0; }
   .hero__grid, .split, .contact, .it, .plan { grid-template-columns: 1fr; gap: 40px; }
   .it { padding: 28px 22px; }
   .plan { padding: 28px 22px; gap: 28px; }
