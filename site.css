@@ -261,7 +261,9 @@ p { margin: 0; }
   display: block; font-size: 8.6em; font-weight: 700; line-height: 1.02; letter-spacing: -0.03em;
   font-family: -apple-system, 'SF Pro Rounded', 'SF Pro Display', system-ui, 'Segoe UI', Roboto, Arial, sans-serif;
 }
-.handset__notes { margin-top: auto; padding: 0 0.9em 7.4em; display: flex; flex-direction: column; gap: 0.7em; }
+/* The notifications stop clear of the torch and camera keys below them
+   (7em tall from the bottom of the screen), not resting on them. */
+.handset__notes { margin-top: auto; padding: 0 0.9em 8.4em; display: flex; flex-direction: column; gap: 0.7em; }
 .handset__note {
   display: flex; gap: 1em; align-items: center; padding: 1.15em 1.3em 1.15em 1.15em; border-radius: 2.2em;
   background: rgba(240, 242, 247, 0.74); color: #000000;
@@ -312,7 +314,7 @@ p { margin: 0; }
 
 /* Shown and hidden by script.js as the call plays. With no script, or
    with reduced motion, the markup's own state stands: both notes, no ring. */
-.handset [data-at] { opacity: 0; transform: translateY(1.2em) scale(0.97); transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1); }
+.handset [data-at] { opacity: 0; transform: translateY(1.6em); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .handset [data-at].is-on { opacity: 1; transform: none; }
 /* The call slides down from above the screen, solid from the start: faded
    in, the time and the battery showed through it on the way. */
