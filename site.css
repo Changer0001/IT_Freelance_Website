@@ -252,9 +252,11 @@ p { margin: 0; }
   display: grid; grid-template-columns: 1fr 7.6em 1fr; align-items: center; justify-items: center;
   height: 4.6em; padding: 1.1em 0 0.9em;
 }
-.handset__status b { font-size: 1.5em; font-weight: 600; letter-spacing: -0.01em; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
-.handset__status span { grid-column: 3; display: flex; align-items: center; gap: 0.42em; }
-.handset__status svg { display: block; height: 1.1em; width: auto; fill: #ffffff; }
+.handset__status b { font-size: 1.42em; font-weight: 600; letter-spacing: -0.01em; line-height: 1; font-variant-numeric: lining-nums tabular-nums; }
+/* The icons are no taller than the time's figures, and the three of them
+   leave as much room to the cut-out as to the screen's edge. */
+.handset__status span { grid-column: 3; display: flex; align-items: center; gap: 0.34em; }
+.handset__status svg { display: block; height: 0.92em; width: auto; fill: #ffffff; }
 .handset__lock { text-align: center; padding-top: 2.6em; text-shadow: 0 0.05em 0.6em rgba(0, 0, 0, 0.18); }
 .handset__lock small { display: block; font-size: 1.85em; font-weight: 500; opacity: 0.92; }
 .handset__lock strong {
