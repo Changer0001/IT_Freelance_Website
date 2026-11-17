@@ -12,8 +12,9 @@
    The look (November 2026): a clear blue on a cool white, headings in a
    book serif and text in its companion sans. Chosen by the owner over
    the indigo and geometric sans the site had, which read as the default
-   look of an AI product. The owners' dashboard still uses the indigo
-   (frontend/tailwind.config.js) and is to follow.
+   look of an AI product. The owners' dashboard carries the same
+   values (frontend/tailwind.config.js in the receptionist's repository):
+   change one, change the other.
    ===================================================================== */
 
 :root {
