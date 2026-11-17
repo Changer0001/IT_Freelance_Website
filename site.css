@@ -77,7 +77,15 @@
 
 /* ---------------------------------------------------------------- base */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+/* Where a menu link lands a section: its first line on the line the page's
+   own first line sits on (68px under the header; 32px on a phone), not a
+   section's whole top padding lower. script.js places it exactly; these
+   two values are the same place for a browser running no script: the
+   line's distance from the top, less the section's own top padding. */
+html { scroll-behavior: smooth; scroll-padding-top: 49px; -webkit-text-size-adjust: 100%; }
+/* A link target that is not a section has no top padding of its own to
+   stand in for, so it is given the section's. */
+[id]:not(.section):not(main):not(header) { scroll-margin-top: 88px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 body {
@@ -479,6 +487,8 @@ p { margin: 0; }
   .features { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 860px) {
+  html { scroll-padding-top: 37px; }
+  [id]:not(.section):not(main):not(header) { scroll-margin-top: 64px; }
   .hero { padding-top: 32px; }
   .hero__copy { padding-top: 0; }
   .hero__grid, .split, .contact, .it, .plan { grid-template-columns: 1fr; gap: 40px; }

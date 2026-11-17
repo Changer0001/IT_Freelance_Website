@@ -81,6 +81,51 @@ if (handset && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 /* ============================================================
+   IN-PAGE LINKS — a section lands with its first line where the
+   page's own first line sits: 68px under the header (32px on a
+   phone), whichever section and whichever browser. Without this
+   the browser's own placement (scroll-padding-top in site.css)
+   still applies.
+   ============================================================ */
+const landAt = hash => {
+  if (hash === '#top') return 0;
+  let target = null;
+  try { target = document.querySelector(hash); } catch (e) { return null; }
+  if (!target) return null;
+  const first  = target.matches('.eyebrow, h1, h2, h3') ? target : (target.querySelector('.eyebrow, h1, h2, h3') || target);
+  const header = document.getElementById('site-header');
+  const under  = window.matchMedia('(max-width: 860px)').matches ? 32 : 68;
+  const top    = first.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0) - under;
+  return Math.max(0, Math.round(top));
+};
+
+document.addEventListener('click', e => {
+  const link = e.target.closest && e.target.closest('a[href^="#"]');
+  if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const hash = link.getAttribute('href');
+  if (hash.length < 2) return;
+  const top = landAt(hash);
+  if (top === null) return;
+  e.preventDefault();
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top, behavior: calm ? 'auto' : 'smooth' });
+  if (hash !== location.hash) history.pushState(null, '', hash);
+  // The keyboard goes with the eye: the next Tab starts from the section.
+  const target = hash === '#top' ? null : document.querySelector(hash);
+  if (target) {
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  }
+});
+
+// Arriving from another page on a link that names a section.
+window.addEventListener('load', () => {
+  if (location.hash.length < 2) return;
+  const top = landAt(location.hash);
+  if (top !== null) window.scrollTo({ top, behavior: 'auto' });
+});
+
+/* ============================================================
    STICKY HEADER — shrink & add bg on scroll
    ============================================================ */
 const siteHeader = document.getElementById('site-header');
