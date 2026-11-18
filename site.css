@@ -276,7 +276,7 @@ p { margin: 0; }
 .hero--work        { --hero-photo: url("img/hero-work.jpg");        --hero-at: 30% 30%; }
 .hero--restaurants { --hero-photo: url("img/hero-restaurants.jpg"); --hero-at: 50% 60%; }
 .hero--handyman    { --hero-photo: url("img/hero-handyman.jpg");    --hero-at: 60% 40%; }
-.hero--cleaning    { --hero-photo: url("img/hero-cleaning.jpg");    --hero-at: 50% 40%; }
+.hero--cleaning    { --hero-photo: url("img/hero-cleaning.jpg");    --hero-at: 60% 50%; }
 .hero--auto        { --hero-photo: url("img/hero-auto.jpg");        --hero-at: 40% 50%; }
 .hero--it          { --hero-photo: url("img/hero-it.jpg");          --hero-at: 70% 50%; }
 .hero--photo::after {
@@ -295,9 +295,16 @@ p { margin: 0; }
    measure again when a picture is swapped. The dark page has room to
    spare, so it keeps the usual wash. */
 .hero--restaurants { --hero-wash: 83%; }
+/* The other way round: a pale picture (a gloved hand with a spray bottle on
+   pale wood) is washed out to nothing at the usual strength, and dark text is
+   easy to read over pale wood, so on the light page it gets less wash and
+   shows through. On a phone the hand falls under the small print, so there it
+   goes back to the usual strength. */
+.hero--cleaning { --hero-wash: 66%; }
+@media (max-width: 900px) { .hero--cleaning { --hero-wash: 80%; } }
 .hero--auto, .hero--it { --hero-wash: 86%; }
 @media (prefers-color-scheme: dark) {
-  .hero--restaurants, .hero--auto, .hero--it { --hero-wash: 80%; }
+  .hero--restaurants, .hero--auto, .hero--it, .hero--cleaning { --hero-wash: 80%; }
 }
 /* One column: the words run the full width, so the wash is even across it. */
 @media (max-width: 900px) {
