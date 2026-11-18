@@ -12,7 +12,7 @@ different kind of call.
 
     for-restaurants.html  for-handymen.html  for-cleaning.html
     for-auto-repair.html  for-it-support.html
-    types.js   (the calls the menu's small phone plays, from the same words)
+    types.js   (what the menu's small card says about each type)
 
 RUN IT AFTER ANY CHANGE TO index.html, and commit what it writes. Every
 replacement is checked: if index.html no longer holds the words this expects,
@@ -31,12 +31,12 @@ SITE = 'https://yap-itsupport.com/'
 OPENING = "Thanks for calling {biz}. I'm the AI assistant here, and I'll take down what you need."
 
 
-def service(file, name, eyebrow, title, describe, biz, where, short, need, ask, answer, field, value, job, person, rows, services):
+def service(file, name, eyebrow, title, describe, biz, where, short, need, ask, answer, field, value, job, person, rows, services, notes):
     """A business that takes enquiries: the caller says what they need, the assistant asks the business's own question."""
     first = person.split()[0]
     return dict(
         kind='service', file=file, name=name, eyebrow=eyebrow, title=title, describe=describe, biz=biz, where=where, short=short,
-        ask=ask, field=field, value=value, job=job, person=person, rows=rows, services=services, time='4:12', them='Customer',
+        ask=ask, field=field, value=value, job=job, person=person, rows=rows, services=services, notes=notes, time='4:12', them='Customer',
         call=[OPENING.format(biz=biz), need, 'Sure. ' + ask, answer, 'And your name?', person + '.',
               'Is 619 555 0142 the best number to call you back on?', "Yes, that's it.",
               f"Thanks, {first}. I've passed that on, and {biz} will call you back."],
@@ -50,7 +50,11 @@ TYPES = {
         kind='restaurant', file='for-restaurants.html', name='Restaurants', eyebrow='For restaurants',
         title='AI phone receptionist for restaurants | YAP Voice',
         describe="YAP Voice answers your restaurant's phone when you can't. It answers guests' questions, takes their booking request and texts and emails it to you to confirm.",
-        biz='Cedar Grill', time='7:42', them='Guest',
+        biz='Cedar Grill', time='7:42', them='Guest', ask='For how many people?',
+        # The assistant is not connected to OpenTable or any other booking system, so the third
+        # line says only what is true: nothing has to be replaced.
+        notes=['Takes booking requests, changes and cancellations by phone', 'Says "requested", never "booked": you confirm each one',
+               'Keep OpenTable or your paper book. Nothing to replace'],
         call=[OPENING.format(biz='Cedar Grill'), 'Hi, can I book a table for Friday night?', 'Of course. For how many people?', 'Four of us.',
               'And what time on Friday?', "Seven o'clock.", 'What name is the booking under?', 'Maria Lopez.',
               "That's requested: a table for four, Friday at 7 PM, under Maria Lopez. Cedar Grill will confirm it with you."],
@@ -64,7 +68,8 @@ TYPES = {
         'Hi, I need a TV mounted on the wall.', 'What size is the TV?', '65 inch.', 'tv size', '65 inch', 'TV mounting', 'Jordan Blake',
         [('SO', 'Sam Okafor', 'Yesterday 5:40 PM', 'Basic plumbing', ('where', 'kitchen sink'), True, '(619) 555-0163'),
          ('PN', 'Priya Natarajan', 'Mon 9:05 AM', 'Drywall repair', None, False, '(619) 555-0187')],
-        [('TV mounting', ['What size is the TV?', 'Which day suits you?']), ('Drywall repair', ['Roughly how big is the damaged area?'])]),
+        [('TV mounting', ['What size is the TV?', 'Which day suits you?']), ('Drywall repair', ['Roughly how big is the damaged area?'])],
+        ['Takes the job, the name and the number while you work', 'Asks your own question for each kind of job', 'Keep the app or notebook you schedule with. Nothing to replace']),
     'cleaning': service(
         'for-cleaning.html', 'Cleaning', 'For cleaning businesses', 'AI phone receptionist for cleaning businesses | YAP Voice',
         "YAP Voice answers your line when you're mid-clean. It takes the caller's name, number and what they need, asks your own questions, and texts and emails it to you.",
@@ -72,7 +77,8 @@ TYPES = {
         'Hi, I need a move-out clean for my apartment.', 'How many bedrooms?', 'Three.', 'bedrooms', '3', 'Move-out clean', 'Erin Walsh',
         [('ML', 'Marcus Lee', 'Yesterday 5:40 PM', 'Office clean', ('when', 'tomorrow morning'), True, '(619) 555-0163'),
          ('DO', 'Dana Ortiz', 'Mon 9:05 AM', 'Deep clean', None, False, '(619) 555-0187')],
-        [('Move-out clean', ['How many bedrooms?', 'Which day suits you?']), ('Office clean', ['Roughly how many square feet?'])]),
+        [('Move-out clean', ['How many bedrooms?', 'Which day suits you?']), ('Office clean', ['Roughly how many square feet?'])],
+        ['Takes the enquiry while you are mid-clean or driving', 'Asks what you need to quote: bedrooms, type of clean', 'Flags a caller who says it is urgent']),
     'auto': service(
         'for-auto-repair.html', 'Auto repair', 'For auto repair', 'AI phone receptionist for auto repair shops | YAP Voice',
         "YAP Voice answers your shop's line when you're under a car. It takes the caller's name, number and what they need, asks your own questions, and texts and emails it to you.",
@@ -80,7 +86,8 @@ TYPES = {
         "Hi, my brakes are grinding and I'd like them checked.", 'What car is it?', 'A 2018 Honda Civic.', 'car', '2018 Honda Civic', 'Brake check', 'Chris Nguyen',
         [('TB', 'Tasha Brooks', 'Yesterday 5:40 PM', "Won't start", ('car', '2014 Ford F-150'), True, '(619) 555-0163'),
          ('LR', 'Luis Romero', 'Mon 9:05 AM', 'Oil change', None, False, '(619) 555-0187')],
-        [('Brake check', ['What car is it?', 'Which day suits you?']), ('Oil change', ['What car is it?'])]),
+        [('Brake check', ['What car is it?', 'Which day suits you?']), ('Oil change', ['What car is it?'])],
+        ['Takes the call while you are under a car', 'Asks the car and the problem before you call back', 'Answers hours and location from what you give it']),
     'it': service(
         'for-it-support.html', 'IT support', 'For IT support', 'AI phone receptionist for IT support businesses | YAP Voice',
         "YAP Voice answers your line when you're on site with a client. It takes the caller's name, number and what they need, asks your own questions, and texts and emails it to you.",
@@ -88,7 +95,8 @@ TYPES = {
         "Hi, my laptop won't turn on and I need it for work.", 'What kind of device is it?', 'A Dell laptop.', 'device', 'Dell laptop', 'Laptop repair', 'Sam Patel',
         [('RC', 'Renee Clark', 'Yesterday 5:40 PM', 'Office Wi-Fi down', ('where', 'front office'), True, '(619) 555-0163'),
          ('OH', 'Omar Haddad', 'Mon 9:05 AM', 'New PC setup', None, False, '(619) 555-0187')],
-        [('Laptop repair', ['What kind of device is it?']), ('Network problem', ['Is it one computer or the whole office?'])]),
+        [('Laptop repair', ['What kind of device is it?']), ('Network problem', ['Is it one computer or the whole office?'])],
+        ['Takes the call while you are on site with a client', 'Asks the device and the problem', 'Flags a caller who says it is urgent']),
 }
 
 
@@ -319,11 +327,11 @@ def main():
                     sys.exit(f'{t["file"]}: the handyman example\'s "{word}" is still on the page')
         (ROOT / t['file']).write_text(p.s)
         print('wrote', t['file'])
-    calls = {key: {k: t[k] for k in ('name', 'time', 'them', 'call', 'sms', 'mail')} for key, t in TYPES.items()}
+    cards = {key: {k: t[k] for k in ('name', 'ask', 'notes')} for key, t in TYPES.items()}
     (ROOT / 'types.js').write_text(
-        '/* MADE BY tools/build_pages.py. The example call for each kind of business, for the small\n'
-        '   phone in the "Business type" menu (script.js). The same words as on each type\'s page. */\n'
-        'window.YAP_TYPES = ' + json.dumps(calls, ensure_ascii=False, indent=1) + ';\n')
+        '/* MADE BY tools/build_pages.py. What the small card in the "Business type" menu says about\n'
+        '   each kind of business (script.js): the question the assistant asks, and three things. */\n'
+        'window.YAP_TYPES = ' + json.dumps(cards, ensure_ascii=False, indent=1) + ';\n')
     print('wrote types.js')
 
 

@@ -172,9 +172,10 @@ p { margin: 0; }
 /* The menu has eight things in it now. Under 1180px they no longer fit on one
    line, so the full menu gives way to the button there (below). */
 /* "Business type": one menu item that opens to the kinds of business, each
-   with a page of its own. Beside the list, a small copy of the phone plays
-   the call for the type the mouse is on (script.js); so the panel is for
-   screens with a mouse and room, and a phone gets the list alone. */
+   with a page of its own. Beside the row the mouse is on, a small card says
+   what the assistant asks that kind of business's callers and three things
+   about it (script.js). The card is for screens with a mouse and room; a
+   phone gets the list alone. */
 .nav__group { position: relative; }
 .nav__sum {
   list-style: none; cursor: pointer; display: flex; align-items: center; gap: 7px;
@@ -186,19 +187,29 @@ p { margin: 0; }
 .nav__group[open] .nav__sum::after { transform: rotate(225deg); margin-top: 3px; }
 .nav__sum:hover, .nav__group[open] .nav__sum { color: var(--ink); background: var(--tint); }
 .nav__menu {
-  position: absolute; top: calc(100% + 8px); right: -150px; z-index: 60; display: grid; grid-template-columns: 232px auto; padding: 6px;
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 60; width: 246px; padding: 6px;
   background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
 }
-.nav__list { display: grid; gap: 2px; align-content: start; }
+.nav__list { display: grid; gap: 2px; }
 .nav__list a { display: block; padding: 9px 12px; border-radius: 6px; text-decoration: none; color: var(--ink); font-size: 0.9375rem; font-weight: 600; }
 .nav__list a small { display: block; margin-top: 2px; font-size: 0.8125rem; font-weight: 400; color: var(--ink-3); }
 .nav__list a:hover, .nav__list a:focus-visible { background: var(--tint); }
 .nav__list a[aria-current] { background: var(--accent-soft); color: var(--accent); }
-.nav__peeks { margin-left: 6px; padding: 14px 16px 12px; border-left: 1px solid var(--line); display: grid; justify-items: center; align-content: start; gap: 10px; }
-.nav__peeks:empty { display: none; }
-.nav__peeks .handset { font-size: 7.6px; }
-.nav__peekcap { font-size: 0.75rem; color: var(--ink-3); text-align: center; }
-.nav__peekcap b { color: var(--ink); font-weight: 600; }
+/* The card: its own small box beside the list, level with the row it is about
+   and shorter than the list. Where there is no room to the right it opens to
+   the left. Empty (no script), it is not there at all. */
+.nav__info {
+  position: absolute; left: calc(100% + 8px); top: 0; width: 250px; padding: 14px 16px; display: grid; gap: 10px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
+  transition: top 0.16s ease;
+}
+.nav__info:empty { display: none; }
+.nav__info--left { left: auto; right: calc(100% + 8px); }
+.nav__infoh { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.nav__infoq { margin-top: 3px; font: 600 1rem/1.3 var(--font-display); color: var(--ink); }
+.nav__infolist { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 0.8125rem; line-height: 1.4; color: var(--ink-2); }
+.nav__infolist li { position: relative; padding-left: 15px; }
+.nav__infolist li::before { content: ''; position: absolute; left: 2px; top: 0.5em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
 
 @media (max-width: 1180px) {
   .header__cta { display: none; }
@@ -230,8 +241,8 @@ p { margin: 0; }
   .nav__link--login { margin: 16px 0 0; padding: 14px 12px; text-align: center; border: 1px solid var(--line); border-radius: 6px; }
   .nav__sum { padding: 14px 0; font-size: 1.0625rem; border-bottom: 1px solid var(--line); border-radius: 0; justify-content: space-between; }
   .nav__sum:hover, .nav__group[open] .nav__sum { background: transparent; }
-  .nav__menu { position: static; grid-template-columns: 1fr; margin: 8px 0 4px; box-shadow: none; }
-  .nav__peeks { display: none; }
+  .nav__menu { position: static; width: auto; margin: 8px 0 4px; box-shadow: none; }
+  .nav__info { display: none; }
 }
 
 /* ---------------------------------------------------------------- hero */
