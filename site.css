@@ -827,13 +827,15 @@ p { margin: 0; }
    Three steps side by side; one under another on a phone.
    ============================================================ */
 .finder { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
-.finder__step { display: grid; align-content: start; gap: 14px; padding: 26px 28px 30px; min-height: 330px; }
+.finder__step { display: grid; align-content: start; gap: 14px; padding: 26px 28px 30px; min-height: 280px; }
 .finder__step + .finder__step { border-left: 1px solid var(--line); }
 .finder__n { display: flex; align-items: center; gap: 10px; font: 600 1.0625rem/1.3 var(--font-display); color: var(--ink-3); }
 .finder__n b { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); font: 700 0.8125rem/1 var(--font-body); color: var(--ink-3); }
 .finder__step.is-on .finder__n { color: var(--ink); }
 .finder__step.is-on .finder__n b { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
 .finder__idle { color: var(--ink-3); font-size: 0.975rem; }
+/* Side by side, the first line of steps 2 and 3 sits on the line of the search box's own words. */
+@media (min-width: 901px) { .finder__idle { padding-top: 15px; } }
 .finder__step.is-on .finder__idle { display: none; }
 .finder__body { display: grid; gap: 12px; }
 .finder [hidden] { display: none; }
@@ -865,8 +867,9 @@ p { margin: 0; }
 .finder__facts dd.is-missing { color: var(--ink-3); }
 .finder__small { font-size: 0.8125rem; line-height: 1.45; color: var(--ink-3); }
 .finder__small a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.finder__terms { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); }
-.finder__terms a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+/* One line across the foot of the card: where the search comes from, and the demo's terms. */
+.finder__foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 28px; padding: 14px 28px; border-top: 1px solid var(--line); }
+.finder__foot > a { margin-left: auto; white-space: nowrap; }
 .finder__label { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .finder__error { padding: 10px 12px; border-radius: 8px; background: var(--urgent-soft); color: var(--urgent); font-size: 0.875rem; line-height: 1.45; }
 .finder__wave { display: inline-flex; align-items: center; gap: 2px; height: 1.3em; color: var(--accent); }
@@ -882,4 +885,6 @@ p { margin: 0; }
   .finder { grid-template-columns: 1fr; }
   .finder__step { min-height: 0; padding: 22px 18px; }
   .finder__step + .finder__step { border-left: 0; border-top: 1px solid var(--line); }
+  .finder__foot { padding: 14px 18px; }
+  .finder__foot > a { margin-left: 0; }
 }
