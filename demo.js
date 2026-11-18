@@ -97,7 +97,7 @@
     clear(); session = token(); searching++; tryId = null;
     q.value = ''; site.value = ''; list([]);
     picked.hidden = true; learned.hidden = true; call.hidden = true; live.hidden = true;
-    searchBox.hidden = !canSearch; if (note) note.hidden = searchBox.hidden; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
+    searchBox.hidden = !canSearch; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
     stage(1); (canSearch ? q : site).focus();
   };
 
@@ -138,7 +138,7 @@
   };
   const prepare = async (body, name, where, fromSearch) => {
     clear(); searching++; list([]);
-    searchBox.hidden = true; if (note) note.hidden = searchBox.hidden; siteBox.hidden = true; orPaste.hidden = true;
+    searchBox.hidden = true; siteBox.hidden = true; orPaste.hidden = true;
     picked.textContent = '';
     const again = el('button', 'finder__again', 'Not yours? Search again'); again.type = 'button'; again.addEventListener('click', reset);
     picked.append(el('b', '', name)); if (where) picked.append(el('span', '', where));
@@ -188,7 +188,8 @@
   ask('/api/demo/status').then(status => {
     if (!status.available) { root.dispatchEvent(new CustomEvent('demo:off')); return; }
     canSearch = !!status.search;
-    searchBox.hidden = !canSearch; if (note) note.hidden = searchBox.hidden; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
+    if (note) note.hidden = !canSearch;
+    searchBox.hidden = !canSearch; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
     section.hidden = false;
     root.dispatchEvent(new CustomEvent('demo:on'));
   }).catch(() => root.dispatchEvent(new CustomEvent('demo:off')));
