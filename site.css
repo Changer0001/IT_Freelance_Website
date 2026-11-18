@@ -376,14 +376,18 @@ p { margin: 0; }
 .handset .handset__call { opacity: 1; transform: translateY(104%); }
 .handset .handset__call.is-on { transform: none; }
 .handset__callhead {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 0.7em 1em; margin: 0; padding: 0 0.5em 1.1em;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.7);
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.8em 0.6em; margin: 0; padding: 0 0.5em 1.1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.72);
 }
-.handset__callhead b { grid-column: 1 / -1; text-align: center; font-size: 1.05em; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+.handset__callhead b { grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 0.7em; font-size: 1.05em; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+/* The green badge a phone shows while a call is on. */
+.handset__callhead em { width: 2em; height: 2em; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; background: #30d158; }
+.handset__callhead em svg { width: 1.15em; height: 1.15em; fill: #ffffff; }
 .handset__callhead span { display: flex; align-items: center; gap: 0.45em; font-size: 1.15em; }
 .handset__callhead span:last-child { justify-content: flex-end; }
-.handset__callhead i { width: 0.7em; height: 0.7em; border-radius: 50%; background: rgba(255, 255, 255, 0.5); }
+.handset__callhead span i { width: 0.7em; height: 0.7em; border-radius: 50%; background: rgba(255, 255, 255, 0.5); }
 .handset__callhead span:last-child i { background: #4d8df5; }
+.handset__callhead time { font-size: 1.25em; font-weight: 600; color: #30d158; font-variant-numeric: tabular-nums; }
 /* Lines leaving by the top fade out, so none is cut off as a sliver under the heading. */
 .handset__thread {
   flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.65em; overflow: hidden; padding-top: 1em;
@@ -393,7 +397,18 @@ p { margin: 0; }
   display: none; opacity: 1; transform: none; margin: 0; max-width: 84%; padding: 0.55em 0.85em;
   border-radius: 1.25em; font-size: 1.32em; line-height: 1.28; color: #ffffff; flex: 0 0 auto;
 }
-.handset .handset__say.is-on { display: block; animation: handset-say 0.35s ease both; }
+.handset .handset__say.is-on { display: flex; align-items: flex-start; gap: 0.5em; animation: handset-say 0.35s ease both; }
+/* The voice sign on each line: four bars, moving on the line being spoken. */
+.handset__wave { flex: 0 0 auto; display: flex; align-items: center; gap: 0.11em; height: 1.28em; }
+.handset__wave i { width: 0.13em; border-radius: 0.1em; background: rgba(255, 255, 255, 0.85); height: 0.34em; transform-origin: center; }
+.handset__wave i:nth-child(2) { height: 0.86em; }
+.handset__wave i:nth-child(3) { height: 0.56em; }
+.handset__wave i:nth-child(4) { height: 0.28em; }
+.handset__say.is-speaking .handset__wave i { animation: handset-wave 0.8s ease-in-out infinite; }
+.handset__say.is-speaking .handset__wave i:nth-child(2) { animation-delay: -0.55s; }
+.handset__say.is-speaking .handset__wave i:nth-child(3) { animation-delay: -0.3s; }
+.handset__say.is-speaking .handset__wave i:nth-child(4) { animation-delay: -0.7s; }
+@keyframes handset-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1.35); } }
 .handset__say--them { align-self: flex-start; background: rgba(255, 255, 255, 0.17); border-bottom-left-radius: 0.35em; }
 .handset__say--yap { align-self: flex-end; background: #2a6be0; border-bottom-right-radius: 0.35em; }
 @keyframes handset-say { from { opacity: 0; transform: translateY(0.7em); } }
@@ -405,6 +420,7 @@ p { margin: 0; }
   .handset [data-at] { transition: none; }
   .handset__ring.is-on .handset__keys i:last-child { animation: none; }
   .handset .handset__say.is-on { animation: none; }
+  .handset__say.is-speaking .handset__wave i { animation: none; }
 }
 
 /* ------------------------------------------------------------- sections */

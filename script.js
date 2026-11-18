@@ -53,12 +53,31 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
   const LAST  = holds.length - 1;
   let timer = null;
 
+  // The call's own clock, in the sheet's heading: it starts when the assistant
+  // answers (frame 2) and counts a second a second until the text arrives.
+  const clock = document.getElementById('call-time');
+  let ticking = null, seconds = 0;
+  const tick = on => {
+    clearInterval(ticking); ticking = null;
+    if (!clock) return;
+    if (!on) return;
+    seconds = 0; clock.textContent = '0:00';
+    ticking = setInterval(() => {
+      seconds += 1;
+      clock.textContent = Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+    }, 1000);
+  };
+
   const show = (step, playing) => {
     parts.forEach(part => {
       const from  = Number(part.dataset.at);
       const until = part.dataset.until ? Number(part.dataset.until) : Infinity;
       part.classList.toggle('is-on', step >= from && step < until);
+      // The line being said: the one this frame brought in.
+      part.classList.toggle('is-speaking', playing && from === step && part.classList.contains('handset__say'));
     });
+    if (step === 2 && playing) tick(true);
+    if (step < 2 || step >= LAST || !playing) tick(false);
     // Which written step is being played. None is marked when the loop is not running.
     steps.forEach(li => li.classList.toggle('is-now', playing && li.dataset.now.split(' ').includes(String(step))));
   };
