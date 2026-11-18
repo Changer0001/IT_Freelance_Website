@@ -553,7 +553,16 @@ p { margin: 0; }
 
 /* Steps: a real sequence, so a real ordered list with the order shown. */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: none; }
-.step { position: relative; padding-top: 20px; border-top: 2px solid var(--line); }
+/* Each step opens with a picture of what happens in it, above the words
+   and never behind them, so the steps read as easily as before. The
+   pictures show objects and hands only: no faces, by the owner's choice.
+   Decorative (alt is empty): the heading under each says the same thing. */
+.step { position: relative; }
+.step__pic {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover;
+  margin-bottom: 18px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--tint);
+}
 .step__n {
   display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
   background: var(--accent); color: var(--on-accent);
