@@ -65,7 +65,7 @@
     found.forEach(place => {
       const li = el('li'), b = el('button');
       b.type = 'button'; b.append(el('b', '', place.name)); if (place.where) b.append(el('span', '', place.where));
-      b.addEventListener('click', () => prepare({ place_id: place.place_id, session }, place.name, place.where));
+      b.addEventListener('click', () => prepare({ place_id: place.place_id, session, asked_for: q.value.trim() }, place.name, place.where));
       li.append(b); results.append(li);
     });
     if (found.length) {
@@ -126,7 +126,15 @@
     if (data.hours_found) fact(dl, 'Hours', week(data.hours)); else fact(dl, 'Hours', 'Not found on the website', true);
     if (data.menu_found) fact(dl, 'Menu', data.dishes.length + (data.dishes.length === 1 ? ' dish: ' : ' dishes: ') + data.dishes.map(d => d.name).join(', '));
     else fact(dl, 'Menu', 'Not found. A menu posted as a photo or a PDF can’t be read.', true);
-    learned.append(dl, el('p', 'finder__small', 'This is all it will answer from. Asked anything else, it says it doesn’t know. No prices are read.'));
+    if (data.enough === false) {
+      // A name and nothing else: say so, and offer the way that usually works.
+      const thin = el('p', 'finder__error', 'This website gave us very little to read, so the demo would only know the name. Some sites show their hours and menu in a way that can’t be read.');
+      const other = el('button', 'finder__again', 'Paste the address of your menu or contact page instead'); other.type = 'button';
+      other.addEventListener('click', () => { reset(); showPaste(true); });
+      learned.append(dl, thin, other);
+    } else {
+      learned.append(dl, el('p', 'finder__small', 'This is all it will answer from. Asked anything else, it says it doesn’t know. No prices are read.'));
+    }
   };
   const prepare = async (body, name, where) => {
     clear(); searching++; list([]);
