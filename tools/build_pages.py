@@ -45,6 +45,17 @@ def service(file, name, eyebrow, title, describe, biz, where, short, need, ask, 
     )
 
 
+# The questions the menu's small card shows for each type, one after another. The first is the
+# question that type's own page shows on the phone.
+ASKS = {
+    'restaurants': ['For how many people?', 'What time on Friday?', 'What name is the booking under?', 'Any children in the party?'],
+    'handyman': ['What size is the TV?', 'Which day suits you?', 'What kind of wall is it going on?'],
+    'cleaning': ['How many bedrooms?', 'Is it a move-out or a regular clean?', 'Which day suits you?'],
+    'auto': ['What car is it?', 'What is it doing?', 'When can you bring it in?'],
+    'it': ['What kind of device is it?', 'Is it one computer or the whole office?', 'When did it start?'],
+}
+
+
 TYPES = {
     'restaurants': dict(
         kind='restaurant', file='for-restaurants.html', name='Restaurants', eyebrow='For restaurants',
@@ -327,10 +338,11 @@ def main():
                     sys.exit(f'{t["file"]}: the handyman example\'s "{word}" is still on the page')
         (ROOT / t['file']).write_text(p.s)
         print('wrote', t['file'])
-    cards = {key: {k: t[k] for k in ('name', 'ask', 'notes')} for key, t in TYPES.items()}
+    assert set(ASKS) == set(TYPES) and all(ASKS[k][0] == TYPES[k]['ask'] for k in TYPES), 'ASKS must start with each type\'s own question'
+    cards = {key: {'name': t['name'], 'asks': ASKS[key], 'notes': t['notes']} for key, t in TYPES.items()}
     (ROOT / 'types.js').write_text(
         '/* MADE BY tools/build_pages.py. What the small card in the "Business type" menu says about\n'
-        '   each kind of business (script.js): the question the assistant asks, and three things. */\n'
+        '   each kind of business (script.js): the questions the assistant asks, shown in turn, and three things. */\n'
         'window.YAP_TYPES = ' + json.dumps(cards, ensure_ascii=False, indent=1) + ';\n')
     print('wrote types.js')
 

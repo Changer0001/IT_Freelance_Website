@@ -206,7 +206,17 @@ p { margin: 0; }
 .nav__info:empty { display: none; }
 .nav__info--left { left: auto; right: calc(100% + 8px); }
 .nav__infoh { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-.nav__infoq { margin-top: 3px; font: 600 1rem/1.3 var(--font-display); color: var(--ink); }
+/* Room for a question of two lines, so the card keeps its height as the questions change. */
+.nav__infoq { margin-top: 3px; display: flex; align-items: flex-start; gap: 8px; min-height: 2.6em; font: 600 1rem/1.3 var(--font-display); color: var(--ink); }
+.nav__wave { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 2px; height: 1.3em; color: var(--accent); }
+.nav__wave i { width: 2px; height: 5px; border-radius: 1px; background: currentColor; animation: nav-wave 0.8s ease-in-out infinite; }
+.nav__wave i:nth-child(2) { height: 13px; animation-delay: -0.55s; }
+.nav__wave i:nth-child(3) { height: 9px; animation-delay: -0.3s; }
+.nav__wave i:nth-child(4) { height: 4px; animation-delay: -0.7s; }
+.nav__infoq span.is-in { animation: nav-ask 0.35s ease both; }
+@keyframes nav-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1.3); } }
+@keyframes nav-ask { from { opacity: 0; transform: translateY(4px); } }
+@media (prefers-reduced-motion: reduce) { .nav__wave i, .nav__infoq span.is-in { animation: none; } }
 .nav__infolist { margin: 0; padding: 0; list-style: none; display: grid; gap: 5px; font-size: 0.8125rem; line-height: 1.4; color: var(--ink-2); }
 .nav__infolist li { position: relative; padding-left: 15px; }
 .nav__infolist li::before { content: ''; position: absolute; left: 2px; top: 0.5em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }

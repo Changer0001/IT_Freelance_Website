@@ -131,13 +131,29 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
   const card = group.querySelector('.nav__info'), menu = group.querySelector('.nav__menu'), types = window.YAP_TYPES;
   if (!card || !menu || !types) return;
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let turn = null;
   const show = link => {
     const t = types[link.dataset.type];
     if (!t) return;
+    clearInterval(turn);
     card.textContent = '';
-    const top = el('div'); top.append(el('p', 'nav__infoh', t.name + ' · it asks'), el('p', 'nav__infoq', '“' + t.ask + '”'));
+    // The question carries the voice sign, because it is spoken; the type's questions take turns.
+    const ask = el('p', 'nav__infoq'), sign = el('span', 'nav__wave'), words = el('span');
+    for (let k = 0; k < 4; k++) sign.append(el('i'));
+    ask.append(sign, words);
+    let i = 0;
+    const say = () => {
+      words.textContent = '“' + t.asks[i % t.asks.length] + '”';
+      words.classList.remove('is-in'); void words.offsetWidth; words.classList.add('is-in');
+      i += 1;
+    };
+    say();
+    const top = el('div'); top.append(el('p', 'nav__infoh', t.name + ' · it asks'), ask);
     const list = el('ul', 'nav__infolist'); t.notes.forEach(note => list.append(el('li', '', note)));
     card.append(top, list);
+    // Only where the card is shown (it is not on small screens), and not for people who ask for less motion.
+    if (!calm && t.asks.length > 1 && card.offsetWidth) turn = setInterval(say, 2400);
     // On the side there is room; level with its row; never past the bottom of the list.
     card.classList.toggle('nav__info--left', menu.getBoundingClientRect().right + 8 + card.offsetWidth > document.documentElement.clientWidth - 8);
     card.style.top = Math.max(0, Math.min(link.offsetTop, menu.clientHeight - card.offsetHeight)) + 'px';
@@ -148,7 +164,7 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
     link.addEventListener('focus', () => show(link));
   });
   // Opened: the card starts on the page you are on, or on the first of the list.
-  group.addEventListener('toggle', () => { if (group.open) show(group.querySelector('.nav__list [aria-current]') || links[0]); });
+  group.addEventListener('toggle', () => { if (group.open) show(group.querySelector('.nav__list [aria-current]') || links[0]); else clearInterval(turn); });
 })();
 
 /* ============================================================
