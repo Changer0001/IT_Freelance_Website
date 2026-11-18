@@ -865,6 +865,8 @@ p { margin: 0; }
 .finder__facts dd.is-missing { color: var(--ink-3); }
 .finder__small { font-size: 0.8125rem; line-height: 1.45; color: var(--ink-3); }
 .finder__small a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.finder__terms { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); }
+.finder__terms a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .finder__label { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .finder__error { padding: 10px 12px; border-radius: 8px; background: var(--urgent-soft); color: var(--urgent); font-size: 0.875rem; line-height: 1.45; }
 .finder__wave { display: inline-flex; align-items: center; gap: 2px; height: 1.3em; color: var(--accent); }

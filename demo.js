@@ -18,7 +18,7 @@
   const $ = name => root.querySelector('[data-finder="' + name + '"]');
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; };
   const q = $('q'), results = $('results'), site = $('site'), siteBox = $('site-box'), orPaste = $('or-paste'), searchBox = $('search-box'),
-    picked = $('picked'), learned = $('learned'), call = $('call'), tel = $('tel'), go = $('go'), live = $('live');
+    note = $('search-note'), picked = $('picked'), learned = $('learned'), call = $('call'), tel = $('tel'), go = $('go'), live = $('live');
   const errors = { 1: $('error-1'), 2: $('error-2'), 3: $('error-3') };
   const steps = Array.from(root.querySelectorAll('.finder__step'));
 
@@ -97,7 +97,7 @@
     clear(); session = token(); searching++; tryId = null;
     q.value = ''; site.value = ''; list([]);
     picked.hidden = true; learned.hidden = true; call.hidden = true; live.hidden = true;
-    searchBox.hidden = !canSearch; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
+    searchBox.hidden = !canSearch; if (note) note.hidden = searchBox.hidden; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
     stage(1); (canSearch ? q : site).focus();
   };
 
@@ -138,7 +138,7 @@
   };
   const prepare = async (body, name, where, fromSearch) => {
     clear(); searching++; list([]);
-    searchBox.hidden = true; siteBox.hidden = true; orPaste.hidden = true;
+    searchBox.hidden = true; if (note) note.hidden = searchBox.hidden; siteBox.hidden = true; orPaste.hidden = true;
     picked.textContent = '';
     const again = el('button', 'finder__again', 'Not yours? Search again'); again.type = 'button'; again.addEventListener('click', reset);
     picked.append(el('b', '', name)); if (where) picked.append(el('span', '', where));
@@ -188,7 +188,7 @@
   ask('/api/demo/status').then(status => {
     if (!status.available) { root.dispatchEvent(new CustomEvent('demo:off')); return; }
     canSearch = !!status.search;
-    searchBox.hidden = !canSearch; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
+    searchBox.hidden = !canSearch; if (note) note.hidden = searchBox.hidden; siteBox.hidden = canSearch; orPaste.hidden = !canSearch;
     section.hidden = false;
     root.dispatchEvent(new CustomEvent('demo:on'));
   }).catch(() => root.dispatchEvent(new CustomEvent('demo:off')));
