@@ -850,6 +850,8 @@ p { margin: 0; }
    the type Google's attribution rules ask for. */
 .finder__attr { padding: 6px 10px 4px; text-align: right; font: 400 12px/1.4 Roboto, var(--font-body), sans-serif; letter-spacing: normal; color: #5e5e5e; white-space: nowrap; }
 @media (prefers-color-scheme: dark) { .finder__attr { color: #fff; } }
+.finder__picked .finder__attr--picked { padding: 2px 0 0; text-align: left; font-size: 12px; color: #5e5e5e; }
+@media (prefers-color-scheme: dark) { .finder__picked .finder__attr--picked { color: #fff; } }
 .finder__or { justify-self: start; padding: 0; font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--accent); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .finder__picked { display: grid; gap: 2px; padding: 12px 14px; background: var(--tint); border-radius: 10px; }
 .finder__picked b { font-weight: 600; color: var(--ink); }

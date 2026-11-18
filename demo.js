@@ -65,7 +65,7 @@
     found.forEach(place => {
       const li = el('li'), b = el('button');
       b.type = 'button'; b.append(el('b', '', place.name)); if (place.where) b.append(el('span', '', place.where));
-      b.addEventListener('click', () => prepare({ place_id: place.place_id, session, asked_for: q.value.trim() }, place.name, place.where));
+      b.addEventListener('click', () => prepare({ place_id: place.place_id, session, asked_for: q.value.trim() }, place.name, place.where, true));
       li.append(b); results.append(li);
     });
     if (found.length) {
@@ -136,12 +136,17 @@
       learned.append(dl, el('p', 'finder__small', 'This is all it will answer from. Asked anything else, it says it doesn’t know. No prices are read.'));
     }
   };
-  const prepare = async (body, name, where) => {
+  const prepare = async (body, name, where, fromSearch) => {
     clear(); searching++; list([]);
     searchBox.hidden = true; siteBox.hidden = true; orPaste.hidden = true;
     picked.textContent = '';
     const again = el('button', 'finder__again', 'Not yours? Search again'); again.type = 'button'; again.addEventListener('click', reset);
-    picked.append(el('b', '', name)); if (where) picked.append(el('span', '', where)); picked.append(again); picked.hidden = false;
+    picked.append(el('b', '', name)); if (where) picked.append(el('span', '', where));
+    if (fromSearch) {
+      // The name and street shown here are still Google's, so they still say so.
+      const from = el('span', 'finder__attr finder__attr--picked', 'Google Maps'); from.setAttribute('translate', 'no'); picked.append(from);
+    }
+    picked.append(again); picked.hidden = false;
     stage(2); call.hidden = true; live.hidden = true;
     learned.textContent = ''; learned.hidden = false;
     const reading = el('p', 'finder__reading'); reading.append(wave(), el('span', '', 'Reading the website. This can take up to a minute…')); learned.append(reading);
