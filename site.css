@@ -187,8 +187,13 @@ p { margin: 0; }
     transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
   }
   .nav.is-open { transform: none; opacity: 1; visibility: visible; }
-  .nav__link { padding: 14px 12px; font-size: 1.0625rem; }
-  .nav__link--login { margin: 8px 0 0; text-align: center; }
+  /* The open menu covers the page under it to the bottom of the screen (the
+     header is this panel's frame, so the height is given outright), and its
+     links start on the logo's left edge, like everything else on the page. */
+  .nav { height: calc(100vh - 68px); height: calc(100dvh - 68px); overflow-y: auto; align-content: start; justify-content: flex-start; }
+  .nav__link { padding: 14px 0; font-size: 1.0625rem; border-bottom: 1px solid var(--line); border-radius: 0; }
+  .nav__link:hover { background: transparent; }
+  .nav__link--login { margin: 16px 0 0; padding: 14px 12px; text-align: center; border: 1px solid var(--line); border-radius: 6px; }
 }
 
 /* ---------------------------------------------------------------- hero */
@@ -465,7 +470,7 @@ p { margin: 0; }
   background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 36px; box-shadow: var(--shadow);
 }
 .plan__amount { font: 600 clamp(2.6rem, 2rem + 2.5vw, 3.6rem)/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; }
-.plan__from { font: 500 1rem/1 var(--font-body); color: var(--ink-3); margin-right: 6px; vertical-align: 0.9em; }
+.plan__from { font: 500 1.125rem/1 var(--font-body); color: var(--ink-2); margin-right: 6px; }
 .plan__per { font: 500 1.125rem/1 var(--font-body); color: var(--ink-2); margin-left: 4px; }
 .plan__sub { margin-top: 12px; color: var(--ink-2); font-size: 0.975rem; }
 .plan__price .btn { margin-top: 24px; }
@@ -523,6 +528,7 @@ p { margin: 0; }
 }
 @media (max-width: 860px) {
   html { scroll-padding-top: 37px; }
+  .hero { padding-bottom: 40px; }
   [id]:not(.section):not(main):not(header) { scroll-margin-top: 64px; }
   .hero { padding-top: 32px; }
   .hero__copy { padding-top: 0; }
@@ -536,6 +542,12 @@ p { margin: 0; }
   .feature { padding: 22px; }
   .contact__card { padding: 22px; }
   .hero__actions .btn { flex: 1 1 100%; }
+  .hero__facts { flex-direction: column; gap: 10px; }
+  /* On a phone the three steps start on the page's left edge, not centred under the handset. */
+  .phone { justify-self: stretch; }
+  .phone__steps { width: 100%; justify-self: start; }
+  .footer__links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; width: 100%; }
+  .footer__links a[href^='mailto:'] { grid-column: 1 / -1; }
   .mock__call { display: none; }
 }
 
