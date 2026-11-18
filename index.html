@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="format-detection" content="telephone=no" />
   <title>YAP Voice — AI phone receptionist for local businesses | San Diego</title>
   <meta name="description" content="YAP Voice answers your business line when you can't. It answers callers' questions, takes their name, number and what they need, and texts and emails it to you. San Diego." />
   <link rel="canonical" href="https://yap-itsupport.com/" />
@@ -117,7 +118,13 @@
 
         <!-- THE PRODUCT'S ACTUAL OUTPUT, on the phone an owner would see it on.
              The text is in the shape the backend sends (enquiry_message, with
-             the registered sender's name first; see sms-opt-in.html's sample).
+             the sender's name first; see sms-opt-in.html's sample).
+             THE NAME IT STARTS WITH is "YAP Voice" here, by the owner's
+             choice (18 Nov). Live texts still start "YAP-AI Solutions:", the
+             name the carrier campaign was registered with, until the
+             campaign's samples are changed and SMS_SENDER_NAME follows;
+             sms-opt-in.html, which carriers read, changes with it and not
+             before.
              Invented business, invented caller, and labelled as an example
              underneath. The caller rings from San Diego, so the number is a
              San Diego one: 619, then 555-01xx, the block kept for examples
@@ -163,7 +170,7 @@
                   <span class="handset__text">
                     <span class="handset__from"><b>(858) 555-0134</b><span>now</span></span>
                     <span class="handset__body">
-                      YAP-AI Solutions: New enquiry for Harbor View Handyman<br />
+                      YAP Voice: New enquiry for Harbor View Handyman<br />
                       Services: TV mounting<br />
                       Name: Jordan Blake<br />
                       Phone: +16195550142
