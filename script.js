@@ -36,8 +36,8 @@ if (hamburger && mainNav) {
    THE PHONE IN THE HERO — one call, played on a loop, in the three
    steps written under it:
      1  a customer calls and the owner cannot pick up   (frame 1)
-     2  YAP Voice answers; two lines of the call        (frames 2, 3)
-     3  the owner gets the text                         (frame 4)
+     2  YAP Voice answers; the call, a line a frame     (frames 2 to 10)
+     3  the owner gets the text                         (frame 11)
    The markup is the last frame, so the page is complete with no
    script and with reduced motion.
    ============================================================ */
@@ -47,9 +47,9 @@ const phone   = document.getElementById('call-story');
 if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const parts = Array.from(phone.querySelectorAll('[data-at]'));
   const steps = Array.from(phone.querySelectorAll('[data-now]'));
-  // How long each frame is held, in milliseconds:
-  // the quiet screen, the ring, the assistant's line, the caller's line, the text.
-  const holds = [900, 2600, 2400, 3400, 6500];
+  // How long each frame is held, in milliseconds: the quiet screen, the ring,
+  // the nine lines of the call (long enough to read each), then the text.
+  const holds = [900, 2400, 3600, 2200, 1900, 1400, 1500, 1500, 2700, 1400, 3400, 7000];
   const LAST  = holds.length - 1;
   let timer = null;
 

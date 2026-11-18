@@ -230,24 +230,8 @@ p { margin: 0; }
 .phone { margin: 0; justify-self: center; display: grid; justify-items: center; }
 .phone__caption { margin-top: 18px; text-align: center; font-size: 0.8125rem; color: var(--ink-3); }
 
-/* The call itself: two lines of it, standing half on the phone and half off,
-   because they are what is said and not something on the owner's screen.
-   Shown by script.js for the middle step only. */
+/* The stage the handset stands on. */
 .phone__stage { position: relative; }
-.talk__line {
-  position: absolute; z-index: 5; width: 15.5rem; max-width: 74vw; margin: 0; padding: 12px 14px;
-  background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px;
-  box-shadow: var(--shadow); font-size: 0.875rem; line-height: 1.45; pointer-events: none;
-  opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-.talk__line.is-on { opacity: 1; transform: none; }
-.talk__line b { display: block; margin-bottom: 4px; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-.talk__line--yap { top: 39%; left: -84px; border-bottom-left-radius: 4px; }
-.talk__line--caller { top: 60%; right: -84px; border-bottom-right-radius: 4px; }
-.talk__line--caller b { color: var(--ink-3); }
-@media (max-width: 1199px) { .talk__line--yap { left: -28px; } .talk__line--caller { right: -28px; } }
-@media (max-width: 860px)  { .talk__line--yap { left: -14px; } .talk__line--caller { right: -14px; } }
-@media (prefers-reduced-motion: reduce) { .talk__line { transition: none; } }
 
 /* The same story in words, under the phone. A real sequence, so a numbered
    list; the step being played is marked while the phone plays it. */
@@ -343,7 +327,7 @@ p { margin: 0; }
 }
 .handset__tools svg { width: 1.9em; height: 1.9em; fill: #ffffff; }
 .handset__bar {
-  position: absolute; left: 50%; bottom: 0.75em; transform: translateX(-50%); width: 11.4em; height: 0.46em;
+  position: absolute; z-index: 5; left: 50%; bottom: 0.75em; transform: translateX(-50%); width: 11.4em; height: 0.46em;
   border-radius: 0.3em; background: rgba(255, 255, 255, 0.92);
 }
 .handset__ring {
@@ -378,6 +362,41 @@ p { margin: 0; }
 .handset .handset__ring { opacity: 1; transform: translateY(-140%); }
 .handset .handset__ring.is-on { transform: none; }
 .handset__ring.is-on .handset__keys i:last-child { animation: handset-ring 0.9s ease-in-out infinite; }
+
+/* The call, line by line: a sheet that rises over the lock screen while the
+   assistant is talking, and goes when the text arrives. The newest line is
+   at the bottom and older ones leave by the top, as in any message thread;
+   the customer is on the left in grey, YAP Voice on the right in blue. */
+.handset__call {
+  position: absolute; left: 0; right: 0; top: 5.4em; bottom: 0; z-index: 3;
+  display: flex; flex-direction: column; padding: 1.5em 1.1em 2.8em; margin: 0;
+  background: rgba(7, 12, 28, 0.97); border-radius: 2.6em 2.6em 0 0;
+  -webkit-backdrop-filter: blur(1.6em); backdrop-filter: blur(1.6em);
+}
+.handset .handset__call { opacity: 1; transform: translateY(104%); }
+.handset .handset__call.is-on { transform: none; }
+.handset__callhead {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.7em 1em; margin: 0; padding: 0 0.5em 1.1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14); color: rgba(255, 255, 255, 0.7);
+}
+.handset__callhead b { grid-column: 1 / -1; text-align: center; font-size: 1.05em; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; }
+.handset__callhead span { display: flex; align-items: center; gap: 0.45em; font-size: 1.15em; }
+.handset__callhead span:last-child { justify-content: flex-end; }
+.handset__callhead i { width: 0.7em; height: 0.7em; border-radius: 50%; background: rgba(255, 255, 255, 0.5); }
+.handset__callhead span:last-child i { background: #4d8df5; }
+/* Lines leaving by the top fade out, so none is cut off as a sliver under the heading. */
+.handset__thread {
+  flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.65em; overflow: hidden; padding-top: 1em;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3em); mask-image: linear-gradient(to bottom, transparent 0, #000 3em);
+}
+.handset .handset__say {
+  display: none; opacity: 1; transform: none; margin: 0; max-width: 84%; padding: 0.55em 0.85em;
+  border-radius: 1.25em; font-size: 1.32em; line-height: 1.28; color: #ffffff; flex: 0 0 auto;
+}
+.handset .handset__say.is-on { display: block; animation: handset-say 0.35s ease both; }
+.handset__say--them { align-self: flex-start; background: rgba(255, 255, 255, 0.17); border-bottom-left-radius: 0.35em; }
+.handset__say--yap { align-self: flex-end; background: #2a6be0; border-bottom-right-radius: 0.35em; }
+@keyframes handset-say { from { opacity: 0; transform: translateY(0.7em); } }
 @keyframes handset-ring {
   0%, 100% { transform: none; } 20% { transform: rotate(-12deg); } 40% { transform: rotate(10deg); }
   60% { transform: rotate(-6deg); } 80% { transform: rotate(4deg); }
@@ -385,6 +404,7 @@ p { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   .handset [data-at] { transition: none; }
   .handset__ring.is-on .handset__keys i:last-child { animation: none; }
+  .handset .handset__say.is-on { animation: none; }
 }
 
 /* ------------------------------------------------------------- sections */

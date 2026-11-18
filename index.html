@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261118b" />
+  <link rel="stylesheet" href="site.css?v=20261118c" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -132,9 +132,9 @@
              business's own line), so it is not read as the caller's.
 
              THE STORY, IN THREE STEPS A VISITOR CAN FOLLOW: a customer calls
-             and the owner cannot pick up; YAP Voice answers (two lines of the
-             call, beside the phone: the assistant's line is the opening it
-             really says); the owner gets the text. The steps are written out
+             and the owner cannot pick up; YAP Voice answers (the call itself,
+             line by line on the phone's screen); the owner gets the text,
+             with what was said in it. The steps are written out
              under the phone, so the story is there with no script at all.
              It used to show a "Missed Call" notification between the ring and
              the text, which read as the call being lost: the opposite of the
@@ -164,8 +164,30 @@
                 </span>
               </div>
 
+              <!-- THE CALL, LINE BY LINE. What is said while the owner's phone
+                   sits in a pocket: headed "Meanwhile, on the call" so it is
+                   not read as something the owner watches (no transcript is
+                   kept or shown; the privacy policy says so). The assistant's
+                   first line is the opening it really says, its question is
+                   the business's own (the Services page), and the number is
+                   read back, as the product does. Each line is one frame. -->
+              <div class="handset__call" data-at="2" data-until="11">
+                <p class="handset__callhead"><b>Meanwhile, on the call</b><span><i></i>Customer</span><span><i></i>YAP Voice</span></p>
+                <div class="handset__thread">
+                  <p class="handset__say handset__say--yap" data-at="2" data-until="11">Thanks for calling Harbor View Handyman. I'm the AI assistant here, and I'll take down what you need.</p>
+                  <p class="handset__say handset__say--them" data-at="3" data-until="11">Hi, I need a TV mounted on the wall.</p>
+                  <p class="handset__say handset__say--yap" data-at="4" data-until="11">Sure. What size is the TV?</p>
+                  <p class="handset__say handset__say--them" data-at="5" data-until="11">65 inch.</p>
+                  <p class="handset__say handset__say--yap" data-at="6" data-until="11">And your name?</p>
+                  <p class="handset__say handset__say--them" data-at="7" data-until="11">Jordan Blake.</p>
+                  <p class="handset__say handset__say--yap" data-at="8" data-until="11">Is 619 555 0142 the best number to call you back on?</p>
+                  <p class="handset__say handset__say--them" data-at="9" data-until="11">Yes, that's it.</p>
+                  <p class="handset__say handset__say--yap" data-at="10" data-until="11">Thanks, Jordan. I've passed that on, and Harbor View Handyman will call you back.</p>
+                </div>
+              </div>
+
               <div class="handset__notes">
-                <div class="handset__note is-on" data-at="4">
+                <div class="handset__note is-on" data-at="11">
                   <span class="handset__app"><svg viewBox="0 0 22 22"><path d="M11 3.600c4.700 0 8.400 3 8.400 6.800s-3.700 6.800-8.400 6.800c-.9 0-1.700-.1-2.500-.3-1.100.9-2.500 1.400-4 1.500.8-.9 1.300-1.900 1.500-3-1.500-1.200-2.400-3-2.400-5 0-3.800 3.700-6.800 7.400-6.800z"/></svg></span>
                   <span class="handset__text">
                     <span class="handset__from"><b>(858) 555-0134</b><span>now</span></span>
@@ -173,7 +195,8 @@
                       YAP Voice: New enquiry for Harbor View Handyman<br />
                       Services: TV mounting<br />
                       Name: Jordan Blake<br />
-                      Phone: +16195550142
+                      Phone: +16195550142<br />
+                      tv size: 65 inch
                     </span>
                   </span>
                 </div>
@@ -186,15 +209,11 @@
               <div class="handset__bar"></div>
             </div>
           </div>
-          <div class="talk" aria-hidden="true">
-            <p class="talk__line talk__line--yap" data-at="2" data-until="4"><b>YAP Voice answers</b>Thanks for calling Harbor View Handyman. I'm the AI assistant here, and I'll take down what you need.</p>
-            <p class="talk__line talk__line--caller" data-at="3" data-until="4"><b>Your customer</b>I need a 65-inch TV mounted. It's Jordan Blake.</p>
-          </div>
           </div>
           <ol class="phone__steps" id="phone-steps">
             <li data-now="1">A customer calls. You're on a job and can't pick up.</li>
-            <li data-now="2 3">YAP Voice answers and takes down what they need.</li>
-            <li data-now="4">You get a text with the job, the name and the number.</li>
+            <li data-now="2 3 4 5 6 7 8 9 10">YAP Voice answers, asks your questions and takes their details.</li>
+            <li data-now="11">You get a text with the job, the name and the number.</li>
           </ol>
           <figcaption class="phone__caption">Example. The business and the caller are made up.</figcaption>
         </figure>
@@ -460,6 +479,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261118b"></script>
+  <script src="script.js?v=20261118c"></script>
 </body>
 </html>
