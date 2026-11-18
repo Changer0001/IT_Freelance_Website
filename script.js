@@ -33,36 +33,44 @@ if (hamburger && mainNav) {
 }
 
 /* ============================================================
-   THE PHONE IN THE HERO — one call, played on a loop
-   The markup is the last frame (the missed call and the text), so
-   the page is complete with no script and with reduced motion.
-   Otherwise: the lock screen, the call ringing, the missed call,
-   then the text with the job; and round again.
+   THE PHONE IN THE HERO — one call, played on a loop, in the three
+   steps written under it:
+     1  a customer calls and the owner cannot pick up   (frame 1)
+     2  YAP Voice answers; two lines of the call        (frames 2, 3)
+     3  the owner gets the text                         (frame 4)
+   The markup is the last frame, so the page is complete with no
+   script and with reduced motion.
    ============================================================ */
 const handset = document.getElementById('handset');
+const phone   = document.getElementById('call-story');
 
-if (handset && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const parts = Array.from(handset.querySelectorAll('[data-at]'));
-  // How long each frame is held, in milliseconds: empty, ringing, missed, the text.
-  const holds = [900, 2800, 1500, 6000];
+if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const parts = Array.from(phone.querySelectorAll('[data-at]'));
+  const steps = Array.from(phone.querySelectorAll('[data-now]'));
+  // How long each frame is held, in milliseconds:
+  // the quiet screen, the ring, the assistant's line, the caller's line, the text.
+  const holds = [900, 2600, 2400, 3400, 6500];
+  const LAST  = holds.length - 1;
   let timer = null;
 
-  const show = step => {
+  const show = (step, playing) => {
     parts.forEach(part => {
       const from  = Number(part.dataset.at);
       const until = part.dataset.until ? Number(part.dataset.until) : Infinity;
       part.classList.toggle('is-on', step >= from && step < until);
     });
+    // Which written step is being played. None is marked when the loop is not running.
+    steps.forEach(li => li.classList.toggle('is-now', playing && li.dataset.now.split(' ').includes(String(step))));
   };
 
   const play = () => {
     let step = 0;
-    show(step);
+    show(step, true);
     const next = () => {
       timer = setTimeout(() => {
         step += 1;
-        if (step > 3) { play(); return; }
-        show(step);
+        if (step > LAST) { play(); return; }
+        show(step, true);
         next();
       }, holds[step]);
     };
@@ -73,7 +81,7 @@ if (handset && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       clearTimeout(timer);
-      if (entries[0].isIntersecting) play(); else show(3);
+      if (entries[0].isIntersecting) play(); else show(LAST, false);
     }, { threshold: 0.35 }).observe(handset);
   } else {
     play();

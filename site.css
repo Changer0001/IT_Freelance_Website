@@ -225,6 +225,41 @@ p { margin: 0; }
 .phone { margin: 0; justify-self: center; display: grid; justify-items: center; }
 .phone__caption { margin-top: 18px; text-align: center; font-size: 0.8125rem; color: var(--ink-3); }
 
+/* The call itself: two lines of it, standing half on the phone and half off,
+   because they are what is said and not something on the owner's screen.
+   Shown by script.js for the middle step only. */
+.phone__stage { position: relative; }
+.talk__line {
+  position: absolute; z-index: 5; width: 15.5rem; max-width: 74vw; margin: 0; padding: 12px 14px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 14px;
+  box-shadow: var(--shadow); font-size: 0.875rem; line-height: 1.45; pointer-events: none;
+  opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.talk__line.is-on { opacity: 1; transform: none; }
+.talk__line b { display: block; margin-bottom: 4px; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.talk__line--yap { top: 39%; left: -84px; border-bottom-left-radius: 4px; }
+.talk__line--caller { top: 60%; right: -84px; border-bottom-right-radius: 4px; }
+.talk__line--caller b { color: var(--ink-3); }
+@media (max-width: 1199px) { .talk__line--yap { left: -28px; } .talk__line--caller { right: -28px; } }
+@media (max-width: 860px)  { .talk__line--yap { left: -14px; } .talk__line--caller { right: -14px; } }
+@media (prefers-reduced-motion: reduce) { .talk__line { transition: none; } }
+
+/* The same story in words, under the phone. A real sequence, so a numbered
+   list; the step being played is marked while the phone plays it. */
+.phone__steps { margin: 22px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; width: min(20rem, 100%); counter-reset: phone-step; }
+.phone__steps li {
+  display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; counter-increment: phone-step;
+  font-size: 0.9375rem; line-height: 1.4; color: var(--ink-2); transition: color 0.25s;
+}
+.phone__steps li::before {
+  content: counter(phone-step); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+  font: 600 0.8125rem/1 var(--font-body); font-variant-numeric: tabular-nums;
+  background: var(--tint); color: var(--ink-2); border: 1px solid var(--line);
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+.phone__steps li.is-now { color: var(--ink); }
+.phone__steps li.is-now::before { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
 .handset {
   font-size: clamp(9px, 2.9vw, 11.5px); position: relative; width: 27em; aspect-ratio: 27 / 57;
   border-radius: 4.6em; padding: 0.95em;

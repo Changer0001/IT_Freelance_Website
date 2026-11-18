@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261117i" />
+  <link rel="stylesheet" href="site.css?v=20261118a" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -122,10 +122,19 @@
              underneath. The caller rings from San Diego, so the number is a
              San Diego one: 619, then 555-01xx, the block kept for examples
              in every area code. The text comes from a different number (the
-             business's own line), so it is not read as the caller's. The handset is drawn in CSS (site.css);
-             script.js plays the call: it rings, it is missed, the text
-             arrives. As written here it is the last frame. -->
-        <figure class="phone" aria-label="Example: a call is missed, and the owner gets a text with the job">
+             business's own line), so it is not read as the caller's.
+
+             THE STORY, IN THREE STEPS A VISITOR CAN FOLLOW: a customer calls
+             and the owner cannot pick up; YAP Voice answers (two lines of the
+             call, beside the phone: the assistant's line is the opening it
+             really says); the owner gets the text. The steps are written out
+             under the phone, so the story is there with no script at all.
+             It used to show a "Missed Call" notification between the ring and
+             the text, which read as the call being lost: the opposite of the
+             point. The handset is drawn in CSS (site.css); script.js plays
+             the steps. As written here it is the last frame. -->
+        <figure class="phone" id="call-story" aria-label="Example: a customer calls, YAP Voice answers, and the owner gets a text with the job">
+          <div class="phone__stage">
           <div class="handset" id="handset" aria-hidden="true">
             <div class="handset__screen">
               <div class="handset__island"></div>
@@ -149,7 +158,7 @@
               </div>
 
               <div class="handset__notes">
-                <div class="handset__note is-on" data-at="3">
+                <div class="handset__note is-on" data-at="4">
                   <span class="handset__app"><svg viewBox="0 0 22 22"><path d="M11 3.600c4.700 0 8.400 3 8.400 6.800s-3.700 6.800-8.400 6.800c-.9 0-1.700-.1-2.500-.3-1.100.9-2.500 1.400-4 1.500.8-.9 1.300-1.900 1.500-3-1.500-1.200-2.400-3-2.400-5 0-3.800 3.700-6.800 7.400-6.800z"/></svg></span>
                   <span class="handset__text">
                     <span class="handset__from"><b>(858) 555-0134</b><span>now</span></span>
@@ -161,13 +170,6 @@
                     </span>
                   </span>
                 </div>
-                <div class="handset__note is-on" data-at="2">
-                  <span class="handset__app"><svg viewBox="0 0 22 22"><path d="M6.6 2.600c.5-.5 1.300-.5 1.800 0l2 2.100c.5.5.5 1.200.1 1.700l-1 1.300c1 2 2.600 3.600 4.600 4.600l1.300-1c.5-.4 1.200-.4 1.700.1l2.100 2c.5.5.5 1.300 0 1.800l-1.200 1.200c-.9.9-2.200 1.200-3.400.8-4.700-1.600-9.400-6.300-11-11-.4-1.200-.1-2.500.8-3.400z"/></svg></span>
-                  <span class="handset__text">
-                    <span class="handset__from"><b>(619) 555-0142</b><span>1m ago</span></span>
-                    <span class="handset__body">Missed Call</span>
-                  </span>
-                </div>
               </div>
 
               <div class="handset__tools">
@@ -177,6 +179,16 @@
               <div class="handset__bar"></div>
             </div>
           </div>
+          <div class="talk" aria-hidden="true">
+            <p class="talk__line talk__line--yap" data-at="2" data-until="4"><b>YAP Voice answers</b>Thanks for calling Harbor View Handyman. I'm the AI assistant here, and I'll take down what you need.</p>
+            <p class="talk__line talk__line--caller" data-at="3" data-until="4"><b>Your customer</b>I need a 65-inch TV mounted. It's Jordan Blake.</p>
+          </div>
+          </div>
+          <ol class="phone__steps" id="phone-steps">
+            <li data-now="1">A customer calls. You're on a job and can't pick up.</li>
+            <li data-now="2 3">YAP Voice answers and takes down what they need.</li>
+            <li data-now="4">You get a text with the job, the name and the number.</li>
+          </ol>
           <figcaption class="phone__caption">Example. The business and the caller are made up.</figcaption>
         </figure>
       </div>
@@ -441,6 +453,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261117i"></script>
+  <script src="script.js?v=20261118a"></script>
 </body>
 </html>
