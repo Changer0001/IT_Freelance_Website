@@ -36,7 +36,7 @@
   --ink-band-text: #edf2fb;
   --ink-band-muted: #b3bfd6;
   --shadow: 0 1px 2px rgba(14, 27, 51, 0.05), 0 12px 32px -12px rgba(14, 27, 51, 0.18);
-  --urgent: #b4232f; --urgent-soft: #fde8ea;
+  --urgent: #b4232f; --urgent-soft: #fde8ea; --ok: #15803d;
 
   /* Source Serif and Source Sans were drawn as one family: the serif for
      what is read once and large, the sans for everything read at length. */
@@ -72,7 +72,7 @@
     --ink-band-text: #eaf0fa;
     --ink-band-muted: #b3bfd6;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
-    --urgent: #ff9aa2; --urgent-soft: #3a1620;
+    --urgent: #ff9aa2; --urgent-soft: #3a1620; --ok: #5fd08a;
     color-scheme: dark;
   }
 }
@@ -465,9 +465,11 @@ p { margin: 0; }
    radio buttons and their labels, so a page is picked with no script: the
    checked button shows its page and marks its tab. */
 .mock { margin: 0; min-width: 0; }
-.mock__frame { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+/* Its four pages lie one on another in the same place, so the frame is the
+   height of the tallest and does not jump as they change. */
+.mock__frame { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
 .mock__pick { position: absolute; opacity: 0; pointer-events: none; }
-.mock__bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--tint); }
+.mock__bar { grid-area: 1 / 1; display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--tint); }
 .mock__bar > span { width: 10px; height: 10px; flex: 0 0 auto; border-radius: 50%; background: var(--line); }
 .mock__tabs { display: flex; gap: 2px; margin-left: 8px; min-width: 0; overflow-x: auto; }
 .mock__tabs label { padding: 7px 11px; border-radius: 6px; font: 600 0.875rem/1 var(--font-body); color: var(--ink-2); cursor: pointer; white-space: nowrap; }
@@ -480,11 +482,11 @@ p { margin: 0; }
 #mock-calls:focus-visible ~ .mock__bar label[for='mock-calls'],
 #mock-overview:focus-visible ~ .mock__bar label[for='mock-overview'],
 #mock-services:focus-visible ~ .mock__bar label[for='mock-services'] { outline: 2px solid var(--accent); outline-offset: 2px; }
-.mock__page { display: none; padding: 18px 18px 20px; min-height: 372px; }
+.mock__page { grid-area: 2 / 1; visibility: hidden; padding: 18px 18px 20px; }
 #mock-callbacks:checked ~ .mock__page--callbacks,
 #mock-calls:checked ~ .mock__page--calls,
 #mock-overview:checked ~ .mock__page--overview,
-#mock-services:checked ~ .mock__page--services { display: block; }
+#mock-services:checked ~ .mock__page--services { visibility: visible; }
 
 .mock__head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 10px 16px; margin-bottom: 14px; }
 .mock__head p { min-width: 0; }
@@ -496,7 +498,7 @@ p { margin: 0; }
 .mock__day { margin: 14px 0 8px; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .mock__day span { margin-left: 8px; font-weight: 500; letter-spacing: 0; text-transform: none; }
 
-.mock__list { margin: 0; border: 1px solid var(--line); border-radius: 8px; }
+.mock__list { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .mock__list li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); }
 .mock__list li:first-child { border-top: 0; }
 .mock__list div { flex: 1 1 0; min-width: 0; }
@@ -515,6 +517,42 @@ p { margin: 0; }
   flex-shrink: 0; align-self: center; font-size: 0.8125rem; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
   padding: 7px 10px; border-radius: 6px; background: var(--accent); color: var(--on-accent);
 }
+.mock__call b, .mock__call i { font: inherit; }
+.mock__call i { display: none; }
+
+/* THE DASHBOARD, PLAYING (script.js sets these and takes them away).
+   The new callback is not there, then lands marked as new; its button is
+   pressed; it is marked called back, as the real row is. */
+.mock__list li.is-hidden { display: none; }
+.mock__list li.is-new { background: var(--accent-soft); animation: mock-land 0.5s ease both; }
+.mock__call { transition: transform 0.15s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; }
+.mock__call.is-pressed { transform: scale(0.95); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 28%, transparent); }
+.mock__list li.is-done .mock__call { background: transparent; color: var(--ok); box-shadow: inset 0 0 0 1px var(--line); }
+.mock__list li.is-done .mock__call b { display: none; }
+.mock__list li.is-done .mock__call i { display: inline; }
+.mock__list li.is-done .mock__call i::before { content: '\2713\00a0'; }
+.mock__list li.is-done .mock__av { background: var(--tint); color: var(--ink-3); }
+.mock__list li.is-done strong { color: var(--ink-2); }
+/* A page just turned to: its rows, bars and questions arrive one after another. */
+.mock__page.is-fresh .mock__list--calls li { animation: mock-land 0.45s ease both; }
+.mock__page.is-fresh .mock__list--calls li:nth-child(2) { animation-delay: 0.25s; }
+.mock__page.is-fresh .mock__list--calls li:nth-child(3) { animation-delay: 0.5s; }
+.mock__page.is-fresh .mock__list--calls li:nth-child(4) { animation-delay: 0.75s; }
+.mock__chart i { transform-origin: bottom; }
+.mock__page.is-fresh .mock__chart i { animation: mock-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--i, 0) * 45ms + 0.3s); }
+.mock__page.is-fresh .mock__service { animation: mock-land 0.45s ease both; }
+.mock__page.is-fresh .mock__service + .mock__service { animation-delay: 0.5s; }
+.mock__page.is-fresh .mock__service ol li { animation: mock-land 0.4s ease both; animation-delay: 0.9s; }
+.mock__page.is-fresh .mock__service ol li:nth-child(2) { animation-delay: 1.3s; }
+.mock__page.is-fresh .mock__service + .mock__service ol li { animation-delay: 1.7s; }
+@keyframes mock-land { from { opacity: 0; transform: translateY(-8px); } }
+@keyframes mock-rise { from { transform: scaleY(0); } }
+/* The point in the list beside it that the scene being played shows. */
+.ticks li { transition: color 0.25s; }
+.ticks li::before { transition: box-shadow 0.25s; }
+.ticks li.is-now { color: var(--ink); }
+.ticks li.is-now::before { box-shadow: 0 0 0 3px var(--accent); }
+
 .mock__list--calls li { align-items: center; }
 .mock__list--calls time { flex: 0 0 4.4rem; font-size: 0.8125rem; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .mock__badge { flex-shrink: 0; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; background: var(--tint); color: var(--ink-2); white-space: nowrap; }

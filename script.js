@@ -109,6 +109,105 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
 }
 
 /* ============================================================
+   THE DASHBOARD IN "YOUR DASHBOARD" — played by itself, like the
+   phone: the callback from that call lands, its Call button is
+   pressed, it is marked called back; then Calls, Overview with its
+   figures counting up, and Services. The point in the list beside
+   it that a scene shows is marked while it plays.
+   Picking a tab stops it for good: the page is the visitor's. With
+   no script or with reduced motion the markup's resting frame shows.
+   ============================================================ */
+const dash = document.getElementById('dash-story');
+
+if (dash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const box    = dash.querySelector('.mock__frame');
+  const row    = dash.querySelector('.mock__row--new');
+  const button = row.querySelector('.mock__call');
+  const pages  = Array.from(dash.querySelectorAll('.mock__page'));
+  const counts = Array.from(dash.querySelectorAll('[data-count]'));
+  const points = Array.from(document.querySelectorAll('#dashboard .ticks [data-scene]'));
+  // Scene by scene: which page is shown, and for how long (milliseconds).
+  //   0 the list before the call   1 the callback lands   2 Call is pressed
+  //   3 marked called back         4 Calls                5 Overview   6 Services
+  const tabs  = ['callbacks', 'callbacks', 'callbacks', 'callbacks', 'calls', 'overview', 'services'];
+  const holds = [1300, 2600, 900, 2600, 4400, 4800, 4600];
+  let timer = null, frame = null, stopped = false;
+
+  const write = (el, value) => {
+    const n = Math.round(value);
+    el.textContent = el.dataset.fmt === 'pct' ? n + '%'
+                   : el.dataset.fmt === 'dur' ? Math.floor(n / 60) + 'm ' + (n % 60) + 's'
+                   : String(n);
+  };
+  const countUp = () => {
+    const began = performance.now();
+    const step = now => {
+      const t = Math.min(1, (now - began) / 1100), eased = 1 - Math.pow(1 - t, 3);
+      counts.forEach(el => write(el, Number(el.dataset.count) * eased));
+      if (t < 1) frame = requestAnimationFrame(step);
+    };
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(step);
+  };
+
+  // The frame the markup was written as: every row there, nothing marked.
+  const rest = () => {
+    clearTimeout(timer); cancelAnimationFrame(frame);
+    row.classList.remove('is-hidden', 'is-new', 'is-done');
+    button.classList.remove('is-pressed');
+    pages.forEach(page => page.classList.remove('is-fresh'));
+    counts.forEach(el => write(el, Number(el.dataset.count)));
+    points.forEach(point => point.classList.remove('is-now'));
+  };
+
+  const show = scene => {
+    const tab = tabs[scene];
+    dash.querySelector('#mock-' + tab).checked = true;
+    row.classList.toggle('is-hidden', scene === 0);
+    row.classList.toggle('is-new', scene === 1 || scene === 2);
+    button.classList.toggle('is-pressed', scene === 2);
+    row.classList.toggle('is-done', scene >= 3);
+    pages.forEach(page => page.classList.toggle('is-fresh', scene >= 4 && page.classList.contains('mock__page--' + tab)));
+    if (scene === 5) countUp(); else { cancelAnimationFrame(frame); counts.forEach(el => write(el, Number(el.dataset.count))); }
+    points.forEach(point => point.classList.toggle('is-now', point.dataset.scene.split(' ').includes(String(scene))));
+  };
+
+  const play = () => {
+    let scene = 0;
+    show(scene);
+    const next = () => {
+      timer = setTimeout(() => {
+        scene = (scene + 1) % tabs.length;
+        show(scene);
+        next();
+      }, holds[scene]);
+    };
+    next();
+  };
+
+  // The visitor picks a page (a click on a tab, or the arrow keys): it is theirs from here.
+  const stop = () => { if (stopped) return; stopped = true; rest(); };
+  dash.querySelector('.mock__tabs').addEventListener('pointerdown', stop);
+  dash.querySelectorAll('.mock__pick').forEach(pick => {
+    pick.addEventListener('keydown', stop);
+    pick.addEventListener('change', stop);   // only a person's choice fires this, never the script's
+  });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      if (stopped) return;
+      if (!entries[0].isIntersecting) { rest(); return; }
+      // The frame keeps the height it has with every row there, so the page
+      // under it does not move when the first scene takes a row away.
+      rest(); box.style.minHeight = ''; box.style.minHeight = box.offsetHeight + 'px';
+      play();
+    }, { threshold: 0.4 }).observe(dash);
+  } else {
+    play();
+  }
+}
+
+/* ============================================================
    IN-PAGE LINKS — a section lands with its first line where the
    page's own first line sits: 68px under the header (32px on a
    phone), whichever section and whichever browser. Without this

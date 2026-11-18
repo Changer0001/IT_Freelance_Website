@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261118e" />
+  <link rel="stylesheet" href="site.css?v=20261118f" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -311,9 +311,10 @@
           <p class="eyebrow">Your dashboard</p>
           <h2 id="dashboard-title" class="section__title">Everyone waiting on you, one tap from a call back</h2>
           <ul class="ticks" role="list">
-            <li>Who is waiting for a call back, what they need, and a button to ring them</li>
-            <li>Every call your assistant answered, and how it ended</li>
-            <li>Your hours, services and answers — change them and the next call uses them</li>
+            <li data-scene="0 1 2 3">Who is waiting for a call back, what they need, and a button to ring them</li>
+            <li data-scene="4">Every call your assistant answered, and how it ended</li>
+            <li data-scene="5">Your month in numbers: calls answered, how many it handled, how long they took</li>
+            <li data-scene="6">Your hours, services and answers — change them and the next call uses them</li>
             <li>Works on your phone as well as your computer</li>
           </ul>
           <a href="login.html" class="btn btn--ghost">Business login</a>
@@ -325,8 +326,15 @@
              LeadsPage, CallsPage, DashboardPage, ServicesPage): the filter's
              labels, the outcome badges, the four figures and their hints,
              "The agent asks". The people and the numbers are invented.
-             The tabs are radio buttons, so they work with no script. -->
-        <figure class="mock" aria-label="Examples of four pages in the dashboard">
+             The tabs are radio buttons, so they work with no script.
+             IT PLAYS BY ITSELF, like the phone in the hero (script.js): the
+             callback from that call lands, its Call button is pressed and it
+             is marked called back, then Calls, Overview with its figures
+             counting up, and Services; the point in the list beside it that
+             a scene shows is marked while it plays. Picking a tab stops it
+             for good: the page is the visitor's. As written here it is the
+             resting frame, shown with no script and with reduced motion. -->
+        <figure class="mock" id="dash-story" aria-label="Examples of four pages in the dashboard">
           <div class="mock__frame">
             <input class="mock__pick" type="radio" name="mock-page" id="mock-callbacks" checked />
             <input class="mock__pick" type="radio" name="mock-page" id="mock-calls" />
@@ -348,10 +356,10 @@
                 <p class="mock__filter"><b>To call back</b><span>Called back</span><span>All</span></p>
               </div>
               <ul class="mock__list" role="list">
-                <li>
+                <li class="mock__row--new">
                   <span class="mock__av">JB</span>
                   <div><strong>Jordan Blake <small>4:12 PM</small></strong><p>TV mounting</p><p class="mock__chips"><span>tv size: <b>65 inch</b></span></p></div>
-                  <span class="mock__call">Call (619) 555-0142</span>
+                  <span class="mock__call"><b>Call (619) 555-0142</b><i>Called back</i></span>
                 </li>
                 <li>
                   <span class="mock__av">SO</span>
@@ -384,14 +392,14 @@
                 <p><strong>Overview</strong><small>The last 30 days on your line.</small></p>
               </div>
               <dl class="mock__stats">
-                <div><dt>Calls answered</dt><dd>42</dd><small>Last 30 days · 3 spam kept out</small></div>
-                <div><dt>Handled by the assistant</dt><dd>90%</dd><small>38 of 42 · 4 passed to you</small></div>
-                <div><dt>Callbacks</dt><dd>17</dd><small>2 still to make</small></div>
-                <div><dt>Average call</dt><dd>1m 24s</dd><small>Answer to hang-up</small></div>
+                <div><dt>Calls answered</dt><dd data-count="42" data-fmt="int">42</dd><small>Last 30 days · 3 spam kept out</small></div>
+                <div><dt>Handled by the assistant</dt><dd data-count="90" data-fmt="pct">90%</dd><small>38 of 42 · 4 passed to you</small></div>
+                <div><dt>Callbacks</dt><dd data-count="17" data-fmt="int">17</dd><small>2 still to make</small></div>
+                <div><dt>Average call</dt><dd data-count="84" data-fmt="dur">1m 24s</dd><small>Answer to hang-up</small></div>
               </dl>
               <p class="mock__day">Calls per day</p>
               <div class="mock__chart" aria-hidden="true">
-                <i style="height:30%"></i><i style="height:55%"></i><i style="height:20%"></i><i style="height:70%"></i><i style="height:45%"></i><i style="height:10%"></i><i style="height:35%"></i><i style="height:60%"></i><i style="height:85%"></i><i style="height:40%"></i><i style="height:65%"></i><i style="height:25%"></i><i style="height:50%"></i><i style="height:100%"></i>
+                <i style="height:30%;--i:0"></i><i style="height:55%;--i:1"></i><i style="height:20%;--i:2"></i><i style="height:70%;--i:3"></i><i style="height:45%;--i:4"></i><i style="height:10%;--i:5"></i><i style="height:35%;--i:6"></i><i style="height:60%;--i:7"></i><i style="height:85%;--i:8"></i><i style="height:40%;--i:9"></i><i style="height:65%;--i:10"></i><i style="height:25%;--i:11"></i><i style="height:50%;--i:12"></i><i style="height:100%;--i:13"></i>
               </div>
             </div>
 
@@ -411,7 +419,7 @@
               </div>
             </div>
           </div>
-          <figcaption class="phone__caption">Examples with made-up callers and figures. Pick a page above.</figcaption>
+          <figcaption class="phone__caption">Examples with made-up callers and figures. It plays by itself; pick a page to stop it and look.</figcaption>
         </figure>
       </div>
     </section>
@@ -563,6 +571,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261118e"></script>
+  <script src="script.js?v=20261118f"></script>
 </body>
 </html>
