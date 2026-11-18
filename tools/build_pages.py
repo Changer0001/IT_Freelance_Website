@@ -152,6 +152,10 @@ def common(p, t, key):
     p.sub(r'<meta property="og:description" content="[^"]*" />', f'<meta property="og:description" content="{esc(t["describe"])}" />')
     p.swap(f'<a href="{t["file"]}" data-type="{key}">', f'<a href="{t["file"]}" data-type="{key}" aria-current="page">')
     p.swap('<a href="#top" class="brand"', '<a href="index.html" class="brand"')
+    # The photo behind the home page's top section is of the business the home page shows (a
+    # tradesperson at work). It would be the wrong picture behind a restaurant or a cleaner, so
+    # a type's page goes without until it has a photo of its own.
+    p.swap('<section class="hero hero--photo" id="top"', '<section class="hero" id="top"')
     p.swap('<p class="eyebrow">AI phone receptionist · San Diego</p>', f'<p class="eyebrow">AI phone receptionist · {esc(t["eyebrow"])}</p>')
     # the call, line by line
     lines = re.findall(r'(<p class="handset__say [^>]*>.*?<span>)(.*?)(</span></p>)', p.s, flags=re.S)
