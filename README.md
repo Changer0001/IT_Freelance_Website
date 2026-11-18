@@ -131,6 +131,9 @@ python3 -m http.server 8000
 .
 ├── index.html   # Full single-page site structure
 ├── site.css     # All styles, for every page (tokens, light and dark, responsive)
+├── for-*.html   # One page per kind of business. MADE from index.html: do not edit
+├── types.js     # The menu's example calls. MADE by the same script
+├── tools/build_pages.py   # Makes the two above. Run it after any change to index.html
 ├── script.js    # Nav toggle, sticky header, scroll reveal, form handler
 └── README.md    # This file
 ```

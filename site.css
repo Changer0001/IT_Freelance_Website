@@ -159,6 +159,7 @@ p { margin: 0; }
 }
 .nav { display: flex; align-items: center; gap: 2px; margin-left: auto; }
 .nav__link {
+  white-space: nowrap;
   color: var(--ink-2); text-decoration: none; font-size: 0.9375rem; font-weight: 500;
   padding: 8px 12px; border-radius: 6px;
 }
@@ -168,7 +169,38 @@ p { margin: 0; }
 
 .menu-btn { display: none; }
 
-@media (max-width: 960px) {
+/* The menu has eight things in it now. Under 1180px they no longer fit on one
+   line, so the full menu gives way to the button there (below). */
+/* "Business type": one menu item that opens to the kinds of business, each
+   with a page of its own. Beside the list, a small copy of the phone plays
+   the call for the type the mouse is on (script.js); so the panel is for
+   screens with a mouse and room, and a phone gets the list alone. */
+.nav__group { position: relative; }
+.nav__sum {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 7px;
+  white-space: nowrap;
+  color: var(--ink-2); font-size: 0.9375rem; font-weight: 500; padding: 8px 12px; border-radius: 6px;
+}
+.nav__sum::-webkit-details-marker { display: none; }
+.nav__sum::after { content: ''; width: 6px; height: 6px; margin-top: -3px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform 0.15s; }
+.nav__group[open] .nav__sum::after { transform: rotate(225deg); margin-top: 3px; }
+.nav__sum:hover, .nav__group[open] .nav__sum { color: var(--ink); background: var(--tint); }
+.nav__menu {
+  position: absolute; top: calc(100% + 8px); right: -150px; z-index: 60; display: grid; grid-template-columns: 232px auto; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow);
+}
+.nav__list { display: grid; gap: 2px; align-content: start; }
+.nav__list a { display: block; padding: 9px 12px; border-radius: 6px; text-decoration: none; color: var(--ink); font-size: 0.9375rem; font-weight: 600; }
+.nav__list a small { display: block; margin-top: 2px; font-size: 0.8125rem; font-weight: 400; color: var(--ink-3); }
+.nav__list a:hover, .nav__list a:focus-visible { background: var(--tint); }
+.nav__list a[aria-current] { background: var(--accent-soft); color: var(--accent); }
+.nav__peeks { margin-left: 6px; padding: 14px 16px 12px; border-left: 1px solid var(--line); display: grid; justify-items: center; align-content: start; gap: 10px; }
+.nav__peeks:empty { display: none; }
+.nav__peeks .handset { font-size: 7.6px; }
+.nav__peekcap { font-size: 0.75rem; color: var(--ink-3); text-align: center; }
+.nav__peekcap b { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 1180px) {
   .header__cta { display: none; }
   .menu-btn {
     display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
@@ -196,6 +228,10 @@ p { margin: 0; }
   .nav__link { padding: 14px 0; font-size: 1.0625rem; border-bottom: 1px solid var(--line); border-radius: 0; }
   .nav__link:hover { background: transparent; }
   .nav__link--login { margin: 16px 0 0; padding: 14px 12px; text-align: center; border: 1px solid var(--line); border-radius: 6px; }
+  .nav__sum { padding: 14px 0; font-size: 1.0625rem; border-bottom: 1px solid var(--line); border-radius: 0; justify-content: space-between; }
+  .nav__sum:hover, .nav__group[open] .nav__sum { background: transparent; }
+  .nav__menu { position: static; grid-template-columns: 1fr; margin: 8px 0 4px; box-shadow: none; }
+  .nav__peeks { display: none; }
 }
 
 /* ---------------------------------------------------------------- hero */
@@ -574,6 +610,20 @@ p { margin: 0; }
 .mock__service ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 4px; font-size: 0.9375rem; color: var(--ink); }
 .mock__service ol li::marker { color: var(--ink-3); font-variant-numeric: tabular-nums; }
 
+/* A booking's row on the restaurants page: two buttons, and what the guest said. */
+.mock__acts { display: flex; gap: 8px; align-self: center; flex-shrink: 0; }
+.mock__ghost { padding: 7px 10px; border-radius: 6px; font-size: 0.8125rem; font-weight: 600; color: var(--ink-2); box-shadow: inset 0 0 0 1px var(--line); white-space: nowrap; }
+.mock__list li.is-done .mock__ghost { display: none; }
+.mock__said { font-style: italic; color: var(--ink-3); }
+.mock__av--n { font-size: 1rem; font-variant-numeric: tabular-nums; }
+/* The week's opening hours, on the restaurants page's fourth tab. */
+.mock__hours { margin: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.mock__hours div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 14px; border-top: 1px solid var(--line); font-size: 0.9375rem; }
+.mock__hours div:first-child { border-top: 0; }
+.mock__hours dt { font-weight: 600; }
+.mock__hours dd { margin: 0; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.mock__page.is-fresh .mock__hours div { animation: mock-land 0.4s ease both; animation-delay: calc(var(--i, 0) * 0.12s); }
+
 /* FAQ: native details, so it works with no script at all. */
 .faq { display: grid; gap: 10px; }
 .faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0 20px; }
@@ -683,6 +733,8 @@ p { margin: 0; }
   .mock__list li { flex-wrap: wrap; }
   .mock__list:not(.mock__list--calls) div { flex-basis: calc(100% - 48px); }
   .mock__call { margin-left: 48px; }
+  .mock__acts { margin-left: 48px; }
+  .mock__acts .mock__call { margin-left: 0; }
   .mock__list--calls time { flex-basis: 4.2rem; }
   .mock__list--calls div { flex-basis: calc(100% - 4.2rem - 12px); }
   .mock__list--calls .mock__badge { margin-left: calc(4.2rem + 12px); }

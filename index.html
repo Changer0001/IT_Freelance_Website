@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="site.css?v=20261118f" />
+  <link rel="stylesheet" href="site.css?v=20261118g" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -68,6 +68,26 @@
         <a href="#dashboard" class="nav__link">Your dashboard</a>
         <a href="#pricing" class="nav__link">Pricing</a>
         <a href="#faq" class="nav__link">FAQ</a>
+        <!-- ONE MENU ITEM FOR EVERY KIND OF BUSINESS. Each type has a page of
+             its own (for-*.html, made from this page by tools/build_pages.py),
+             with that trade's call on the phone and its rows in the dashboard.
+             A details element, so it opens with no script. With a mouse it
+             opens when pointed at, and a small phone beside the list plays
+             the call for the type the mouse is on (script.js fills
+             .nav__peeks from types.js). -->
+        <details class="nav__group">
+          <summary class="nav__sum">Business type</summary>
+          <div class="nav__menu">
+            <div class="nav__list">
+              <a href="for-restaurants.html" data-type="restaurants">Restaurants<small>Table bookings by phone</small></a>
+              <a href="for-handymen.html" data-type="handyman">Handyman<small>Repairs, mounting, odd jobs</small></a>
+              <a href="for-cleaning.html" data-type="cleaning">Cleaning<small>Homes, offices, move-outs</small></a>
+              <a href="for-auto-repair.html" data-type="auto">Auto repair<small>Garages and mobile mechanics</small></a>
+              <a href="for-it-support.html" data-type="it">IT support<small>Computers, networks, cabling</small></a>
+            </div>
+            <div class="nav__peeks" aria-hidden="true"></div>
+          </div>
+        </details>
         <a href="it-support.html" class="nav__link">IT &amp; cabling</a>
         <!-- THE OWNERS' DOOR. The published terms and privacy policy both
              send a business owner to "their YAP VOICE dashboard"; this is
@@ -571,6 +591,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261118f"></script>
+  <script src="types.js?v=20261118g"></script>
+  <script src="script.js?v=20261118g"></script>
 </body>
 </html>

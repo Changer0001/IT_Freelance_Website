@@ -109,6 +109,78 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
 }
 
 /* ============================================================
+   "BUSINESS TYPE" IN THE MENU
+   With a mouse it opens when pointed at, and a small copy of the
+   hero's phone beside the list plays the call for the type under
+   the pointer (or the keyboard's focus): the ring, the call line by
+   line, the text and the email, round again. Nothing is clicked.
+   It stops when the menu closes. A click anywhere else, or Escape,
+   closes it. A touch screen taps it open and gets the list alone.
+   The calls are in types.js, written by tools/build_pages.py from
+   the same words the pages are made of.
+   ============================================================ */
+(() => {
+  const group = document.querySelector('.nav__group');
+  if (!group) return;
+  document.addEventListener('click', e => { if (group.open && !group.contains(e.target)) group.open = false; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && group.open) { group.open = false; group.querySelector('summary').focus(); } });
+
+  const mouse = window.matchMedia('(hover: hover) and (min-width: 1181px)');
+  let closing = null;
+  group.addEventListener('pointerenter', () => { if (mouse.matches) { clearTimeout(closing); group.open = true; } });
+  group.addEventListener('pointerleave', () => { if (mouse.matches) closing = setTimeout(() => { group.open = false; }, 220); });
+
+  const pane = group.querySelector('.nav__peeks'), hero = document.getElementById('handset'), types = window.YAP_TYPES;
+  if (!pane || !hero || !types) return;
+  const mini = hero.cloneNode(true);
+  mini.removeAttribute('id'); mini.querySelectorAll('[id]').forEach(e => e.removeAttribute('id'));
+  const cap = document.createElement('p'); cap.className = 'nav__peekcap';
+  pane.append(mini, cap);
+  const parts = Array.from(mini.querySelectorAll('[data-at]')), clock = mini.querySelector('time');
+  // Quicker than the big phone: a preview is watched for a few seconds, not thirty.
+  const holds = [0, 1000, 1700, 1100, 1100, 800, 900, 800, 1500, 800, 1900, 1600, 2800];
+  const LAST  = holds.length - 1;
+  const calm  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const here  = (group.querySelector('.nav__list [aria-current]') || group.querySelector('.nav__list a')).dataset.type;
+  let timer = null, playing = null;
+
+  const fill = type => {
+    const t = types[type];
+    mini.querySelector('.handset__status b').textContent = t.time; mini.querySelector('.handset__lock strong').textContent = t.time;
+    mini.querySelectorAll('.handset__say > span').forEach((line, i) => { line.textContent = t.call[i]; });
+    mini.querySelector('.handset__callhead span').lastChild.textContent = t.them;
+    mini.querySelector('.handset__note[data-at="12"] .handset__body b').textContent = t.mail;
+    const text = mini.querySelector('.handset__note[data-at="11"] .handset__body');
+    text.textContent = '';
+    t.sms.forEach((line, i) => { if (i) text.append(document.createElement('br')); text.append(line); });
+    cap.textContent = ''; const name = document.createElement('b'); name.textContent = t.name; cap.append(name, ' · an example call');
+  };
+  const show = step => {
+    parts.forEach(part => {
+      const from = Number(part.dataset.at), until = part.dataset.until ? Number(part.dataset.until) : Infinity;
+      part.classList.toggle('is-on', step >= from && step < until);
+      part.classList.toggle('is-speaking', from === step && part.classList.contains('handset__say'));
+    });
+    if (clock) clock.textContent = '0:' + String(Math.max(0, (step - 2) * 2)).padStart(2, '0');
+  };
+  const stop = () => { clearTimeout(timer); timer = null; playing = null; };
+  const play = type => {
+    if (!types[type] || playing === type) return;
+    stop(); playing = type; fill(type);
+    if (calm) { show(LAST); return; }
+    let step = 1; show(step);
+    const next = () => { timer = setTimeout(() => { step = step >= LAST ? 1 : step + 1; show(step); next(); }, holds[step]); };
+    next();
+  };
+  group.querySelectorAll('.nav__list a').forEach(link => {
+    link.addEventListener('pointerenter', () => play(link.dataset.type));
+    link.addEventListener('focus', () => play(link.dataset.type));
+  });
+  group.addEventListener('toggle', () => { if (group.open) play(playing || here); else stop(); });
+  fill(here); show(LAST);
+})();
+
+/* ============================================================
    THE DASHBOARD IN "YOUR DASHBOARD" — played by itself, like the
    phone: the callback from that call lands, its Call button is
    pressed, it is marked called back; then Calls, Overview with its
