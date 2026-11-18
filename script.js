@@ -524,6 +524,49 @@ if (contactForm && formSuccess) {
 }
 
 /* ============================================================
+   THE WORKFLOW — "How it works" plays its four steps in turn
+   ============================================================
+   One step at a time is "on" (its scene plays), the ones before it stay
+   "done" (resting on their last frame), then it starts again. How each
+   state looks is in site.css. It runs only while the steps are on screen,
+   so it costs nothing further down the page, and it never starts for
+   anyone who has asked for less motion: they see every scene finished. */
+(function () {
+  const list = document.getElementById('workflow');
+  if (!list || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const steps = Array.from(list.querySelectorAll('.step'));
+  const BEAT = 3000;   // how long a step is on
+  const REST = 2200;   // how long all four stay finished before it starts again
+  let at = -1;
+  let timer = null;
+  list.style.setProperty('--beat', BEAT + 'ms');
+
+  function show(n) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('is-on', i === n);
+      step.classList.toggle('is-done', i < n || n === steps.length);
+    });
+  }
+  function tick() {
+    at = at >= steps.length ? 0 : at + 1;
+    show(at);
+    timer = setTimeout(tick, at === steps.length ? REST : BEAT);
+  }
+  new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      if (timer) return;
+      list.classList.add('is-playing');
+      at = -1;
+      tick();
+    } else {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }, { threshold: 0.35 }).observe(list);
+})();
+
+/* ============================================================
    FOOTER — dynamic year
    ============================================================ */
 const yearEl = document.getElementById('footer-year');

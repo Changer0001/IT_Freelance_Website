@@ -26,6 +26,8 @@ import re
 import sys
 from pathlib import Path
 
+import scenes
+
 ROOT = Path(__file__).resolve().parent.parent
 SITE = 'https://yap-itsupport.com/'
 OPENING = "Thanks for calling {biz}. I'm the AI assistant here, and I'll take down what you need."
@@ -156,6 +158,8 @@ def common(p, t, key):
     # the home page, and each type's own picture on its page (img/hero-<type>.jpg, named in
     # site.css). A new type needs its picture and its line there, or it shows no photo at all.
     p.swap('<section class="hero hero--photo hero--work" id="top"', f'<section class="hero hero--photo hero--{key}" id="top"')
+    # The last scene of "How it works" shows the owner getting the text: dressed for this trade.
+    p.s = scenes.put(p.s, 4, key)
     # The closing section shows the same picture the page opened on.
     p.swap('<section class="section section--ink section--photo band--work" id="contact"', f'<section class="section section--ink section--photo band--{key}" id="contact"')
     p.swap('<p class="eyebrow">AI phone receptionist · San Diego</p>', f'<p class="eyebrow">AI phone receptionist · {esc(t["eyebrow"])}</p>')
