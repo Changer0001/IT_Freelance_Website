@@ -33,6 +33,10 @@ licence. No faces in these either.
 |---|---|---|---|
 | `band-office.jpg` | What it does | `photo-1497366216548-37526070297c` | an empty office |
 | `band-laptop.jpg` | Your dashboard | `photo-1516387938699-a93567ec168e` | hands typing on a laptop |
+| `band-price.jpg` | Pricing | `photo-1579621970563-ebec7560ff3e` | a seedling growing from a pile of coins |
+| `band-notes.jpg` | Questions | `photo-1517842645767-c639042777db` | a notebook, a pen and a pair of glasses |
+
+The closing "Get in touch" section reuses the page's own `hero-*.jpg`.
 
 A picture behind text is saved already blurred and small (21 to 36 KB), so the
 browser does no blurring. To swap one: save the new file under the same name

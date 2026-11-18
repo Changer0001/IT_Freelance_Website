@@ -555,6 +555,7 @@ p { margin: 0; }
    No faces in these pictures, by the owner's choice. */
 .section--photo { position: relative; isolation: isolate; overflow: hidden; --band-bg: var(--bg); --band-wash: 82%; }
 .section--tint.section--photo { --band-bg: var(--tint); }
+.section--ink.section--photo { --band-bg: var(--ink-band); --band-wash: 80%; }
 .section--photo::before {
   content: ''; position: absolute; inset: 0; z-index: -2;
   background: var(--band-photo) var(--band-at, 50% 50%) / cover no-repeat;
@@ -566,11 +567,21 @@ p { margin: 0; }
     color-mix(in srgb, var(--band-bg) var(--band-wash), transparent);
 }
 .band--office { --band-photo: url("img/band-office.jpg"); }
+.band--price  { --band-photo: url("img/band-price.jpg"); }
+.band--notes  { --band-photo: url("img/band-notes.jpg"); }
+/* The closing section: the picture the page opened on, so each page begins
+   and ends with its own business. */
+.band--work        { --band-photo: url("img/hero-work.jpg");        --band-at: 30% 30%; }
+.band--restaurants { --band-photo: url("img/hero-restaurants.jpg"); --band-at: 50% 60%; }
+.band--handyman    { --band-photo: url("img/hero-handyman.jpg");    --band-at: 60% 40%; }
+.band--cleaning    { --band-photo: url("img/hero-cleaning.jpg");    --band-at: 60% 50%; }
+.band--auto        { --band-photo: url("img/hero-auto.jpg");        --band-at: 40% 50%; }
+.band--it          { --band-photo: url("img/hero-it.jpg");          --band-at: 70% 50%; }
 .band--laptop { --band-photo: url("img/band-laptop.jpg"); --band-at: 30% 50%; }
 /* The light page's small grey text has little room to spare, so these two
    sit further back there (measured: every text 4.5:1 or better). */
-.band--office, .band--laptop { --band-wash: 89%; }
-@media (prefers-color-scheme: dark) { .band--office, .band--laptop { --band-wash: 82%; } }
+.band--office, .band--laptop, .band--price, .band--notes { --band-wash: 89%; }
+@media (prefers-color-scheme: dark) { .band--office, .band--laptop, .band--price, .band--notes { --band-wash: 82%; } }
 .section--ink { background: var(--ink-band); color: var(--ink-band-text); }
 .section__head { max-width: 720px; margin-bottom: 44px; }
 .section__title { font-size: var(--step-2); font-weight: 600; }
