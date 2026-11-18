@@ -25,6 +25,15 @@ for pictures with no faces, so a replacement must have none either.
 | `step-3.jpg` | It takes the details | `photo-1484480974693-6ca0a78fb36b` | a hand writing in a notebook |
 | `step-4.jpg` | You get a text and an email | `photo-1423666639041-f56000c27a9a` | a hand holding a phone over a laptop |
 
+The blurred pictures behind two sections further down every page
+(`.section--photo` and the `.band--*` lines in `site.css`). Same source and
+licence. No faces in these either.
+
+| File | Section | Unsplash image | What it shows |
+|---|---|---|---|
+| `band-office.jpg` | What it does | `photo-1497366216548-37526070297c` | an empty office |
+| `band-laptop.jpg` | Your dashboard | `photo-1516387938699-a93567ec168e` | hands typing on a laptop |
+
 A picture behind text is saved already blurred and small (21 to 36 KB), so the
 browser does no blurring. To swap one: save the new file under the same name
 at 1200 pixels wide, already blurred, then measure the text's contrast over it

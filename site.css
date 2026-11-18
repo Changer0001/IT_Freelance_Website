@@ -544,6 +544,33 @@ p { margin: 0; }
 /* ------------------------------------------------------------- sections */
 .section { padding: 88px 0; }
 .section--tint { background: var(--tint); }
+
+/* A blurred picture behind a whole section, further down the page. Same idea
+   as the top section's: the file is already blurred and small, and the
+   section's own colour is laid over it so the words stay the thing you read.
+   The boxes inside these sections (the feature grid, the dashboard picture)
+   are solid, so the photo shows around them and never behind their text.
+   The section fades back to its own plain colour at its top and bottom
+   edge, so it meets its neighbours exactly as it did before.
+   No faces in these pictures, by the owner's choice. */
+.section--photo { position: relative; isolation: isolate; overflow: hidden; --band-bg: var(--bg); --band-wash: 82%; }
+.section--tint.section--photo { --band-bg: var(--tint); }
+.section--photo::before {
+  content: ''; position: absolute; inset: 0; z-index: -2;
+  background: var(--band-photo) var(--band-at, 50% 50%) / cover no-repeat;
+}
+.section--photo::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to bottom, var(--band-bg) 0%, transparent 16%, transparent 66%, var(--band-bg) 96%),
+    color-mix(in srgb, var(--band-bg) var(--band-wash), transparent);
+}
+.band--office { --band-photo: url("img/band-office.jpg"); }
+.band--laptop { --band-photo: url("img/band-laptop.jpg"); --band-at: 30% 50%; }
+/* The light page's small grey text has little room to spare, so these two
+   sit further back there (measured: every text 4.5:1 or better). */
+.band--office, .band--laptop { --band-wash: 89%; }
+@media (prefers-color-scheme: dark) { .band--office, .band--laptop { --band-wash: 82%; } }
 .section--ink { background: var(--ink-band); color: var(--ink-band-text); }
 .section__head { max-width: 720px; margin-bottom: 44px; }
 .section__title { font-size: var(--step-2); font-weight: 600; }
