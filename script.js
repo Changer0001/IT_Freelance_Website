@@ -37,7 +37,7 @@ if (hamburger && mainNav) {
    steps written under it:
      1  a customer calls and the owner cannot pick up   (frame 1)
      2  YAP Voice answers; the call, a line a frame     (frames 2 to 10)
-     3  the owner gets the text                         (frame 11)
+     3  the owner gets the text, then the email         (frames 11, 12)
    The markup is the last frame, so the page is complete with no
    script and with reduced motion.
    ============================================================ */
@@ -48,8 +48,9 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
   const parts = Array.from(phone.querySelectorAll('[data-at]'));
   const steps = Array.from(phone.querySelectorAll('[data-now]'));
   // How long each frame is held, in milliseconds: the quiet screen, the ring,
-  // the nine lines of the call (long enough to read each), then the text.
-  const holds = [900, 2400, 3600, 2200, 1900, 1400, 1500, 1500, 2700, 1400, 3400, 7000];
+  // the nine lines of the call (long enough to read each), the text, the email.
+  const holds = [900, 2400, 3600, 2200, 1900, 1400, 1500, 1500, 2700, 1400, 3400, 2600, 6500];
+  const TEXT  = 11;   // the frame the text arrives on: the call is over
   const LAST  = holds.length - 1;
   let timer = null;
 
@@ -77,7 +78,7 @@ if (handset && phone && !window.matchMedia('(prefers-reduced-motion: reduce)').m
       part.classList.toggle('is-speaking', playing && from === step && part.classList.contains('handset__say'));
     });
     if (step === 2 && playing) tick(true);
-    if (step < 2 || step >= LAST || !playing) tick(false);
+    if (step < 2 || step >= TEXT || !playing) tick(false);
     // Which written step is being played. None is marked when the loop is not running.
     steps.forEach(li => li.classList.toggle('is-now', playing && li.dataset.now.split(' ').includes(String(step))));
   };
