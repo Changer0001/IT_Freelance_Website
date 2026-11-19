@@ -306,12 +306,21 @@ p { margin: 0; }
 @media (prefers-color-scheme: dark) {
   .hero--restaurants, .hero--auto, .hero--it, .hero--cleaning { --hero-wash: 80%; }
 }
-/* One column: the words run the full width, so the wash is even across it. */
+/* One column (a phone or a narrow window): the words come first and the
+   phone picture under them. On a laptop the photo shows beside the words,
+   behind the phone; here it does the same thing one above the other: heavy
+   behind the words, lighter behind the phone picture, then heavy again
+   behind the steps under it, and back to the page at the bottom. Measured:
+   every text over it 4.5:1 or better. */
 @media (max-width: 900px) {
   .hero--photo::after {
-    background:
-      linear-gradient(to bottom, transparent 70%, var(--bg) 100%),
-      color-mix(in srgb, var(--bg) calc(var(--hero-wash) + 6%), transparent);
+    background: linear-gradient(to bottom,
+      color-mix(in srgb, var(--bg) calc(var(--hero-wash) + 8%), transparent) 0%,
+      color-mix(in srgb, var(--bg) calc(var(--hero-wash) + 8%), transparent) 41%,
+      color-mix(in srgb, var(--bg) calc(var(--hero-wash) - 24%), transparent) 48%,
+      color-mix(in srgb, var(--bg) calc(var(--hero-wash) - 24%), transparent) 64%,
+      color-mix(in srgb, var(--bg) calc(var(--hero-wash) + 14%), transparent) 70%,
+      var(--bg) 100%);
   }
 }
 /* The words start at the phone's top, not at its middle: centred against a
