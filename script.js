@@ -1,4 +1,51 @@
 /* ============================================================
+   LIGHT OR DARK — the header's button
+   ============================================================
+   The page follows the device's setting until the visitor presses the
+   button; from then on their choice is kept in this browser (localStorage)
+   and stamped on <html> as data-theme, which site.css lets win over the
+   device. Pages put a saved choice back in <head> before they are drawn;
+   this does it again for pages that have no such line, and runs the button.
+   Storage can be refused (a private window, blocked site data): then the
+   button still works for the page in front of the visitor. */
+(() => {
+  const root = document.documentElement;
+  const KEY = 'yap-theme';
+  try {
+    const saved = localStorage.getItem(KEY);
+    if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  } catch (e) { /* no storage: follow the device */ }
+
+  const deviceDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const current = () => root.getAttribute('data-theme') || (deviceDark.matches ? 'dark' : 'light');
+  const button = document.getElementById('theme-btn');
+
+  function label() {
+    if (!button) return;
+    const next = current() === 'dark' ? 'light' : 'dark';
+    button.setAttribute('aria-label', `Switch to ${next} mode`);
+    button.title = `Switch to ${next} mode`;
+  }
+  // The browser's own bar (on a phone) takes the page's colour too.
+  function bar() {
+    if (!root.hasAttribute('data-theme')) return;
+    const colour = current() === 'dark' ? '#0a101d' : '#f4f7fc';
+    document.querySelectorAll('meta[name="theme-color"]').forEach(m => m.setAttribute('content', colour));
+  }
+
+  if (button) {
+    button.addEventListener('click', () => {
+      const next = current() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem(KEY, next); } catch (e) { /* this page only */ }
+      label(); bar();
+    });
+  }
+  deviceDark.addEventListener('change', label);
+  label(); bar();
+})();
+
+/* ============================================================
    MOBILE NAV TOGGLE
    ============================================================ */
 const hamburger = document.getElementById('menu-btn');

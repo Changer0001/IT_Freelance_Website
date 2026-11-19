@@ -54,8 +54,14 @@
   color-scheme: light;
 }
 
+/* LIGHT OR DARK. The page follows the device's own setting, unless the
+   visitor has picked one with the button in the header (script.js): that
+   choice is stamped on <html> as data-theme="light" or "dark" and wins.
+   So every dark rule in this file is written twice: once for "the device
+   is dark and the visitor has not picked light", once for "the visitor
+   picked dark". Write any new dark rule the same way. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #0a101d;
     --surface: #121b2d;
     --tint: #0e1626;
@@ -76,6 +82,26 @@
     color-scheme: dark;
   }
 }
+:root[data-theme="dark"] {
+    --bg: #0a101d;
+    --surface: #121b2d;
+    --tint: #0e1626;
+    --line: #243049;
+    --ink: #eaf0fa;
+    --ink-2: #b3bfd6;
+    --ink-3: #8a99b5;
+    --accent: #7aa8ff;
+    --accent-hover: #9bbdff;
+    --accent-soft: #16264a;
+    --on-accent: #0a101d;
+    --sms: #34c171;
+    --ink-band: #121b2d;
+    --ink-band-text: #eaf0fa;
+    --ink-band-muted: #b3bfd6;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+    --urgent: #ff9aa2; --urgent-soft: #3a1620; --ok: #5fd08a;
+    color-scheme: dark;
+  }
 
 /* ---------------------------------------------------------------- base */
 *, *::before, *::after { box-sizing: border-box; }
@@ -169,6 +195,24 @@ p { margin: 0; }
 
 .menu-btn { display: none; }
 
+/* The light/dark button, beside the menu button on a phone and after
+   "Book a free demo" on a laptop. It shows the moon on a light page and
+   the sun on a dark one: the look a press will give. */
+.theme-btn {
+  display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0;
+  color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
+}
+.theme-btn:hover { background: var(--tint); }
+.theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-btn svg { width: 20px; height: 20px; }
+.theme-btn__sun { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn__sun { display: block; }
+  :root:not([data-theme="light"]) .theme-btn__moon { display: none; }
+}
+:root[data-theme="dark"] .theme-btn__sun { display: block; }
+:root[data-theme="dark"] .theme-btn__moon { display: none; }
+
 /* The menu has eight things in it now. Under 1180px they no longer fit on one
    line, so the full menu gives way to the button there (below). */
 /* "Business type": one menu item that opens to the kinds of business, each
@@ -223,6 +267,8 @@ p { margin: 0; }
 
 @media (max-width: 1180px) {
   .header__cta { display: none; }
+  .theme-btn { margin-left: auto; }
+  .theme-btn + .menu-btn { margin-left: -8px; }
   .menu-btn {
     display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
     margin-left: auto; width: 44px; height: 44px; padding: 0 11px;
@@ -304,8 +350,9 @@ p { margin: 0; }
 @media (max-width: 900px) { .hero--cleaning { --hero-wash: 80%; } }
 .hero--auto, .hero--it { --hero-wash: 86%; }
 @media (prefers-color-scheme: dark) {
-  .hero--restaurants, .hero--auto, .hero--it, .hero--cleaning { --hero-wash: 80%; }
+  :root:not([data-theme="light"]) .hero--restaurants, :root:not([data-theme="light"]) .hero--auto, :root:not([data-theme="light"]) .hero--it, :root:not([data-theme="light"]) .hero--cleaning { --hero-wash: 80%; }
 }
+:root[data-theme="dark"] .hero--restaurants, :root[data-theme="dark"] .hero--auto, :root[data-theme="dark"] .hero--it, :root[data-theme="dark"] .hero--cleaning { --hero-wash: 80%; }
 /* One column (a phone or a narrow window): the words come first and the
    phone picture under them. On a laptop the photo shows beside the words,
    behind the phone; here it does the same thing one above the other: heavy
@@ -340,10 +387,13 @@ p { margin: 0; }
 }
 
 @media (prefers-color-scheme: dark) {
-  .hero__facts li::before, .ticks li::before {
+  :root:not([data-theme="light"]) .hero__facts li::before, :root:not([data-theme="light"]) .ticks li::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
   }
 }
+:root[data-theme="dark"] .hero__facts li::before, :root[data-theme="dark"] .ticks li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  }
 
 /* The phone: a handset drawn to look like one, showing what an owner sees.
    A call comes in and is not picked up, the missed call is noted, and the
@@ -591,7 +641,10 @@ p { margin: 0; }
 /* The light page's small grey text has little room to spare, so these two
    sit further back there (measured: every text 4.5:1 or better). */
 .band--office, .band--laptop, .band--price, .band--notes, .band--phone { --band-wash: 89%; }
-@media (prefers-color-scheme: dark) { .band--office, .band--laptop, .band--price, .band--notes, .band--phone { --band-wash: 82%; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .band--office, :root:not([data-theme="light"]) .band--laptop, :root:not([data-theme="light"]) .band--price, :root:not([data-theme="light"]) .band--notes, :root:not([data-theme="light"]) .band--phone { --band-wash: 82%; }
+}
+:root[data-theme="dark"] .band--office, :root[data-theme="dark"] .band--laptop, :root[data-theme="dark"] .band--price, :root[data-theme="dark"] .band--notes, :root[data-theme="dark"] .band--phone { --band-wash: 82%; }
 .section--ink { background: var(--ink-band); color: var(--ink-band-text); }
 .section__head { max-width: 720px; margin-bottom: 44px; }
 .section__title { font-size: var(--step-2); font-weight: 600; }
@@ -1047,9 +1100,15 @@ p { margin: 0; }
 /* The search results come from Google Maps, and say so, in the words and
    the type Google's attribution rules ask for. */
 .finder__attr { padding: 6px 10px 4px; text-align: right; font: 400 12px/1.4 Roboto, var(--font-body), sans-serif; letter-spacing: normal; color: #5e5e5e; white-space: nowrap; }
-@media (prefers-color-scheme: dark) { .finder__attr { color: #fff; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .finder__attr { color: #fff; }
+}
+:root[data-theme="dark"] .finder__attr { color: #fff; }
 .finder__picked .finder__attr--picked { padding: 2px 0 0; text-align: left; font-size: 12px; color: #5e5e5e; }
-@media (prefers-color-scheme: dark) { .finder__picked .finder__attr--picked { color: #fff; } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .finder__picked .finder__attr--picked { color: #fff; }
+}
+:root[data-theme="dark"] .finder__picked .finder__attr--picked { color: #fff; }
 .finder__or { justify-self: start; padding: 0; font: inherit; font-size: 0.875rem; font-weight: 600; color: var(--accent); background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .finder__picked { display: grid; gap: 2px; padding: 12px 14px; background: var(--tint); border-radius: 10px; }
 .finder__picked b { font-weight: 600; color: var(--ink); }
