@@ -332,7 +332,9 @@ p { margin: 0; }
   .nav { gap: 0; }
   .nav__link, .nav__sum { display: inline-flex; align-items: center; height: var(--item-h); padding: 0 10px; font-size: 0.9rem; }
   .nav__link--login { padding: 0 12px; margin-left: 8px; }
-  .header__cta { height: var(--item-h); padding: 0 16px; font-size: 0.9rem; }
+  /* "Book a free demo" takes "Business login" as its pattern: the same
+     height, padding, type and corners, so the two read as a pair. */
+  .nav__link--login, .header__cta { height: var(--item-h); padding: 0 12px; font-size: 0.9rem; font-weight: 500; border-radius: 6px; }
 }
 .theme-btn { height: var(--bar-h); }
 .theme-btn__track { width: 56px; height: 28px; padding: 0 7px; }
