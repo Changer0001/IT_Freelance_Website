@@ -195,23 +195,37 @@ p { margin: 0; }
 
 .menu-btn { display: none; }
 
-/* The light/dark button, beside the menu button on a phone and after
-   "Book a free demo" on a laptop. It shows the moon on a light page and
-   the sun on a dark one: the look a press will give. */
+/* The light/dark switch, beside the menu button on a phone and after
+   "Book a free demo" on a laptop. A switch, not a lone icon, so it reads as
+   on/off at a glance: the sun on the left, the moon on the right, and the
+   knob sits on the one in use. The button itself is 44px tall so a thumb
+   finds it; the pill inside is the part you see. */
 .theme-btn {
-  display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0;
-  color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
+  display: inline-grid; place-items: center; flex-shrink: 0; height: 44px; padding: 0 2px;
+  background: transparent; border: 0; border-radius: 999px; cursor: pointer; color: var(--ink-3);
 }
-.theme-btn:hover { background: var(--tint); }
 .theme-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.theme-btn svg { width: 20px; height: 20px; }
-.theme-btn__sun { display: none; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-btn__sun { display: block; }
-  :root:not([data-theme="light"]) .theme-btn__moon { display: none; }
+.theme-btn__track {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  width: 62px; height: 32px; padding: 0 8px; border-radius: 999px;
+  background: var(--tint); border: 1px solid var(--line); transition: border-color 0.2s;
 }
-:root[data-theme="dark"] .theme-btn__sun { display: block; }
-:root[data-theme="dark"] .theme-btn__moon { display: none; }
+.theme-btn:hover .theme-btn__track { border-color: var(--ink-3); }
+.theme-btn__knob {
+  position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); transition: transform 0.22s ease;
+}
+.theme-btn svg { position: relative; width: 14px; height: 14px; transition: color 0.2s; }
+.theme-btn__sun { color: var(--on-accent); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn__knob { transform: translateX(28px); }
+  :root:not([data-theme="light"]) .theme-btn__sun { color: var(--ink-3); }
+  :root:not([data-theme="light"]) .theme-btn__moon { color: var(--on-accent); }
+}
+:root[data-theme="dark"] .theme-btn__knob { transform: translateX(28px); }
+:root[data-theme="dark"] .theme-btn__sun { color: var(--ink-3); }
+:root[data-theme="dark"] .theme-btn__moon { color: var(--on-accent); }
+@media (prefers-reduced-motion: reduce) { .theme-btn__knob { transition: none; } }
 
 /* The menu has eight things in it now. Under 1180px they no longer fit on one
    line, so the full menu gives way to the button there (below). */

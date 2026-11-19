@@ -15,7 +15,7 @@
   <script>try{var t=localStorage.getItem('yap-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <meta name="theme-color" content="#f4f7fc" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0a101d" media="(prefers-color-scheme: dark)" />
-  <link rel="stylesheet" href="site.css?v=20261119b" />
+  <link rel="stylesheet" href="site.css?v=20261119c" />
 </head>
 <body>
   <header class="site-header" id="site-header">
@@ -42,9 +42,12 @@
 
       <a href="index.html#contact" class="btn btn--primary header__cta">Book a free demo</a>
 
-      <button class="theme-btn" id="theme-btn" type="button" aria-label="Switch between light and dark" title="Light or dark">
-        <svg class="theme-btn__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        <svg class="theme-btn__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+      <button class="theme-btn" id="theme-btn" type="button" role="switch" aria-checked="false" aria-label="Dark mode" title="Dark mode on or off">
+        <span class="theme-btn__track" aria-hidden="true">
+          <span class="theme-btn__knob"></span>
+          <svg class="theme-btn__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg>
+          <svg class="theme-btn__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </span>
       </button>
 
       <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
@@ -130,7 +133,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261119b"></script>
+  <script src="script.js?v=20261119c"></script>
   <script src="demo.js?v=20261118o"></script>
   <script>
     /* This page only: say plainly when the server has the demo switched off. */

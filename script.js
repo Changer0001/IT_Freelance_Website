@@ -20,11 +20,9 @@
   const current = () => root.getAttribute('data-theme') || (deviceDark.matches ? 'dark' : 'light');
   const button = document.getElementById('theme-btn');
 
+  // A switch: "Dark mode", on or off. The knob's place is drawn by site.css.
   function label() {
-    if (!button) return;
-    const next = current() === 'dark' ? 'light' : 'dark';
-    button.setAttribute('aria-label', `Switch to ${next} mode`);
-    button.title = `Switch to ${next} mode`;
+    if (button) button.setAttribute('aria-checked', String(current() === 'dark'));
   }
   // The browser's own bar (on a phone) takes the page's colour too.
   function bar() {
@@ -41,7 +39,9 @@
       label(); bar();
     });
   }
-  deviceDark.addEventListener('change', label);
+  // Older Safari has only addListener on a media query.
+  if (deviceDark.addEventListener) deviceDark.addEventListener('change', label);
+  else if (deviceDark.addListener) deviceDark.addListener(label);
   label(); bar();
 })();
 
