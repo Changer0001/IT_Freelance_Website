@@ -343,11 +343,15 @@ p { margin: 0; }
   .nav__link--login:hover { background: var(--surface); }
 }
 .theme-btn { height: var(--bar-h); }
-.theme-btn__track { width: 56px; height: 28px; padding: 0 7px; }
-.theme-btn__knob { top: 2px; left: 2px; width: 22px; height: 22px; }
-.theme-btn svg { width: 13px; height: 13px; }
+/* The switch is as tall as the buttons and the logo too. */
+.theme-btn__track { width: 60px; height: var(--item-h); padding: 0 8px; }
+.theme-btn__knob { top: 2px; left: 2px; width: calc(var(--item-h) - 6px); height: calc(var(--item-h) - 6px); }
+.theme-btn svg { width: 14px; height: 14px; }
 @media (max-width: 1180px) {
-  .menu-btn { width: 38px; height: 38px; padding: 0 10px; gap: 4px; }
+  /* As tall as the logo and the switch beside it; the area a thumb can
+     press reaches 6px past what is drawn, so it is still easy to hit. */
+  .menu-btn { position: relative; width: 36px; height: var(--item-h); padding: 0 9px; gap: 4px; }
+  .menu-btn::after { content: ''; position: absolute; inset: -6px; }
   .menu-btn[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .menu-btn[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   .nav { inset: var(--bar-h) 0 auto 0; height: calc(100vh - var(--bar-h)); height: calc(100dvh - var(--bar-h)); }
