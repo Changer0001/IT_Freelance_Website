@@ -315,6 +315,36 @@ p { margin: 0; }
   .nav__info { display: none; }
 }
 
+/* THE HEADER BAR: slimmer, lined up, see-through. It runs edge to edge as
+   before, but is only --bar-h tall; everything in it is one height
+   (--item-h) and sits on one centre line, and the page shows through it,
+   softened, as you scroll. */
+:root { --bar-h: 58px; --item-h: 34px; }
+.site-header {
+  background: color-mix(in srgb, var(--bg) var(--bar-solid, 66%), transparent);
+  backdrop-filter: saturate(1.6) blur(18px);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+}
+.header__row { height: var(--bar-h); gap: 14px; }
+.brand { gap: 9px; font-size: 1.125rem; }
+.brand svg { width: 26px; height: 26px; }
+@media (min-width: 1181px) {
+  .nav { gap: 0; }
+  .nav__link, .nav__sum { display: inline-flex; align-items: center; height: var(--item-h); padding: 0 10px; font-size: 0.9rem; }
+  .nav__link--login { padding: 0 12px; margin-left: 8px; }
+  .header__cta { height: var(--item-h); padding: 0 16px; font-size: 0.9rem; }
+}
+.theme-btn { height: var(--bar-h); }
+.theme-btn__track { width: 56px; height: 28px; padding: 0 7px; }
+.theme-btn__knob { top: 2px; left: 2px; width: 22px; height: 22px; }
+.theme-btn svg { width: 13px; height: 13px; }
+@media (max-width: 1180px) {
+  .menu-btn { width: 40px; height: 40px; padding: 0 10px; gap: 4px; }
+  .menu-btn[aria-expanded='true'] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .nav { inset: var(--bar-h) 0 auto 0; height: calc(100vh - var(--bar-h)); height: calc(100dvh - var(--bar-h)); }
+}
+
 /* ---------------------------------------------------------------- hero */
 .hero { padding: 40px 0 72px; }
 
