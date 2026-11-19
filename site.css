@@ -326,8 +326,10 @@ p { margin: 0; }
   -webkit-backdrop-filter: saturate(1.6) blur(18px);
 }
 .header__row { height: var(--bar-h); gap: 14px; }
-.brand { gap: 9px; font-size: 1.125rem; }
-.brand svg { width: 26px; height: 26px; }
+/* The logo is exactly as tall as the buttons, and the name sized to sit
+   with it, so the left end of the bar matches the right. */
+.brand { gap: 10px; font-size: 1.3125rem; }
+.brand svg { width: var(--item-h); height: var(--item-h); }
 @media (min-width: 1181px) {
   .nav { gap: 0; }
   .nav__link, .nav__sum { display: inline-flex; align-items: center; height: var(--item-h); padding: 0 10px; font-size: 0.9rem; }
