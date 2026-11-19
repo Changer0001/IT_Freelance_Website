@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="robots" content="noindex, nofollow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant demo test | YAP Voice</title>
+  <title>Hear It Answer as Your Restaurant | YAP Voice</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,7 +15,7 @@
   <script>try{var t=localStorage.getItem('yap-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
   <meta name="theme-color" content="#f4f7fc" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0a101d" media="(prefers-color-scheme: dark)" />
-  <link rel="stylesheet" href="site.css?v=20261119i" />
+  <link rel="stylesheet" href="site.css?v=20261119j" />
 </head>
 <body>
   <header class="site-header" id="site-header">
@@ -59,18 +59,15 @@
   <main id="main">
     <section class="section" data-demo-off>
       <div class="wrap narrow">
-        <p class="eyebrow">Test page · not linked from the site</p>
-        <h1 class="section__title">Restaurant demo</h1>
-        <p class="section__lede" id="demo-state">Checking whether the demo is switched on…</p>
+        <p class="eyebrow">For restaurant owners</p>
+        <h1 class="section__title">Hear it answer as your restaurant</h1>
+        <p class="section__lede">Pick your restaurant, enter the phone you'll call from, and ring the demo line. For a few minutes it answers as your restaurant, with your hours and menu from your own website.</p>
+        <p class="section__lede demo-state" id="demo-state" hidden></p>
       </div>
     </section>
     <section class="section section--tint" id="try" aria-labelledby="try-title" data-demo-section hidden>
       <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">Try it on your own restaurant</p>
-          <h2 id="try-title" class="section__title">Find your restaurant. Then call it.</h2>
-          <p class="section__lede">It reads your hours, address and menu from your own website and gets an assistant ready. Call the demo line from your own phone and it answers as your restaurant.</p>
-        </header>
+        <h2 id="try-title" class="visually-hidden">Find your restaurant, then call it</h2>
         <div class="finder" id="finder" data-api="https://app.yap-itsupport.com">
           <div class="finder__step is-on">
             <p class="finder__n"><b>1</b> Find your restaurant</p>
@@ -133,14 +130,18 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261119i"></script>
+  <script src="script.js?v=20261119j"></script>
   <script src="demo.js?v=20261118o"></script>
   <script>
-    /* This page only: say plainly when the server has the demo switched off. */
+    /* This page only: when the demo is not available, say so and offer the
+       demo business instead; when it is, say nothing and let the steps speak. */
     (() => {
       const finder = document.getElementById('finder'), state = document.getElementById('demo-state');
-      finder.addEventListener('demo:on', () => { state.textContent = 'The demo is switched on. This is the section that will go on the Restaurants page.'; });
-      finder.addEventListener('demo:off', () => { state.textContent = 'The demo is switched off on the server, or the server could not be reached. Nothing to try yet.'; });
+      finder.addEventListener('demo:on', () => { state.hidden = true; });
+      finder.addEventListener('demo:off', () => {
+        state.innerHTML = 'The restaurant demo isn\u2019t available right now. You can still hear the assistant: call <a href="tel:+18314327547">(831) 432-7547</a> and a demo business answers, or email <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>.';
+        state.hidden = false;
+      });
     })();
   </script>
 </body>

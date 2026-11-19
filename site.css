@@ -104,6 +104,9 @@
   }
 
 /* ---------------------------------------------------------------- base */
+/* Read by screen readers, not shown: a heading a page needs for its outline
+   when the words on screen already say the same. */
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 *, *::before, *::after { box-sizing: border-box; }
 /* Where a menu link lands a section: its first line on the line the page's
    own first line sits on (68px under the header; 32px on a phone), not a

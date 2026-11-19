@@ -59,7 +59,7 @@
 
   <main id="main" class="policy-page">
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: November 12, 2026</p>
+    <p class="updated">Last updated: November 19, 2026</p>
 
     <p>YAP VOICE is a product of <strong>YAP-AI Solutions</strong>, San Diego, CA. YAP VOICE and YAP-AI Solutions are trade names of <strong>Burak Yilmaz</strong>, San Diego, CA. YAP-AI Solutions ("I", "me", or "my") operates this website and the YAP VOICE AI phone receptionist, a service that answers a business's phone calls, takes callers' details, and can book visits into the business owner's own Google Calendar. This policy explains what information is collected and how it is used, including what YAP VOICE does with Google user data.</p>
 
@@ -208,6 +208,23 @@
 
     <p><strong>Limited Use.</strong> YAP VOICE's use and transfer to any other app of information received from Google APIs will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
 
+    <!--
+      THE RESTAURANT DEMO (ai-restaurant-receptionist, demo_tries;
+      docs/restaurant-demo.md). Every figure below is a setting there:
+        12 months  - DEMO_LEAD_RETENTION_DAYS (365)
+        an hour    - the longest DEMO_TRY_MINUTES the dashboard allows (60)
+      IF EITHER SETTING CHANGES, THE WORDS HERE MUST CHANGE WITH IT.
+      The page's promise beside the phone box ("Nobody rings you. We keep
+      this number and may follow up about YAP Voice") is the same promise.
+      LEGAL REVIEW REQUIRED, with the rest of this policy.
+    -->
+    <h2 id="restaurant-demo">The Restaurant Demo</h2>
+    <p>A restaurant owner may be shown a demo page where they pick their restaurant, enter the phone number they will call from, and call a demo line that answers as that restaurant for a short time.</p>
+    <p><strong>What is kept.</strong> The phone number entered, the restaurant's name (and, if it was picked from the search box, the Google place ID that identifies it), when the demo was made, and whether a call was made. This is kept for up to 12 months as a record of who tried the demo, and I may call that number to follow up about YAP Voice. The number is never texted, sold or shared.</p>
+    <p><strong>What is not kept.</strong> The hours, address and menu read from the restaurant's own website are deleted when the demo ends, at most about an hour after it was made. So is the temporary demo restaurant and the record of any call to it. As with every call to the assistant, the demo call is not recorded and no transcript of it is kept.</p>
+    <p>To limit how often the demo can be used, a one-way code made from your internet address is kept with the record. It cannot be turned back into the address.</p>
+    <p>The search box on the demo page uses Google Maps: what you type into it is sent to Google and handled under the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+
     <h2>Where the Service Runs</h2>
     <p>The YAP VOICE phone assistant and the business dashboard run on equipment I operate. Connections to it — a business owner opening their dashboard, and the phone network passing a call to the assistant — travel through <a href="https://www.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a>, which provides the encrypted connection between the internet and that equipment. This means the audio of a call answered by the assistant, and the pages of the dashboard, pass through Cloudflare's network as they happen. The enquiry records themselves are stored only in the YAP VOICE system, not by Cloudflare. See Cloudflare's <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> for how it handles data passing through its network.</p>
     <p>Dashboard accounts are created by me for each business. Each is protected by a password the account holder can change at any time from their dashboard, and a business owner's account shows only their own business's calls and enquiries.</p>
@@ -217,6 +234,7 @@
     <p>For the AI receptionist service, enquiry records (including the record of any visit booked) and the owner's notification number are retained while the business holds an active account, and are deleted on request or when the account is closed. A connected Google Calendar's stored authorization is deleted as soon as the owner disconnects it.</p>
     <p>Calls are not recorded and conversations are not stored, so there is nothing of either to retain. A record that a call happened — when it was, how long it lasted, how it ended, and a short list of what happened on it (for example which service was asked about, whether a message was taken or a visit booked) — is kept for up to 24 months so the business has its own history. It contains none of your own words and not your name.</p>
     <p>Questions the assistant could not answer are kept for up to 90 days, and are deleted sooner on request or when the account is closed.</p>
+    <p>A record of a restaurant demo (the phone number entered and the restaurant) is kept for up to 12 months, and deleted sooner on request.</p>
 
     <h2>Your Rights</h2>
     <p>You may request that I delete any personal information you have submitted by contacting me directly at <a href="mailto:yap.itsupport@gmail.com">yap.itsupport@gmail.com</a>. I will respond within 30 days.</p>
