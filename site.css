@@ -978,18 +978,24 @@ p { margin: 0; }
 .hero__demo { margin-top: 22px; font-size: var(--step--1); color: var(--ink-2); max-width: 34em; }
 .hero__demo a { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-/* Pricing: one plan, so one card, split into the figure and what it buys. */
+/* Pricing: the plans side by side, each a card: its name, the figure, what
+   it buys, and the same button at the same height in both. A page with one
+   plan (a restaurant's) keeps the one card, centred. */
+.plans { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.plans--one { grid-template-columns: minmax(0, 560px); justify-content: center; }
 .plan {
-  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center;
-  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 36px; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 32px; box-shadow: var(--shadow);
 }
+.plan--more { border-color: var(--accent); }
+.plan__name { margin: 0 0 14px; font: 600 1.0625rem/1.2 var(--font-body); color: var(--ink); }
 .plan__amount { font: 600 clamp(2.6rem, 2rem + 2.5vw, 3.6rem)/1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: lining-nums tabular-nums; }
 .plan__from { font: 500 1.125rem/1 var(--font-body); color: var(--ink-2); margin-right: 6px; }
 .plan__per { font: 500 1.125rem/1 var(--font-body); color: var(--ink-2); margin-left: 4px; }
 .plan__sub { margin-top: 12px; color: var(--ink-2); font-size: 0.975rem; }
-.plan__price .btn { margin-top: 24px; }
-.plan__fine { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-3); max-width: 28em; }
-.plan__list { margin: 0; }
+.plan .btn { margin-top: auto; }
+.plan__fine { margin-top: 20px; font-size: 0.875rem; color: var(--ink-3); max-width: 62em; }
+.plan__list { margin: 22px 0 28px; }
 .plan__note { margin-top: 18px; font-size: 0.9375rem; color: var(--ink-3); }
 
 /* IT & cabling: deliberately quieter than the product above it. */
@@ -1047,9 +1053,10 @@ p { margin: 0; }
   [id]:not(.section):not(main):not(header) { scroll-margin-top: 64px; }
   .hero { padding-top: 32px; }
   .hero__copy { padding-top: 0; }
-  .hero__grid, .split, .contact, .it, .plan { grid-template-columns: 1fr; gap: 40px; }
+  .hero__grid, .split, .contact, .it { grid-template-columns: 1fr; gap: 40px; }
+  .plans, .plans--one { grid-template-columns: 1fr; }
   .it { padding: 28px 22px; }
-  .plan { padding: 28px 22px; gap: 28px; }
+  .plan { padding: 28px 22px; }
   .section { padding: 64px 0; }
 }
 @media (max-width: 560px) {

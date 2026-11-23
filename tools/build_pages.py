@@ -302,15 +302,30 @@ def restaurant_page(p, t):
               '              <dl class="mock__hours">\n' + ''.join(f'                <div style="--i:{i}"><dt>{d}</dt><dd>{h}</dd></div>\n' for i, (d, h) in enumerate(week)) + '              </dl>\n')
     p.swap('Examples with made-up callers and figures.', 'Examples with made-up guests and figures.')
 
-    # pricing
-    p.sub(r'<ul class="ticks plan__list" role="list">.*?</ul>', '''<ul class="ticks plan__list" role="list">
-            <li>Answers every call you send it, day or night</li>
-            <li>Takes booking requests: name, party size, day and time</li>
-            <li>Lets guests change or cancel a booking by phone</li>
-            <li>Texts and emails you after every call</li>
-            <li>Answers guests' questions from your own hours and answers</li>
-            <li>Set up with you, usually in one sitting</li>
-          </ul>''')
+    # pricing: one plan. A restaurant's bookings are table requests, which
+    # are part of answering its calls and need no calendar.
+    p.swap('<h2 id="pricing-title" class="section__title">Two plans, one line each</h2>',
+           '<h2 id="pricing-title" class="section__title">One line, one price</h2>')
+    p.between('        <div class="plans">', '        <p class="plan__fine">', '''        <div class="plans plans--one">
+          <article class="plan">
+            <p class="plan__amount">$99<span class="plan__per">/month</span></p>
+            <p class="plan__sub">per business line · up to 300 calls a month</p>
+            <ul class="ticks plan__list" role="list">
+              <li>Answers every call you send it, day or night</li>
+              <li>Takes booking requests: name, party size, day and time</li>
+              <li>Lets guests change or cancel a booking by phone</li>
+              <li>Texts and emails you after every call</li>
+              <li>Answers guests' questions from your own hours and answers</li>
+              <li>Set up with you, usually in one sitting</li>
+            </ul>
+            <a href="#contact" class="btn btn--primary btn--lg">Start with a free demo</a>
+          </article>
+        </div>
+''')
+    p.swap('The first two weeks are free on either plan, and you can cancel any time.',
+           'The first two weeks are free, and you can cancel any time.')
+    p.swap('or $149 with booking into your Google Calendar, and the first two weeks are free. Each plan covers up to 300 calls a month;',
+           'and the first two weeks are free. It covers up to 300 calls a month;')
     p.swap("What it won't do: quote prices or promise dates on your behalf. It takes the details, and you decide.", "What it won't do: promise a table or take a deposit. It takes the request, and you confirm.")
 
     # questions: the two that are about jobs give way to two about tables
