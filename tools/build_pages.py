@@ -308,6 +308,7 @@ def restaurant_page(p, t):
            '<h2 id="pricing-title" class="section__title">One line, one price</h2>')
     p.between('        <div class="plans">', '        <p class="plan__fine">', '''        <div class="plans plans--one">
           <article class="plan">
+            <h3 class="plan__name">Answering + Booking</h3>
             <p class="plan__amount">$99<span class="plan__per">/month</span></p>
             <p class="plan__sub">per business line · up to 300 calls a month</p>
             <p class="plan__trial">14-day free trial</p>
@@ -325,7 +326,7 @@ def restaurant_page(p, t):
 ''')
     p.swap('The 14-day free trial is on either plan: it starts',
            'The 14-day free trial starts')
-    p.swap('or $149 with booking into your Google Calendar, and the first 14 days are free. Each plan covers up to 300 calls a month;',
+    p.swap('or $149 with your Google Calendar connected so visits are booked straight into it, and the first 14 days are free. Each plan covers up to 300 calls a month;',
            'and the first 14 days are free. It covers up to 300 calls a month;')
     p.swap("What it won't do: quote prices or promise dates on your behalf. It takes the details, and you decide.", "What it won't do: promise a table or take a deposit. It takes the request, and you confirm.")
 
