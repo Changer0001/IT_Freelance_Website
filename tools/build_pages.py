@@ -311,7 +311,7 @@ def restaurant_page(p, t):
             <h3 class="plan__name">Answering + Booking</h3>
             <p class="plan__amount">$99<span class="plan__per">/month</span></p>
             <p class="plan__sub">per business line · up to 300 calls a month</p>
-            <p class="plan__trial">14-day free trial</p>
+            <p class="plan__trial">30-day free trial</p>
             <ul class="ticks plan__list" role="list">
               <li>Answers every call you send it, day or night</li>
               <li>Takes booking requests: name, party size, day and time</li>
@@ -320,14 +320,14 @@ def restaurant_page(p, t):
               <li>Answers guests' questions from your own hours and answers</li>
               <li>Set up with you, usually in one sitting</li>
             </ul>
-            <a href="#contact" class="btn btn--primary btn--lg">Start 14-day free trial</a>
+            <a href="#contact" class="btn btn--primary btn--lg">Start 30-day free trial</a>
           </article>
         </div>
 ''')
-    p.swap('The 14-day free trial is on either plan: it starts',
-           'The 14-day free trial starts')
-    p.swap('or $149 with your Google Calendar connected so visits are booked straight into it, and the first 14 days are free. Each plan covers up to 300 calls a month;',
-           'and the first 14 days are free. It covers up to 300 calls a month;')
+    p.swap('The 30-day free trial is on either plan: it starts',
+           'The 30-day free trial starts')
+    p.swap('or $149 with your Google Calendar connected so visits are booked straight into it, and the first 30 days are free. Each plan covers up to 300 calls a month;',
+           'and the first 30 days are free. It covers up to 300 calls a month;')
     p.swap("What it won't do: quote prices or promise dates on your behalf. It takes the details, and you decide.", "What it won't do: promise a table or take a deposit. It takes the request, and you confirm.")
 
     # questions: the two that are about jobs give way to two about tables
