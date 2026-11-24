@@ -175,6 +175,8 @@ def common(p, t, key):
 
 
 def service_page(p, t):
+    # The home page speaks to every kind of business; a trade's page keeps the line about jobs.
+    p.swap('<h1 id="hero-title" class="hero__title">Your phone, always answered.</h1>', '<h1 id="hero-title" class="hero__title">Never lose a job to voicemail.</h1>')
     p.sub(r'<p class="hero__lede">.*?</p>', f'''<p class="hero__lede">
             YAP Voice answers your business line when you can't — {esc(t["where"])}. It answers the caller's questions, takes their
             name, number and what they need, and <strong>texts it straight to you</strong>.
@@ -204,7 +206,7 @@ def service_page(p, t):
 
 
 def restaurant_page(p, t):
-    p.swap('<h1 id="hero-title" class="hero__title">Never lose a job to voicemail.</h1>', '<h1 id="hero-title" class="hero__title">Never miss a booking during service.</h1>')
+    p.swap('<h1 id="hero-title" class="hero__title">Your phone, always answered.</h1>', '<h1 id="hero-title" class="hero__title">Never miss a booking during service.</h1>')
     p.sub(r'<p class="hero__lede">.*?</p>', '''<p class="hero__lede">
             YAP Voice answers your restaurant's phone when you can't — mid-service, after closing,
             on your day off. It answers the guest's questions, takes their booking request,
