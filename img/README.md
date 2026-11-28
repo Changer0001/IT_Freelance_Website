@@ -16,7 +16,7 @@ required. Each was cropped, made smaller, and blurred before it was saved here.
 
 ## The film behind the story (`img/story/`)
 
-The story at the top of the Home and Handymen pages (`story.css`, `story.js`)
+The story at the top of the home page and every trade's page (`story.css`, `story.js`)
 plays a short film behind the phone, and the same film plays behind the small
 pages as they are scrolled (`film.js`: IT services, billing, the policies,
 "page not found"): 198 frames, `001.webp` to `198.webp`,
@@ -30,10 +30,11 @@ numbers 771, 49933, 1796 and 1443. Many Mixkit clips are under its
 *Restricted* licence instead, which does not allow this use: check the
 licence named on a clip's own page before adding one.
 
-The other trades' pages have no film yet. They show their own `hero-*.jpg`
-behind the phone, held still. To give a trade a film: cut its frames into a
-folder here, add the trade to `FILMED` in `tools/build_pages.py`, and give
-its page that folder in `data-film`.
+Every trade's page plays this same film (the owner's choice, 28 Nov), though
+it shows tradespeople. A trade taken out of `FILMED` in
+`tools/build_pages.py` shows its own `hero-*.jpg` behind the phone instead,
+held still. To give a trade a film of its own: cut its frames into a folder
+here and give its page that folder in `data-film`.
 
 The page says "Stock footage. The business and the caller are made up."
 under the film, because the people in it are not customers.

@@ -18,9 +18,10 @@ THE STORY AT THE TOP OF EVERY PAGE (story.css, story.js) shows one call on a
 phone, step by step. Its words and its five phone screens are written by this
 script from the same made-up call each page uses everywhere else, into the
 marked blocks of index.html too (the home page shows the handyman's call), so
-the phone can never say something the rest of the page does not. Only the home
-page and the Handymen page play the film (img/story/, tradespeople); the other
-trades show their own picture until each has a film of its own (FILMED below).
+the phone can never say something the rest of the page does not. Every page
+plays the same film behind the phone (img/story/, tradespeople): the owner
+chose the film on every page over a still picture (28 Nov). A trade taken out
+of FILMED below shows its own picture instead, held still.
 
 RUN IT AFTER ANY CHANGE TO index.html, and commit what it writes. Every
 replacement is checked: if index.html no longer holds the words this expects,
@@ -39,7 +40,7 @@ SITE = 'https://yap-itsupport.com/'
 OPENING = "Thanks for calling {biz}. I'm the AI assistant here, and I'll take down what you need."
 CALLER = '(619) 555-0142'       # the made-up caller on every page: 555-01xx, the block kept for examples
 DEMO_LINE = ('+18314327547', '831-432-7547')   # the one real number on the site
-FILMED = {'handyman'}           # the trades whose page plays the film; index.html plays it too
+FILMED = {'restaurants', 'handyman', 'cleaning', 'auto', 'it'}   # the trades whose page plays the film; index.html plays it too
 
 
 def service(file, name, eyebrow, title, describe, biz, where, short, need, ask, answer, field, value, job, person, rows, services, notes):
@@ -268,7 +269,7 @@ def common(p, t, key):
     # Only the home page opens slowly, the headline coming out of the dark letter by letter.
     # On a trade's page the headline is simply there.
     p.swap(' data-open="slow"', '')
-    # The film is of tradespeople. A trade it does not suit shows its own picture, held still.
+    # A trade that is not in FILMED shows its own picture, held still, and says "Example".
     if key not in FILMED:
         p.swap(' data-film="img/story/"', '')
         p.swap('Stock footage. The business and the caller are made up.', 'Example. The business and the caller are made up.')
@@ -317,7 +318,7 @@ def restaurant_page(p, t):
             and <strong>texts it straight to you</strong>.
           </p>''')
     p.swap('<li>Every callback in your dashboard</li>', '<li>Every booking in your dashboard</li>')
-    p.swap('Example. The business and the caller are made up.', 'Example. The restaurant and the guest are made up.')
+    p.swap('The business and the caller are made up.</p>', 'The restaurant and the guest are made up.</p>')
 
     # what it does
     p.swap('<h2 id="features-title" class="section__title">A receptionist that never puts anyone on hold</h2>', '<h2 id="features-title" class="section__title">A host that never leaves the phone ringing</h2>')
