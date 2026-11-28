@@ -153,6 +153,9 @@
     // the page's bar is dark for as long as the story is under it
     if(header)header.classList.toggle('st-over',r.bottom>header.offsetHeight/2);
     goal=Math.max(-H,Math.min(r.height-H,-r.top));
+    // once the story has been scrolled through, its progress line is not left showing while the
+    // page glides to a stop
+    line.style.visibility=-r.top>=r.height-H-1?'hidden':'';
     if(!begun){begun=true;now=goal}
   }
   function draw(y){
@@ -191,7 +194,9 @@
       copy[k].style.opacity=o;copy[k].style.transform='translate3d(0,'+dy.toFixed(2)+'px,0)';
       copy[k].classList.toggle('is-on',o>.5);
     }
-    line.style.width=(whole*100)+'%';
+    // the progress line fills as the story goes, and is gone by its end, so it is not left as a
+    // white rule between the story and the page under it
+    line.style.width=(whole*100)+'%';line.style.opacity=(1-ease((whole-.9)/.08)).toFixed(3);
   }
   function fill(k,f){
     // a call's clock runs as its step is scrolled: data-clock="3,21" is the seconds at its start and end

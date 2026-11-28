@@ -166,7 +166,7 @@
 .is-live #st-voice{display:block;position:absolute;inset:0;width:100%;height:100%;max-width:none;z-index:1;pointer-events:none}
 .st-film::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
   linear-gradient(180deg,var(--st-bg) 0%,rgba(10,18,34,.72) 9%,rgba(10,18,34,0) 30%),
-  linear-gradient(0deg,rgba(10,18,34,.75) 0%,rgba(10,18,34,0) 22%),
+  linear-gradient(0deg,var(--st-bg) 0%,rgba(10,18,34,.78) 8%,rgba(10,18,34,0) 26%),
   linear-gradient(90deg,rgba(10,18,34,.7) 0%,rgba(10,18,34,0) 16%,rgba(10,18,34,0) 84%,rgba(10,18,34,.7) 100%)}
 .st-load{position:absolute;left:0;top:var(--st-bar);height:3px;width:0;background:var(--st-sky);transition:width .2s,opacity .4s;z-index:3}
 /* strips across the screen: they report which part of it can really be seen (see look() in story.js) */
@@ -385,6 +385,26 @@
 }
 :root.st-through[data-theme="dark"] .section--photo{--band-wash:50%}
 .st-through .footer{background:color-mix(in srgb,var(--bg) 92%,transparent)}
+/* where the story ends and the page goes on: the story's foot is its own dark colour, and the
+   section under it starts in that colour and clears within its top padding, so there is no seam */
+.st-through .story + .section--photo::after{background:linear-gradient(to bottom,#0a1222 0,rgba(10,18,34,0) 76px),color-mix(in srgb,var(--band-bg) var(--band-wash),transparent)}
+/* THE BOXES ARE FROSTED GLASS over the film, not solid slabs in front of it: the plans, the
+   feature boxes, the dashboard, the questions, the billing fold. The film shows softly through
+   each, blurred, so they belong to the scene; the words on them still read. The contact form
+   stays nearly solid, because people type in it. */
+.st-through{--st-glass:76%}
+@media (prefers-color-scheme:dark){ :root.st-through:not([data-theme="light"]){--st-glass:52%} }
+:root.st-through[data-theme="dark"]{--st-glass:52%}
+.st-through .plan,.st-through .feature,.st-through .faq details,.st-through .billing,.st-through .mock__frame{
+  background:color-mix(in srgb,var(--surface) var(--st-glass),transparent);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);backdrop-filter:blur(20px) saturate(1.3);
+  border-color:color-mix(in srgb,var(--ink) 16%,transparent);
+  box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 12%,transparent),0 20px 48px -26px rgba(2,6,16,.6)}
+.st-through .plan--more{border-color:color-mix(in srgb,var(--accent) 85%,transparent)}
+.st-through .features{background:color-mix(in srgb,var(--ink) 14%,transparent);border-color:color-mix(in srgb,var(--ink) 16%,transparent)}
+.st-through .feature{box-shadow:none;border:0}
+.st-through .mock__bar{background:color-mix(in srgb,var(--tint) 55%,transparent)}
+.st-through .contact__card{background:color-mix(in srgb,var(--surface) 92%,transparent);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
 /* the headline's band, at the top of a page people come to read */
 .st-open{position:relative;margin-top:calc(-1 * var(--st-bar) - 1px);min-height:min(52vh,480px);
   display:flex;align-items:center;justify-content:center;text-align:center;padding:calc(var(--st-bar) + 40px) max(18px,4vw) 44px}
