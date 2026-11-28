@@ -20,7 +20,7 @@
    sizes the phone to the room that is left, and sets every position.
    Every class here starts "st-" so nothing collides with site.css.
    ========================================================================== */
-.story,.st-outro,.st-open,.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{
+.story,.st-outro,.st-open,.st-filmed[data-film="hero"] .hero,.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{
   --bg:#0a1222; --surface:#121b2d; --tint:#0e1626; --line:#2a3854; --ink:#f3efe6; --ink-2:#b9c4da; --ink-3:#8a99b5;
   --accent:#7aa8ff; --accent-hover:#9bbdff; --accent-soft:#16264a; --on-accent:#0a101d;
   --st-bg:#0a1222; --st-navy:#0e1b33; --st-cream:#f3efe6; --st-muted:#aab6cf; --st-accent:#1f66e5; --st-sky:#a9c6ff; --st-sms:#1f9d55;
@@ -76,23 +76,26 @@
 /* the cover's lower edge is not a line: it thins out over a quarter of a screen */
 .is-live .st-cover::after{content:"";display:block;height:26vh;
   background:linear-gradient(180deg,var(--st-bg) 0,rgba(10,18,34,.86) 27%,rgba(10,18,34,.45) 65%,rgba(10,18,34,0) 100%)}
-.is-live .st-hint,.st-open .st-hint{display:flex;position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font:600 11px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--st-muted);flex-direction:column;align-items:center;gap:10px;animation:st-settle 2s ease backwards;animation-delay:5.4s}
+.is-live .st-hint{display:flex;position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font:600 11px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--st-muted);flex-direction:column;align-items:center;gap:10px}
+.st-slow .st-hint{animation:st-settle 2s ease backwards;animation-delay:5.4s}
 .st-hint i{width:1px;height:34px;background:linear-gradient(180deg,var(--st-muted),rgba(170,182,207,0));animation:st-drip 1.8s ease-in-out infinite}
 @keyframes st-drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes st-settle{from{opacity:0}to{opacity:1}}
 
-/* The opening, slow, the way an old console woke up: a moment of dark, a soft light that
+/* ON THE HOME PAGE ONLY (.st-slow): the opening, slow, the way an old console woke up: a moment of dark, a soft light that
    swells behind where the words will be, and then the headline coming out of a blur, glowing,
    every letter in its own time and none of them in a hurry. Afterwards each letter lights up
    as the mouse crosses it, and fades slowly, so a glow trails the cursor. The rest of the
    opening (the line under it, the buttons) follows once the headline is there. */
-.is-live .st-panel::before,.st-open::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+.is-live .st-panel::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,rgba(70,125,235,.34),rgba(40,80,190,.12) 55%,rgba(10,18,34,0));
-  animation:st-dawn 5.2s ease-out backwards,st-breathe 9s ease-in-out 5.2s infinite}
+  opacity:.62;animation:st-breathe 9s ease-in-out infinite}
+.st-slow .st-panel::before{animation:st-dawn 5.2s ease-out backwards,st-breathe 9s ease-in-out 5.2s infinite}
 @keyframes st-dawn{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}55%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}100%{opacity:.62;transform:translate(-50%,-50%) scale(1)}}
 @keyframes st-breathe{0%,100%{opacity:.62;transform:translate(-50%,-50%) scale(1)}50%{opacity:.42;transform:translate(-50%,-50%) scale(1.06)}}
 .is-live .hero__title{cursor:default;max-width:900px;font-size:clamp(32px,5vw,56px);line-height:1.05;letter-spacing:-.02em}
-.is-live .st-sub{display:block;font:400 18px/1.5 var(--font-body);color:var(--st-muted);margin-top:14px;animation:st-settle 2s ease backwards;animation-delay:4.1s}
+.is-live .st-sub{display:block;font:400 18px/1.5 var(--font-body);color:var(--st-muted);margin-top:14px}
+.st-slow .st-sub{animation:st-settle 2s ease backwards;animation-delay:4.1s}
 .st-word{display:inline-block;white-space:nowrap}
 .st-ch{display:inline-block;animation:st-arrive 3.1s cubic-bezier(.3,.05,.2,1) backwards;animation-delay:calc(var(--d) + 900ms);
   transition:color 1.1s ease,text-shadow 1.1s ease,transform .6s cubic-bezier(.34,1.9,.5,1)}
@@ -280,17 +283,29 @@
 }
 
 /* ==========================================================================
-   THE SAME OPENING ON THE SMALL PAGES (opening.js): the page's own headline in
-   a dark block under the page's bar, arriving out of the glow letter by letter.
-   A whole screen on a page that sells; about half a screen ("band") on a page
-   people come to read, so its text starts on the first screen.
+   THE FILM BEHIND THE SMALL PAGES (film.js). The film fills the window behind
+   the page and moves as the page is scrolled. The page's headline stands over
+   it at the top; everything meant to be read lies on a solid panel in front.
+   No slow headline here: that is the home page's alone.
    ========================================================================== */
-.st-open{position:relative;isolation:isolate;overflow:hidden;background:var(--st-bg);margin-top:calc(-1 * var(--st-bar) - 1px);min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--st-bar) + 40px) max(18px,4vw) 72px}
-.st-open--band{min-height:min(56vh,520px);padding-bottom:44px}
-.st-open h1{font:600 clamp(32px,5vw,56px)/1.05 var(--font-display);letter-spacing:-.02em;max-width:900px;margin:0;color:var(--st-cream);cursor:default}
-.st-open--band::before{top:54%;height:min(420px,60vh)}
-/* Until opening.js has built the block (the page's head adds .st-wait and takes it away after
+.st-back{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#0a1222}
+.st-back canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;display:block;filter:brightness(.66) saturate(.92)}
+.st-back::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,34,.62) 0,rgba(10,18,34,.3) 34%,rgba(10,18,34,.42) 100%)}
+/* the headline's band, at the top of a page people come to read */
+.st-open{position:relative;margin-top:calc(-1 * var(--st-bar) - 1px);min-height:min(52vh,480px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:calc(var(--st-bar) + 40px) max(18px,4vw) 44px}
+.st-open h1{font:600 clamp(32px,5vw,56px)/1.05 var(--font-display);letter-spacing:-.02em;max-width:900px;margin:0;color:var(--st-cream);text-shadow:0 2px 28px rgba(4,8,18,.7)}
+/* the text, on a panel of the page's own colour */
+.st-filmed main.policy-page,.st-filmed main.error-page{background:var(--bg);width:min(840px,100%);padding-inline:clamp(18px,5vw,60px);border-radius:14px 14px 0 0;box-shadow:0 -18px 60px -30px rgba(0,0,0,.6)}
+.st-filmed .footer{background:var(--bg)}
+/* a page with a top section of its own (IT services): that section stands over the film, in the
+   story's dark colours, under the page's bar; the sections after it are solid already */
+.st-filmed[data-film="hero"] .hero{margin-top:calc(-1 * var(--st-bar) - 1px);padding-top:calc(var(--st-bar) + 72px);padding-bottom:88px;color:var(--st-cream);text-shadow:0 1px 18px rgba(4,8,18,.55)}
+.st-filmed[data-film="hero"] .hero .btn{text-shadow:none}
+.st-filmed[data-film="hero"] .hero .btn--primary{background:var(--st-accent);color:#fff}
+.st-filmed[data-film="hero"] .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
+.st-filmed .section:not(.section--tint):not(.section--ink){background:var(--bg)}
+/* Until film.js has set the page up (the page's head adds .st-wait and takes it away after
    three seconds whatever happens): dark and empty, so the page is never seen the other way first. */
 .st-wait body{background:#0a1222}
 .st-wait main,.st-wait footer{visibility:hidden}

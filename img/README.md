@@ -17,7 +17,9 @@ required. Each was cropped, made smaller, and blurred before it was saved here.
 ## The film behind the story (`img/story/`)
 
 The story at the top of the Home and Handymen pages (`story.css`, `story.js`)
-plays a short film behind the phone: 198 frames, `001.webp` to `198.webp`,
+plays a short film behind the phone, and the same film plays behind the small
+pages as they are scrolled (`film.js`: IT services, billing, the policies,
+"page not found"): 198 frames, `001.webp` to `198.webp`,
 800 by 450, cut at 12 frames a second from four stock clips of tradespeople
 and joined in the order the story tells. About 2.3 MB in all. The script
 draws the frame that matches how far the page has been scrolled.

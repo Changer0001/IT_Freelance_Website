@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css?v=20261123c" />
-  <link rel="stylesheet" href="story.css?v=20261128b" />
+  <link rel="stylesheet" href="story.css?v=20261128c" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -161,7 +161,7 @@
          It used to be a phone beside the headline that played the call by
          itself, and a "How it works" section of four drawings further
          down. The owner chose this instead (28 Nov). -->
-    <section class="story hero--work" id="top" aria-labelledby="hero-title" data-film="img/story/">
+    <section class="story hero--work" id="top" aria-labelledby="hero-title" data-film="img/story/" data-open="slow">
       <div class="st-cover">
         <div class="st-panel">
           <div class="wrap st-intro">
@@ -170,7 +170,9 @@
           <!-- THE OPENING IS THE HEADLINE AND THIS ONE LINE, nothing else: a
                dark screen, a light that swells, and the words coming out of
                it slowly, the way an old console woke up (the owner's choice,
-               28 Nov). So while the story is live, story.js moves the line
+               28 Nov). ONLY THE HOME PAGE OPENS SLOWLY (data-open="slow"
+               on the section): on a trade's page the headline is simply
+               there. So while the story is live, story.js moves the line
                over the headline and everything in .st-more to the foot of
                the story (.st-outro), where a visitor who has just watched
                the call is ready for it. With no script or with less motion
@@ -619,6 +621,6 @@
 
   <script src="types.js?v=20261123c"></script>
   <script src="script.js?v=20261123c"></script>
-  <script src="story.js?v=20261128b"></script>
+  <script src="story.js?v=20261128c"></script>
 </body>
 </html>

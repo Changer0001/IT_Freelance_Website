@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-open="band">
+<html lang="en" data-film="band">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,13 +11,12 @@
   <meta name="theme-color" content="#f4f7fc" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0a101d" media="(prefers-color-scheme: dark)" />
   <link rel="stylesheet" href="site.css?v=20261118i" />
-  <link rel="stylesheet" href="story.css?v=20261128b" />
-  <!-- The same opening as the product pages, without the phone story: the
-       headline in a dark block, arriving slowly (opening.js, story.css).
-       Kept dark and empty until opening.js has built it, so the page is
-       never seen the other way first; shown as written if it has not
-       started within three seconds. Not for visitors who asked for less
-       motion. -->
+  <link rel="stylesheet" href="story.css?v=20261128c" />
+  <!-- The film from the product pages plays behind this page as it is
+       scrolled (film.js, story.css). The page is kept dark and empty until
+       film.js has set it up, so it is never seen the other way first, and
+       is shown as written if that has not happened within three seconds.
+       Not for visitors who asked for less motion. -->
   <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var h=document.documentElement;h.classList.add('st-wait');setTimeout(function(){h.classList.remove('st-wait')},3000)}}catch(e){}</script>
 </head>
 <body>
@@ -131,6 +130,6 @@
   </footer>
 
   <script src="script.js?v=20261118i"></script>
-  <script src="opening.js?v=20261128b"></script>
+  <script src="film.js?v=20261128c"></script>
 </body>
 </html>

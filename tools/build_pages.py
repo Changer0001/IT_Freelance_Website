@@ -265,6 +265,9 @@ def common(p, t, key):
     # the home page, and each type's own picture on its page (img/hero-<type>.jpg, named in
     # site.css). A new type needs its picture and its line there, or it shows no photo at all.
     p.swap('<section class="story hero--work" id="top"', f'<section class="story hero--{key}" id="top"')
+    # Only the home page opens slowly, the headline coming out of the dark letter by letter.
+    # On a trade's page the headline is simply there.
+    p.swap(' data-open="slow"', '')
     # The film is of tradespeople. A trade it does not suit shows its own picture, held still.
     if key not in FILMED:
         p.swap(' data-film="img/story/"', '')

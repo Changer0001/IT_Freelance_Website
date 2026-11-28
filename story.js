@@ -20,6 +20,8 @@
   // Less motion asked for: leave the page as the plain section it already is.
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   story.classList.add('is-live');document.documentElement.classList.add('st-go','st-ready');
+  // the home page opens slowly; a trade's page has its headline there at once
+  var SLOW=story.dataset.open==='slow';if(SLOW)story.classList.add('st-slow');
 
   // Each of the five steps plays a run of frames. `x`,`y` say where the
   // subject sits in the frame (0 to 1); `side` is which side of the phone to
@@ -290,7 +292,7 @@
   // (the times are scattered, not left to right) and light up by itself. Words stay whole, so a
   // line never breaks inside one; a reader of the page still gets the sentence.
   (function(){
-    var h=$('hero-title');if(!h)return;
+    var h=$('hero-title');if(!h||!SLOW)return;
     var text=h.textContent.trim(),n=0;
     h.setAttribute('aria-label',text);h.textContent='';
     text.split(' ').forEach(function(w,k,all){
