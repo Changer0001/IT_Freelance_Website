@@ -198,7 +198,15 @@ def story_phone(t):
     """The phone's five screens: the call comes in, the assistant answers, what it took down,
     the text the owner gets, and the owner's list. All from the page's own made-up call."""
     biz, clock, call = esc(t['biz']), t['time'], [esc(x) for x in t['call']]
-    bar = lambda small, length: f'<div class="st-bar">{MARK}<div><b>{biz}</b><small>{small}</small></div><em>{length}</em></div>'
+    # Step two is a PHONE CALL, and has to look like one, not like a chat: a call's own screen (who
+    # is on it, a running clock, sound moving, the call's buttons), with what is being said shown as
+    # speech, one line at a time, under who is saying it. It is headed "Meanwhile, on the call"
+    # because the owner does not watch this: no transcript is kept or shown (the privacy policy).
+    them = t['them'].lower()
+    say = lambda who, line, when: f'<p class="st-say"{when}><small>{who}</small>{line}</p>'
+    sound = '<div class="st-sound" aria-hidden="true">' + '<i></i>' * 13 + '</div>'
+    bar = lambda small, a, b: (f'<div class="st-bar">{MARK}<div><b>{biz}</b><small>{small}</small></div>'
+                               f'<em><i class="st-live"><i></i><i></i><i></i></i><span data-clock="{a},{b}">0:{a:02d}</span></em></div>')
     if t['kind'] == 'restaurant':
         took = [('The request', esc(t['request']), esc(t['when'])), ('Name', esc(t['person']), ''), ('Number', CALLER, '')]
         title, rows = 'Requests', [(esc(n), esc(d), 'Confirm' if i == 0 else 'Confirmed') for i, (n, d) in enumerate(t['requests'])]
@@ -223,15 +231,24 @@ def story_phone(t):
           <div class="st-btns"><div><i class="st-no"><svg viewBox="0 0 24 24"><path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3.5-2v-2.2a9 9 0 0 0-6 0v2.2l-3.5 2z"/></svg></i><span>Decline</span></div><div><i class="st-yes"><svg viewBox="0 0 24 24">{HANDSET}</svg></i><span>Accept</span></div></div>
         </div>
         <div class="st-view st-v1" data-time="{clock}">
-          {bar('Answered by YAP Voice', '0:12')}
-          <div class="st-talk">
-            <div class="st-b st-yap">{call[0]}</div>
-            <div class="st-b st-them" data-at=".3">{call[1]}</div>
-            <div class="st-b st-yap" data-at=".58">{call[2]}</div>
+          <p class="st-meanwhile">Meanwhile, on the call</p>
+          <div class="st-onwith">{MARK}<b>{biz}</b><small>Answered by YAP Voice</small></div>
+          <p class="st-clock"><i></i><span data-clock="3,21">0:03</span></p>
+          {sound}
+          <div class="st-said">
+            {say('The assistant says', call[0], ' data-until=".24"')}
+            {say(f'The {them} says', call[1], ' data-at=".32" data-until=".56"')}
+            {say('The assistant says', call[2], ' data-at=".64"')}
+          </div>
+          <div class="st-keys" aria-hidden="true">
+            <i><svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V21h2v-2.100A7 7 0 0 0 19 12z"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="1.800"/><circle cx="12" cy="6" r="1.800"/><circle cx="18" cy="6" r="1.800"/><circle cx="6" cy="12" r="1.800"/><circle cx="12" cy="12" r="1.800"/><circle cx="18" cy="12" r="1.800"/><circle cx="6" cy="18" r="1.800"/><circle cx="12" cy="18" r="1.800"/><circle cx="18" cy="18" r="1.800"/></svg></i>
+            <i><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zm11.500 3a4 4 0 0 0-2-3.500v7a4 4 0 0 0 2-3.500zM13.500 3.300v2.100a7 7 0 0 1 0 13.200v2.100a9 9 0 0 0 0-17.400z"/></svg></i>
+            <i class="st-end"><svg viewBox="0 0 24 24"><path d="M3 15c5-5 13-5 18 0l-2.500 2.500-3.500-2v-2.200a9 9 0 0 0-6 0v2.200l-3.500 2z"/></svg></i>
           </div>
         </div>
         <div class="st-view st-v2" data-time="{later(clock, 1)}">
-          {bar('Taken down so far', '0:41')}
+          {bar('Still on the call', 26, 47)}
           <div class="st-got">
 {cards}          </div>
         </div>

@@ -53,6 +53,7 @@
   var LINES=[{k:.021,w:5.2,a:1,p:0,t:2.3,g:16,c:'rgba(236,244,255,.95)'},{k:.030,w:6.6,a:.7,p:1.9,t:1.5,g:11,c:'rgba(150,196,255,.8)'},{k:.015,w:3.8,a:.55,p:3.7,t:1.3,g:9,c:'rgba(92,152,255,.72)'},{k:.043,w:8.3,a:.33,p:.8,t:1,g:6,c:'rgba(255,255,255,.55)'}];
   // the parts of each screen that arrive, or leave, part-way through its step
   var parts=views.map(function(v){return [].slice.call(v.querySelectorAll('[data-at],[data-until]')).map(function(el){return {el:el,at:el.dataset.at?+el.dataset.at:-1,until:el.dataset.until?+el.dataset.until:2}})});
+  var clocks=views.map(function(v){return [].slice.call(v.querySelectorAll('[data-clock]')).map(function(el){var n=el.dataset.clock.split(',');return {el:el,a:+n[0],b:+n[1]}})});
   // the phone's pose from the scroll; where the mouse is; and four springs that follow it
   var pose={rx:0,ry:0,rz:0},ptr={x:0,y:0,on:false,over:false},sp={tx:0,ty:0,sc:1,gl:0},sp2=0,vel={tx:0,ty:0,sc:0,gl:0},alive=0;
   // H is the scene's height; lead is how far the page has scrolled when the phone gets home
@@ -177,6 +178,8 @@
     line.style.width=(whole*100)+'%';
   }
   function fill(k,f){
+    // a call's clock runs as its step is scrolled: data-clock="3,21" is the seconds at its start and end
+    clocks[k].forEach(function(c){var s=Math.round(c.a+(c.b-c.a)*Math.max(0,Math.min(1,f)));c.el.textContent=Math.floor(s/60)+':'+('0'+s%60).slice(-2)});
     parts[k].forEach(function(q){
       var o=(q.at<0?1:ease((f-q.at)/.13))*(1-ease((f-q.until)/.1));
       q.el.style.opacity=o.toFixed(3);q.el.style.translate='0 '+((1-o)*(q.until<2&&f>q.until?-.9:.9)).toFixed(3)+'em';

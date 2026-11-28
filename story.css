@@ -202,16 +202,45 @@
 .st-v0 .st-btns span{font-size:1.05em;opacity:.85}
 
 
-.st-v1,.st-v2{background:#0c1528}
+.st-v2{background:#0c1528}
+/* STEP TWO IS A CALL, so it is a call's screen and not a chat: who is on the line, a clock that
+   runs, sound moving, the call's own buttons, and what is being said shown as speech, one line
+   at a time under who is saying it. */
+.st-v1{background:radial-gradient(120% 55% at 50% 0%,#1d3a78 0%,rgba(29,58,120,0) 64%),linear-gradient(180deg,#101b33 0%,#0a1224 100%);align-items:center;text-align:center}
+.st-meanwhile{font-size:1em;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--st-sky);margin-top:.5em}
+.st-onwith{display:flex;flex-direction:column;align-items:center;margin-top:1.1em}
+.st-onwith svg{width:4em;height:4em;max-width:none}
+.st-onwith b{font-size:1.85em;font-weight:600;line-height:1.15;margin-top:.5em;letter-spacing:-.01em}
+.st-onwith small{font-size:1.15em;opacity:.7;margin-top:.15em}
+.st-clock{display:flex;align-items:center;gap:.45em;margin-top:.7em;font-size:1.35em;font-weight:600;color:#6ee7a0;font-variant-numeric:tabular-nums}
+.st-clock i{width:.55em;height:.55em;border-radius:50%;background:currentColor;animation:st-dot 1.2s ease-in-out infinite}
+@keyframes st-dot{0%,100%{opacity:.3}40%{opacity:1}}
+/* the sound of the call: thirteen bars, each rising and falling in its own time */
+.st-sound{display:flex;align-items:center;justify-content:center;gap:.36em;height:4.6em;margin-top:.9em}
+.st-sound i{width:.36em;height:100%;border-radius:.2em;background:linear-gradient(180deg,#cfe0ff,#5c98ff);transform:scaleY(.2);animation:st-sound 1.1s ease-in-out infinite}
+.st-sound i:nth-child(3n){animation-duration:.8s;animation-delay:-.3s}.st-sound i:nth-child(3n+1){animation-duration:1.35s;animation-delay:-.7s}
+.st-sound i:nth-child(4n){animation-delay:-.5s}.st-sound i:nth-child(5n){animation-duration:.95s;animation-delay:-.15s}
+.st-sound i:nth-child(1),.st-sound i:nth-child(13){height:45%}.st-sound i:nth-child(2),.st-sound i:nth-child(12){height:65%}.st-sound i:nth-child(3),.st-sound i:nth-child(11){height:82%}
+@keyframes st-sound{0%,100%{transform:scaleY(.18)}50%{transform:scaleY(1)}}
+/* what is being said: one line at a time, in the same place */
+.st-said{position:relative;align-self:stretch;height:12.4em;margin:1em 1.5em 0}
+.st-say{position:absolute;left:0;right:0;top:0;font-size:1.52em;line-height:1.34;font-weight:500}
+.st-say small{display:block;font-size:.66em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--st-sky);margin-bottom:.55em}
+/* the call's buttons: mute, keypad, speaker, and the red one */
+.st-keys{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:1.5em}
+.st-keys i{width:4.3em;height:4.3em;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center}
+.st-keys svg{width:1.95em;height:1.95em;fill:#fff;max-width:none}
+.st-keys .st-end{background:#e5484d}
+.st-v1 .st-home{margin-top:1.5em}
+/* in the next step's heading: three small bars that keep moving, because the call is still on */
+.st-live{display:inline-flex;align-items:center;gap:.16em;height:1em;margin-right:.45em;vertical-align:-.1em}
+.st-live i{width:.18em;height:100%;border-radius:.1em;background:currentColor;animation:st-sound 1s ease-in-out infinite}
+.st-live i:nth-child(2){animation-delay:-.4s}.st-live i:nth-child(3){animation-delay:-.7s}
 .st-bar{display:flex;align-items:center;gap:.8em;margin:0 1.3em;padding:.3em 0 1em;border-bottom:.08em solid rgba(255,255,255,.12)}
 .st-bar svg{width:3em;height:3em;flex:none}
 .st-bar b{display:block;font-size:1.36em;font-weight:600;line-height:1.15}
 .st-bar small{font-size:1.06em;opacity:.65}
-.st-bar em{margin-left:auto;font-style:normal;font-size:1.1em;font-weight:600;color:#6ee7a0;font-variant-numeric:tabular-nums}
-.st-talk{display:flex;flex-direction:column;gap:.9em;padding:1.3em 1.3em 0}
-.st-b{max-width:90%;font-size:1.5em;line-height:1.34;padding:.62em .85em;border-radius:1.15em}
-.st-yap{background:#1f66e5;align-self:flex-start;border-bottom-left-radius:.35em}
-.st-them{background:#26334f;align-self:flex-end;border-bottom-right-radius:.35em}
+.st-bar em{margin-left:auto;font-style:normal;font-size:1.1em;font-weight:600;color:#6ee7a0;font-variant-numeric:tabular-nums;white-space:nowrap}
 .st-got{display:grid;gap:.9em;padding:1.3em 1.3em 0}
 .st-got div{background:#16233f;border:.08em solid rgba(255,255,255,.12);border-radius:1.3em;padding:1.1em 1.2em}
 .st-got small{display:block;font-size:1em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--st-sky);margin-bottom:.6em}
@@ -250,11 +279,11 @@
 .st-waves i{position:absolute;inset:0;border-radius:4.6em;border:.17em solid rgba(200,222,255,.95);box-shadow:0 0 1.6em rgba(90,150,255,.45),inset 0 0 1.2em rgba(90,150,255,.25);opacity:0;animation:wave 2.1s cubic-bezier(.16,.6,.3,1) forwards}
 @keyframes wave{0%{inset:0;border-radius:4.6em;opacity:0}10%{opacity:1}55%{opacity:.5}100%{inset:-11em;border-radius:15.6em;opacity:0}}
 /* each thing on the screen swells and catches the light as the mouse crosses it */
-.st-b,.st-got div,.st-row,.st-note,.st-pass,.st-v0 .st-btns i{position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.34,1.9,.5,1)}
-.st-b::after,.st-got div::after,.st-row::after,.st-note::after,.st-pass::after,.st-v0 .st-btns i::after,.st-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 32%,rgba(255,255,255,.5) 49%,rgba(255,255,255,0) 64%);transform:translateX(-130%)}
-.st-b:hover,.st-got div:hover,.st-row:hover,.st-note:hover,.st-pass:hover{transform:scale(1.045)}
+.st-got div,.st-row,.st-note,.st-pass,.st-v0 .st-btns i{position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.34,1.9,.5,1)}
+.st-got div::after,.st-row::after,.st-note::after,.st-pass::after,.st-v0 .st-btns i::after,.st-cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,rgba(255,255,255,0) 32%,rgba(255,255,255,.5) 49%,rgba(255,255,255,0) 64%);transform:translateX(-130%)}
+.st-got div:hover,.st-row:hover,.st-note:hover,.st-pass:hover{transform:scale(1.045)}
 .st-v0 .st-btns i:hover{transform:scale(1.14)}
-.st-b:hover::after,.st-got div:hover::after,.st-row:hover::after,.st-note:hover::after,.st-pass:hover::after,.st-v0 .st-btns i:hover::after,.st-cta:hover::after{transform:translateX(130%);transition:transform .75s ease}
+.st-got div:hover::after,.st-row:hover::after,.st-note:hover::after,.st-pass:hover::after,.st-v0 .st-btns i:hover::after,.st-cta:hover::after{transform:translateX(130%);transition:transform .75s ease}
 
 /* ------------------------------------------------- the words above the phone */
 .is-live .st-copy{position:absolute;left:0;right:0;top:8%;width:auto;height:24%;margin:0;padding:0 max(18px,4vw);z-index:2;display:block}
