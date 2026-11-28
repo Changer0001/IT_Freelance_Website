@@ -20,17 +20,20 @@
    sizes the phone to the room that is left, and sets every position.
    Every class here starts "st-" so nothing collides with site.css.
    ========================================================================== */
-.story{
+.story,.st-outro,.site-header.st-over,.st-go:not(.st-ready) .site-header{
   --bg:#0a1222; --surface:#121b2d; --tint:#0e1626; --line:#2a3854; --ink:#f3efe6; --ink-2:#b9c4da; --ink-3:#8a99b5;
   --accent:#7aa8ff; --accent-hover:#9bbdff; --accent-soft:#16264a; --on-accent:#0a101d;
   --st-bg:#0a1222; --st-navy:#0e1b33; --st-cream:#f3efe6; --st-muted:#aab6cf; --st-accent:#1f66e5; --st-sky:#a9c6ff; --st-sms:#1f9d55;
   --st-ui:-apple-system,'SF Pro Text',system-ui,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
   --st-bar:var(--bar-h,52px);
-  position:relative; color-scheme:dark; background:var(--st-bg); color:var(--st-cream);
+  color-scheme:dark; color:var(--st-cream);
+}
+.story{
+  position:relative; background:var(--st-bg);
   /* the page's bar lies over the top of the story, as it lies over every section */
   margin-top:calc(-1 * var(--st-bar));
 }
-.story .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
+.story .hero__facts li::before,.st-outro .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
 
 /* ------------------------------------------------- the opening (the cover) */
 .st-cover{position:relative;z-index:4}
@@ -40,9 +43,10 @@
 .st-intro .hero__lede,.st-intro .hero__demo{margin-inline:auto}
 .st-intro .hero__actions,.st-intro .hero__facts{justify-content:center}
 /* the opening's main button is the same blue as the phone's own call button */
-.story .btn--primary{background:var(--st-accent);color:#fff}
-.story .btn--primary:hover{background:#3b7cf0}
-.st-hint{display:none}
+.story .btn--primary,.st-outro .btn--primary{background:var(--st-accent);color:#fff}
+.story .btn--primary:hover,.st-outro .btn--primary:hover{background:#3b7cf0}
+.st-hint,.st-sub,.st-outro{display:none}
+.st-more{display:contents}
 
 /* ------------------------------------------------- the five steps, as a list */
 .st-stage{position:relative;padding:8px 0 72px}
@@ -67,7 +71,7 @@
    half screens. story.js sets the section's real height; this is the height until it has. */
 .story.is-live{height:455vh}
 .is-live .st-cover{position:absolute;left:0;right:0;top:0;pointer-events:none}
-.is-live .st-panel{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-bottom:96px}
+.is-live .st-panel{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--st-bar) + 40px) 0 72px}
 .is-live .st-panel > *{pointer-events:auto}
 /* the cover's lower edge is not a line: it thins out over a quarter of a screen */
 .is-live .st-cover::after{content:"";display:block;height:26vh;
@@ -82,12 +86,13 @@
    every letter in its own time and none of them in a hurry. Afterwards each letter lights up
    as the mouse crosses it, and fades slowly, so a glow trails the cursor. The rest of the
    opening (the line under it, the buttons) follows once the headline is there. */
-.is-live .st-panel::before{content:"";position:absolute;left:50%;top:44%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+.is-live .st-panel::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,rgba(70,125,235,.34),rgba(40,80,190,.12) 55%,rgba(10,18,34,0));
   animation:st-dawn 5.2s ease-out backwards,st-breathe 9s ease-in-out 5.2s infinite}
 @keyframes st-dawn{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}55%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}100%{opacity:.62;transform:translate(-50%,-50%) scale(1)}}
 @keyframes st-breathe{0%,100%{opacity:.62;transform:translate(-50%,-50%) scale(1)}50%{opacity:.42;transform:translate(-50%,-50%) scale(1.06)}}
-.is-live .hero__title{cursor:default}
+.is-live .hero__title{cursor:default;max-width:900px;font-size:clamp(32px,5vw,56px);line-height:1.05;letter-spacing:-.02em}
+.is-live .st-sub{display:block;font:400 18px/1.5 var(--font-body);color:var(--st-muted);margin-top:14px;animation:st-settle 2s ease backwards;animation-delay:4.1s}
 .st-word{display:inline-block;white-space:nowrap}
 .st-ch{display:inline-block;animation:st-arrive 3.1s cubic-bezier(.3,.05,.2,1) backwards;animation-delay:calc(var(--d) + 900ms);
   transition:color 1.1s ease,text-shadow 1.1s ease,transform .6s cubic-bezier(.34,1.9,.5,1)}
@@ -95,8 +100,19 @@
 .st-ch:hover{color:#fff;text-shadow:0 0 .12em #fff,0 0 .38em rgba(190,215,255,.95),0 0 .9em rgba(90,150,255,.85);transform:translateY(-.05em) scale(1.09);transition-duration:.07s,.07s,.22s}
 /* the letters either side catch some of the light */
 .st-ch:hover + .st-ch,.st-ch:has(+ .st-ch:hover){color:#fff;text-shadow:0 0 .3em rgba(190,215,255,.6),0 0 .7em rgba(90,150,255,.45);transition-duration:.12s,.12s,.3s}
-.is-live .st-intro > :not(.hero__title){animation:st-settle 1.8s ease backwards;animation-delay:3.6s}
-.is-live .st-intro > .eyebrow{animation-delay:.5s}
+/* While the story is under it, the page's bar is dark too (story.js adds .st-over), so the
+   opening is one dark screen in the light theme as well. Its colours are set with the story's,
+   at the top of this file. */
+.site-header.st-over,.st-go:not(.st-ready) .site-header{color:var(--ink)}
+/* Until story.js has taken over (see the note in the page's head): dark and empty, one screen tall. */
+.st-go .story:not(.is-live){min-height:100vh}
+.st-go .story:not(.is-live) > *{visibility:hidden}
+/* The foot of the story: the opening's own words and buttons, moved here by story.js. The
+   second button ("See how a call goes") would only send the visitor back up, so it is left out. */
+.st-outro.is-on{display:block;background:var(--st-bg);padding:64px 0 84px}
+.st-outro .eyebrow{margin-bottom:6px}
+.st-outro .hero__lede{margin-top:0;font-size:1.25rem}
+.st-outro .btn--ghost{display:none}
 
 /* ------------------------------------------------- the scene */
 .is-live .st-stage{position:sticky;top:0;height:100vh;padding:0;overflow:hidden;background:var(--st-bg)}
