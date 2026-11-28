@@ -14,6 +14,14 @@ different kind of call.
     for-auto-repair.html  for-it-support.html
     types.js   (what the menu's small card says about each type)
 
+THE STORY AT THE TOP OF EVERY PAGE (story.css, story.js) shows one call on a
+phone, step by step. Its words and its five phone screens are written by this
+script from the same made-up call each page uses everywhere else, into the
+marked blocks of index.html too (the home page shows the handyman's call), so
+the phone can never say something the rest of the page does not. Only the home
+page and the Handymen page play the film (img/story/, tradespeople); the other
+trades show their own picture until each has a film of its own (FILMED below).
+
 RUN IT AFTER ANY CHANGE TO index.html, and commit what it writes. Every
 replacement is checked: if index.html no longer holds the words this expects,
 the script stops and names them, so a page is never quietly left half-changed.
@@ -26,11 +34,12 @@ import re
 import sys
 from pathlib import Path
 
-import scenes
-
 ROOT = Path(__file__).resolve().parent.parent
 SITE = 'https://yap-itsupport.com/'
 OPENING = "Thanks for calling {biz}. I'm the AI assistant here, and I'll take down what you need."
+CALLER = '(619) 555-0142'       # the made-up caller on every page: 555-01xx, the block kept for examples
+DEMO_LINE = ('+18314327547', '831-432-7547')   # the one real number on the site
+FILMED = {'handyman'}           # the trades whose page plays the film; index.html plays it too
 
 
 def service(file, name, eyebrow, title, describe, biz, where, short, need, ask, answer, field, value, job, person, rows, services, notes):
@@ -73,6 +82,9 @@ TYPES = {
               "That's requested: a table for four, Friday at 7 PM, under Maria Lopez. Cedar Grill will confirm it with you."],
         sms=['YAP Voice: New reservation request for Cedar Grill: Maria Lopez, party of 4, 2026-11-20 at 19:00. Phone: +16195550142.'],
         mail='New reservation request — Cedar Grill',
+        # the story's phone: what was taken down, and the list the owner confirms from
+        person='Maria Lopez', request='Table for 4', when='Friday at 7 PM',
+        requests=[('Maria Lopez', 'Table for 4 · Fri 7:00 PM'), ('Daniel Reyes', 'Table for 2 · Sat 6:30 PM'), ('Aisha Rahman', 'Table for 6 · Sat 8:00 PM')],
     ),
     'handyman': service(
         'for-handymen.html', 'Handyman', 'For handymen', 'AI phone receptionist for handymen | YAP Voice',
@@ -143,6 +155,101 @@ def esc(text):
     return text.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 
+# ---------------------------------------------------------------- the story
+MARK = ('<svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#mark)"/><g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/>'
+        '<rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/>'
+        '<rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g></svg>')
+HANDSET = '<path d="M6.6 3h3l1.4 4.4-2 1.4a12 12 0 0 0 6.2 6.2l1.4-2L21 14.4v3A3.6 3.6 0 0 1 17.4 21 14.4 14.4 0 0 1 3 6.6 3.6 3.6 0 0 1 6.6 3z"/>'
+WORDS = ('<!-- STORY WORDS: written by tools/build_pages.py, do not edit here -->', '<!-- /STORY WORDS -->')
+PHONE = ('<!-- STORY PHONE: written by tools/build_pages.py, do not edit here -->', '<!-- /STORY PHONE -->')
+
+
+def later(clock, minutes):
+    """'4:12' and 2 -> '4:14'. The story's five screens are a few minutes of one afternoon."""
+    h, m = map(int, clock.split(':'))
+    m += minutes
+    return f'{(h + m // 60 - 1) % 12 + 1}:{m % 60:02d}'
+
+
+def story_words(t, home=False):
+    """The five steps said over the phone. Only what the product does: it says it is an AI
+    assistant, it takes requests and never confirms a booking, and nothing is recorded."""
+    hear = f'Hear it answer for yourself: <a href="tel:{DEMO_LINE[0]}"><b>{DEMO_LINE[1]}</b></a>'
+    if t['kind'] == 'restaurant':
+        steps = [('A guest calls during service. Nobody can get to the phone.', 'So the call passes to YAP Voice.'),
+                 ("It answers in your restaurant's name.", "It tells the guest it's an AI assistant, then answers their questions."),
+                 ('It takes the booking request.', 'How many, which day and time, and what name. It says "requested", never "booked".'),
+                 ('The request lands on your phone.', 'A text and an email, moments after the call. Nothing is recorded.'),
+                 ('You confirm or decline, in one tap.', hear)]
+    else:
+        busy = 'Your hands are full' if home else "You're " + esc(t['short'])
+        steps = [("A customer calls. You can't pick up.", busy + ', so the call passes to YAP Voice.'),
+                 ("It answers in your business's name.", "It tells the caller it's an AI assistant, then answers their questions."),
+                 ('It takes down what matters.', "The job, the name and the number, asked the way you'd ask."),
+                 ('The details land on your phone.', 'A text and an email, moments after the call. Nothing is recorded.'),
+                 ('You call back while the job is still open.', hear)]
+    names = ['one', 'two', 'three', 'four', 'five']
+    return ''.join(f'          <li><div class="st-in"><p class="st-label">Step {n}</p><h2>{head}</h2><p class="st-lede">{lede}</p></div></li>\n'
+                   for n, (head, lede) in zip(names, steps))
+
+
+def story_phone(t):
+    """The phone's five screens: the call comes in, the assistant answers, what it took down,
+    the text the owner gets, and the owner's list. All from the page's own made-up call."""
+    biz, clock, call = esc(t['biz']), t['time'], [esc(x) for x in t['call']]
+    bar = lambda small, length: f'<div class="st-bar">{MARK}<div><b>{biz}</b><small>{small}</small></div><em>{length}</em></div>'
+    if t['kind'] == 'restaurant':
+        took = [('The request', esc(t['request']), esc(t['when'])), ('Name', esc(t['person']), ''), ('Number', CALLER, '')]
+        title, rows = 'Requests', [(esc(n), esc(d), 'Confirm' if i == 0 else 'Confirmed') for i, (n, d) in enumerate(t['requests'])]
+    else:
+        took = [('The job', esc(t['job']), f'{esc(t["field"])}: {esc(t["value"])}'), ('Name', esc(t['person']), ''), ('Number', CALLER, '')]
+        title, rows = 'Callbacks', ([(esc(t['person']), f'{esc(t["job"])} · {clock} PM', 'Call back')]
+                                    + [(esc(r[1]), f'{esc(r[3])} · {r[2]}', 'Called') for r in t['rows']])
+    cards = ''.join(f'            <div{at}><small>{label}</small><b>{value}</b>{"<span>" + more + "</span>" if more else ""}</div>\n'
+                    for at, (label, value, more) in zip(['', ' data-at=".28"', ' data-at=".54"'], took))
+    lines = ''.join(f'          <div class="st-row {"st-first" if i == 0 else "st-done"}"><b>{name}</b><span>{what}</span><a>{go}</a></div>\n'
+                    for i, (name, what, go) in enumerate(rows))
+    sms = [esc(x) for x in t['sms']]
+    text = f'<b>{sms[0]}</b><br>' + '<br>'.join(sms[1:]) if len(sms) > 1 else sms[0]
+    return f'''        <div class="st-view st-v0" data-time="{clock}">
+          <div class="st-kind">Incoming call</div>
+          <div class="st-face"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21c0-4.6 3.8-7.3 8.5-7.3s8.500 2.700 8.500 7.300z"/></svg></div>
+          <div class="st-who">{CALLER}</div><div class="st-where">San Diego, CA</div>
+          <div class="st-mid">
+            <div class="st-ringing" data-until=".42">Ringing<i></i><i></i><i></i></div>
+            <div class="st-pass" data-at=".46">{MARK}<div><b>No answer</b><small>YAP Voice is picking up</small></div></div>
+          </div>
+          <div class="st-btns"><div><i class="st-no"><svg viewBox="0 0 24 24"><path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3.5-2v-2.2a9 9 0 0 0-6 0v2.2l-3.5 2z"/></svg></i><span>Decline</span></div><div><i class="st-yes"><svg viewBox="0 0 24 24">{HANDSET}</svg></i><span>Accept</span></div></div>
+        </div>
+        <div class="st-view st-v1" data-time="{clock}">
+          {bar('Answered by YAP Voice', '0:12')}
+          <div class="st-talk">
+            <div class="st-b st-yap">{call[0]}</div>
+            <div class="st-b st-them" data-at=".3">{call[1]}</div>
+            <div class="st-b st-yap" data-at=".58">{call[2]}</div>
+          </div>
+        </div>
+        <div class="st-view st-v2" data-time="{later(clock, 1)}">
+          {bar('Taken down so far', '0:41')}
+          <div class="st-got">
+{cards}          </div>
+        </div>
+        <div class="st-view st-v3" data-time="{later(clock, 2)}">
+          <div class="st-date">Thursday, November 19</div><div class="st-time">{later(clock, 2)}</div>
+          <div class="st-note" data-at=".2"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></i>Messages<span>now</span></div>
+          <p>{text}</p></div>
+        </div>
+        <div class="st-view st-v4" data-time="{later(clock, 3)}">
+          <h4>{title}</h4><div class="st-sub">{biz} · today</div>
+{lines}        </div>
+'''
+
+
+def put_story(p, t, home=False):
+    p.between(WORDS[0], WORDS[1], WORDS[0] + '\n' + story_words(t, home) + '          ')
+    p.between(PHONE[0], PHONE[1], PHONE[0] + '\n' + story_phone(t) + '        ')
+
+
 def common(p, t, key):
     """What every type's page changes: its name in the head, the menu's mark, the line over the headline, the call."""
     url = SITE + t['file']
@@ -157,21 +264,16 @@ def common(p, t, key):
     # The photo behind the top section is of the business the page is about: a tradesperson on
     # the home page, and each type's own picture on its page (img/hero-<type>.jpg, named in
     # site.css). A new type needs its picture and its line there, or it shows no photo at all.
-    p.swap('<section class="hero hero--photo hero--work" id="top"', f'<section class="hero hero--photo hero--{key}" id="top"')
-    # The last scene of "How it works" shows the owner getting the text: dressed for this trade.
-    p.s = scenes.put(p.s, 4, key)
+    p.swap('<section class="story hero--work" id="top"', f'<section class="story hero--{key}" id="top"')
+    # The film is of tradespeople. A trade it does not suit shows its own picture, held still.
+    if key not in FILMED:
+        p.swap(' data-film="img/story/"', '')
+        p.swap('Stock footage. The business and the caller are made up.', 'Example. The business and the caller are made up.')
     # The closing section shows the same picture the page opened on.
     p.swap('<section class="section section--ink section--photo band--work" id="contact"', f'<section class="section section--ink section--photo band--{key}" id="contact"')
     p.swap('<p class="eyebrow">AI phone receptionist · San Diego</p>', f'<p class="eyebrow">AI phone receptionist · {esc(t["eyebrow"])}</p>')
-    # the call, line by line
-    lines = re.findall(r'(<p class="handset__say [^>]*>.*?<span>)(.*?)(</span></p>)', p.s, flags=re.S)
-    if len(lines) != 9:
-        sys.exit(f'{p.name}: expected nine lines in the call, found {len(lines)}')
-    for (head, old, tail), new in zip(lines, t['call']):
-        p.swap(head + old + tail, head + esc(new) + tail)
-    p.sub(r'<span class="handset__body">\s*YAP Voice: New enquiry.*?</span>',
-          '<span class="handset__body">\n                      ' + '<br />\n                      '.join(esc(x) for x in t['sms']) + '\n                    </span>')
-    p.swap('<span class="handset__body"><b>New enquiry — Harbor View Handyman</b></span>', f'<span class="handset__body"><b>{esc(t["mail"])}</b></span>')
+    # the story at the top: this trade's words, and its call on the phone
+    put_story(p, t)
 
 
 def service_page(p, t):
@@ -181,7 +283,6 @@ def service_page(p, t):
             YAP Voice answers your business line when you can't — {esc(t["where"])}. It answers the caller's questions, takes their
             name, number and what they need, and <strong>texts it straight to you</strong>.
           </p>''')
-    p.swap("<li data-now=\"1\">A customer calls. You're on a job and can't pick up.</li>", f"<li data-now=\"1\">A customer calls. You're {esc(t['short'])} and can't pick up.</li>")
     p.swap('"what size is the TV?"', '"' + esc(t['ask'][0].lower() + t['ask'][1:]) + '"')
     initials = ''.join(w[0] for w in t['person'].split())
     def row(av, name, when, job, chip, urgent, number, new=False):
@@ -213,25 +314,7 @@ def restaurant_page(p, t):
             and <strong>texts it straight to you</strong>.
           </p>''')
     p.swap('<li>Every callback in your dashboard</li>', '<li>Every booking in your dashboard</li>')
-    p.swap('aria-label="Example: a customer calls, YAP Voice answers, and the owner gets a text and an email with the job"',
-           'aria-label="Example: a guest calls, YAP Voice answers, and the owner gets a text and an email with the booking request"')
-    p.swap('<b>4:12</b>', f'<b>{t["time"]}</b>')
-    p.swap('<strong>4:12</strong>', f'<strong>{t["time"]}</strong>')
-    p.swap('<span><i></i>Customer</span>', f'<span><i></i>{t["them"]}</span>')
-    p.sub(r'<ol class="phone__steps" id="phone-steps">.*?</ol>', '''<ol class="phone__steps" id="phone-steps">
-            <li data-now="1">A guest calls during service. Nobody can get to the phone.</li>
-            <li data-now="2 3 4 5 6 7 8 9 10">YAP Voice answers and takes the booking request: how many, when, what name.</li>
-            <li data-now="11 12">You get a text and an email with the request, ready to confirm.</li>
-          </ol>''')
     p.swap('Example. The business and the caller are made up.', 'Example. The restaurant and the guest are made up.')
-
-    # how it works
-    p.swap("<h3>It answers like your front desk</h3>\n            <p>It says it's your business's automated assistant, then answers from what you've told it: hours, services, the area you cover.</p>",
-           "<h3>It answers like your front of house</h3>\n            <p>It says it's your restaurant's automated assistant, then answers from what you've told it: opening hours, where you are, what you tell it about the menu.</p>")
-    p.swap('<h3>It takes the details</h3>\n            <p>Name, the best number to call back, what they need, and your own questions for that job — like which day suits them.</p>',
-           '<h3>It takes the booking request</h3>\n            <p>Name, party size, the day and the time, and a number to reach them. It reads it back, and tells the guest the restaurant will confirm.</p>')
-    p.swap('<p>When the call ends, the details are texted and emailed to you. They also wait in your dashboard with a button to call them back.</p>',
-           '<p>When the call ends, the request is texted and emailed to you. It also waits in your dashboard with a button to confirm or decline it.</p>')
 
     # what it does
     p.swap('<h2 id="features-title" class="section__title">A receptionist that never puts anyone on hold</h2>', '<h2 id="features-title" class="section__title">A host that never leaves the phone ringing</h2>')
@@ -353,7 +436,12 @@ def restaurant_page(p, t):
 
 
 def main():
-    source = (ROOT / 'index.html').read_text()
+    # The home page's own story first: the handyman's call, with the home page's first line.
+    home = Page((ROOT / 'index.html').read_text(), 'index.html')
+    put_story(home, TYPES['handyman'], home=True)
+    (ROOT / 'index.html').write_text(home.s)
+    print('wrote the story into index.html')
+    source = home.s
     for key, t in TYPES.items():
         p = Page(source, t['file'])
         common(p, t, key)

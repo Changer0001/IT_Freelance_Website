@@ -30,6 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css?v=20261123c" />
+  <link rel="stylesheet" href="story.css?v=20261128a" />
 
   <script type="application/ld+json">
   {
@@ -105,9 +106,10 @@
   </header>
 
   <main id="main">
-    <section class="hero hero--photo hero--it" id="top" aria-labelledby="hero-title">
-      <div class="wrap hero__grid">
-        <div class="hero__copy">
+    <section class="story hero--it" id="top" aria-labelledby="hero-title">
+      <div class="st-cover">
+        <div class="st-panel">
+          <div class="wrap st-intro">
           <p class="eyebrow">AI phone receptionist · For IT support</p>
           <h1 id="hero-title" class="hero__title">Never lose a job to voicemail.</h1>
           <p class="hero__lede">
@@ -128,121 +130,83 @@
             <a href="tel:+18314327547">(831) 432-7547</a>.
             A demo business answers, so ask it anything.
           </p>
+          </div>
+          <div class="st-hint" aria-hidden="true">Scroll<i></i></div>
         </div>
-
-        <figure class="phone" id="call-story" aria-label="Example: a customer calls, YAP Voice answers, and the owner gets a text and an email with the job">
-          <div class="phone__stage">
-          <div class="handset" id="handset" aria-hidden="true">
-            <div class="handset__screen">
-              <div class="handset__island"></div>
-              <div class="handset__status">
-                <b>4:12</b>
-                <span>
-                  <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-                  <svg viewBox="0 0 16 12"><circle cx="8" cy="10.2" r="1.5"/><path d="M3.3 7.2a6.6 6.6 0 0 1 9.4 0l-1.4 1.4a4.6 4.6 0 0 0-6.6 0zM.5 4.3a10.6 10.6 0 0 1 15 0l-1.4 1.4a8.6 8.6 0 0 0-12.2 0z"/></svg>
-                  <svg viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.2" fill="none" stroke="#ffffff" stroke-opacity="0.45"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="24" y="4" width="2" height="4" rx="1" fill-opacity="0.5"/></svg>
-                </span>
-              </div>
-              <div class="handset__lock"><small>Thursday, November 19</small><strong>4:12</strong></div>
-
-              <div class="handset__ring" data-at="1" data-until="2">
-                <span class="handset__avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21c0-4.6 3.800-7.300 8.500-7.300s8.500 2.700 8.500 7.300z"/></svg></span>
-                <span class="handset__who"><b>(619) 555-0142</b><span>San Diego, CA</span></span>
-                <span class="handset__keys">
-                  <i><svg viewBox="0 0 22 22"><path d="M6.6 2.600c.5-.5 1.300-.5 1.800 0l2 2.100c.5.5.5 1.200.1 1.700l-1 1.300c1 2 2.600 3.600 4.600 4.600l1.300-1c.5-.4 1.200-.4 1.700.1l2.100 2c.5.5.5 1.300 0 1.800l-1.200 1.200c-.9.9-2.200 1.200-3.400.8-4.700-1.600-9.400-6.300-11-11-.4-1.200-.1-2.500.8-3.400z"/></svg></i>
-                  <i><svg viewBox="0 0 22 22"><path d="M6.6 2.600c.5-.5 1.300-.5 1.800 0l2 2.100c.5.5.5 1.200.1 1.700l-1 1.300c1 2 2.600 3.600 4.600 4.600l1.300-1c.5-.4 1.200-.4 1.700.1l2.100 2c.5.5.5 1.300 0 1.800l-1.200 1.200c-.9.9-2.200 1.200-3.400.8-4.700-1.600-9.400-6.300-11-11-.4-1.200-.1-2.500.8-3.400z"/></svg></i>
-                </span>
-              </div>
-
-              <div class="handset__call" data-at="2" data-until="11">
-                <p class="handset__callhead"><b><em><svg viewBox="0 0 22 22"><path d="M6.6 2.600c.5-.5 1.300-.5 1.800 0l2 2.100c.5.5.5 1.200.1 1.700l-1 1.300c1 2 2.600 3.600 4.600 4.600l1.300-1c.5-.4 1.200-.4 1.700.1l2.100 2c.5.5.5 1.300 0 1.800l-1.200 1.200c-.9.9-2.200 1.200-3.400.8-4.700-1.600-9.400-6.300-11-11-.4-1.200-.1-2.500.8-3.400z"/></svg></em>Meanwhile, on the call</b><span><i></i>Customer</span><time id="call-time">0:00</time><span><i></i>YAP Voice</span></p>
-                <div class="handset__thread">
-                  <p class="handset__say handset__say--yap" data-at="2" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Thanks for calling Northside IT. I'm the AI assistant here, and I'll take down what you need.</span></p>
-                  <p class="handset__say handset__say--them" data-at="3" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Hi, my laptop won't turn on and I need it for work.</span></p>
-                  <p class="handset__say handset__say--yap" data-at="4" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Sure. What kind of device is it?</span></p>
-                  <p class="handset__say handset__say--them" data-at="5" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>A Dell laptop.</span></p>
-                  <p class="handset__say handset__say--yap" data-at="6" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>And your name?</span></p>
-                  <p class="handset__say handset__say--them" data-at="7" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Sam Patel.</span></p>
-                  <p class="handset__say handset__say--yap" data-at="8" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Is 619 555 0142 the best number to call you back on?</span></p>
-                  <p class="handset__say handset__say--them" data-at="9" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Yes, that's it.</span></p>
-                  <p class="handset__say handset__say--yap" data-at="10" data-until="11"><i class="handset__wave"><i></i><i></i><i></i><i></i></i><span>Thanks, Sam. I've passed that on, and Northside IT will call you back.</span></p>
-                </div>
-              </div>
-
-              <div class="handset__notes">
-                <div class="handset__note is-on" data-at="12">
-                  <span class="handset__app handset__app--mail"><svg viewBox="0 0 22 22"><rect x="3" y="5.500" width="16" height="11" rx="2"/><path style="fill:none;stroke:#1a7cf2;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round" d="M4.600 7.400 11 12l6.400-4.600"/></svg></span>
-                  <span class="handset__text">
-                    <span class="handset__from"><b>YAP Voice</b><span>now</span></span>
-                    <span class="handset__body"><b>New enquiry — Northside IT</b></span>
-                  </span>
-                </div>
-                <div class="handset__note is-on" data-at="11">
-                  <span class="handset__app"><svg viewBox="0 0 22 22"><path d="M11 3.600c4.700 0 8.400 3 8.400 6.800s-3.700 6.800-8.400 6.800c-.9 0-1.700-.1-2.500-.3-1.100.9-2.500 1.400-4 1.500.8-.9 1.300-1.900 1.500-3-1.500-1.200-2.400-3-2.400-5 0-3.800 3.700-6.800 7.400-6.800z"/></svg></span>
-                  <span class="handset__text">
-                    <span class="handset__from"><b>(858) 555-0134</b><span>now</span></span>
-                    <span class="handset__body">
-                      YAP Voice: New enquiry for Northside IT<br />
-                      Services: Laptop repair<br />
-                      Name: Sam Patel<br />
-                      Phone: +16195550142<br />
-                      device: Dell laptop
-                    </span>
-                  </span>
-                </div>
-              </div>
-
-              <div class="handset__tools">
-                <i><svg viewBox="0 0 20 20"><path d="M6.500 2h7v2.600l-1.600 2.400v9c0 1.100-.9 2-2 2s-1.900-.9-1.900-2v-9L6.500 4.600z"/></svg></i>
-                <i><svg viewBox="0 0 20 20"><path d="M7.200 4l1.100-1.600h3.400L12.800 4H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM10 13.600a3.300 3.300 0 1 0 0-6.600 3.300 3.300 0 0 0 0 6.600z"/></svg></i>
-              </div>
-              <div class="handset__bar"></div>
-            </div>
-          </div>
-          </div>
-          <ol class="phone__steps" id="phone-steps">
-            <li data-now="1">A customer calls. You're with a client and can't pick up.</li>
-            <li data-now="2 3 4 5 6 7 8 9 10">YAP Voice answers, asks your questions and takes their details.</li>
-            <li data-now="11 12">You get a text and an email with the job, the name and the number.</li>
-          </ol>
-          <figcaption class="phone__caption">Example. The business and the caller are made up.</figcaption>
-        </figure>
       </div>
-    </section>
 
-    <section class="section section--photo band--phone" id="how" aria-labelledby="how-title">
-      <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-title" class="section__title">What happens when someone calls</h2>
-        </header>
-        <ol class="steps" id="workflow" role="list">
-          <li class="step">
-            <div class="flow" aria-hidden="true"><div class="flow__screen" data-scene="1"><svg class="fig" viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle class="blob" cx="250" cy="50" r="70"/><g class="p "><path fill="#5a3a22" d="M69.0,124.0 A27.0,27.0 0 0 1 123.0,124.0 L125.0,158.0 Q96.0,168.0 67.0,158.0 Z"/><path fill="#f08a5d" d="M46.0,204.0 C46.0,168.0 64.0,152.0 83.0,150.0 L109.0,150.0 C128.0,152.0 146.0,168.0 146.0,204.0 Z"/><path fill="#f2c7a5" d="M87.0,138.0 L105.0,138.0 L105.0,150.0 Q96.0,160.0 87.0,150.0 Z"/><path fill="#000" opacity="0.12" d="M87.0,142.0 Q96.0,150.0 105.0,142.0 L105.0,138.0 L87.0,138.0 Z"/><circle fill="#f2c7a5" cx="96.0" cy="122.0" r="22.0"/><path fill="#5a3a22" d="M73.0,122.0 A23.0,23.0 0 0 1 119.0,122.0 Q120.0,112.0 112.0,108.0 Q98.0,118.0 82.0,114.0 Q75.0,116.0 73.0,122.0 Z"/><g class="p__eyes" fill="#16213a"><circle cx="88.0" cy="124.0" r="2.3"/><circle cx="104.0" cy="124.0" r="2.3"/></g><path fill="none" stroke="#16213a" stroke-width="2.0" stroke-linecap="round" d="M89.0,133.0 Q96.0,140.0 103.0,133.0"/></g><path fill="none" stroke="#f08a5d" stroke-width="17.0" stroke-linecap="round" d="M136.0,196.0 Q154.0,164.0 127.0,138.0"/><rect fill="#16213a" x="116.0" y="104.0" width="11.0" height="30.0" rx="4.0" transform="rotate(8 121.0 119.0)"/><circle fill="#f2c7a5" cx="125.0" cy="130.0" r="8.0"/><path class="wire" fill="none" d="M146,96 Q190,52 226,84"/><circle class="spark" r="4"><animateMotion dur="1.4s" repeatCount="indefinite" path="M146,96 Q190,52 226,84"/></circle><g class="ringer"><g class="rings" fill="none" stroke-linecap="round" stroke-width="3"><path d="M218,74 Q210,98 218,122"/><path d="M208,66 Q196,98 208,130"/><path d="M290,74 Q298,98 290,122"/><path d="M300,66 Q312,98 300,130"/></g><rect fill="#16213a" x="228" y="46" width="52" height="104" rx="11"/><rect fill="#1d2d52" x="232" y="54" width="44" height="88" rx="7"/><circle fill="#7aa8ff" cx="254" cy="80" r="11"/><rect fill="#7aa8ff" opacity="0.55" x="241" y="97" width="26" height="4" rx="2"/><circle fill="#e5484d" cx="243" cy="124" r="8"/><circle class="pick-up" fill="#34c171" cx="265" cy="124" r="8"/></g></svg></div><span class="flow__link"><i></i></span></div>
-            <span class="step__n">1</span>
-            <h3>Your phone rings first</h3>
-            <p>Calls reach you as they do today. If you don't pick up in the time you choose — or you're closed — the assistant answers. Or let it take every call.</p>
-          </li>
-          <li class="step">
-            <div class="flow" aria-hidden="true"><div class="flow__screen" data-scene="2"><svg class="fig" viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle class="blob" cx="60" cy="40" r="70"/><g class="p p--ai"><path fill="#2f6bff" d="M54.0,204.0 C54.0,168.0 72.0,152.0 91.0,150.0 L117.0,150.0 C136.0,152.0 154.0,168.0 154.0,204.0 Z"/><rect fill="#fff" opacity="0.94" x="91.0" y="168.0" width="26.0" height="16.0" rx="8.0"/><text x="104.0" y="179.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2f6bff" font-family="Source Sans 3, sans-serif">AI</text><rect fill="#b9c8e6" x="96.0" y="142.0" width="16.0" height="12.0"/><line stroke="#b9c8e6" stroke-width="3.0" stroke-linecap="round" x1="104.0" y1="98.0" x2="104.0" y2="86.0"/><circle class="ai__dot" fill="#7aa8ff" cx="104.0" cy="84.0" r="4.5"/><rect fill="#f4f7fc" x="77.0" y="96.0" width="54.0" height="48.0" rx="17.0"/><rect fill="#16213a" x="84.0" y="104.0" width="40.0" height="28.0" rx="11.0"/><g class="p__eyes" fill="#7aa8ff"><rect x="91.5" y="111.0" width="7.0" height="11.0" rx="3.5"/><rect x="109.5" y="111.0" width="7.0" height="11.0" rx="3.5"/></g><path fill="none" stroke="#16213a" stroke-width="4.0" stroke-linecap="round" d="M75.0,118.0 A29.0,31.0 0 0 1 133.0,118.0"/><rect fill="#16213a" x="69.0" y="110.0" width="10.0" height="20.0" rx="5.0"/><rect fill="#16213a" x="129.0" y="110.0" width="10.0" height="20.0" rx="5.0"/><path fill="none" stroke="#16213a" stroke-width="3.0" stroke-linecap="round" d="M74.0,128.0 Q74.0,142.0 90.0,141.0"/><circle fill="#7aa8ff" cx="92.0" cy="141.0" r="3.5"/></g><g class="say"><path class="card" d="M170,40 h112 a14,14 0 0 1 14,14 v46 a14,14 0 0 1 -14,14 h-84 l-22,18 l6,-18 h-12 a14,14 0 0 1 -14,-14 v-46 a14,14 0 0 1 14,-14 z"/><rect class="bar" x="184" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="195" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="206" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="217" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="228" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="239" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="250" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="261" y="57" width="5" height="40" rx="2.5"/><rect class="bar" x="272" y="57" width="5" height="40" rx="2.5"/></g></svg></div><span class="flow__link"><i></i></span></div>
-            <span class="step__n">2</span>
-            <h3>It answers like your front desk</h3>
-            <p>It says it's your business's automated assistant, then answers from what you've told it: hours, services, the area you cover.</p>
-          </li>
-          <li class="step">
-            <div class="flow" aria-hidden="true"><div class="flow__screen" data-scene="3"><svg class="fig" viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle class="blob" cx="250" cy="170" r="80"/><g class="p "><path fill="#5a3a22" d="M46.8,135.2 A23.2,23.2 0 0 1 93.2,135.2 L94.9,164.4 Q70.0,173.0 45.1,164.4 Z"/><path fill="#f08a5d" d="M27.0,204.0 C27.0,173.0 42.5,159.3 58.8,157.6 L81.2,157.6 C97.5,159.3 113.0,173.0 113.0,204.0 Z"/><path fill="#f2c7a5" d="M62.3,147.2 L77.7,147.2 L77.7,157.6 Q70.0,166.2 62.3,157.6 Z"/><path fill="#000" opacity="0.12" d="M62.3,150.7 Q70.0,157.6 77.7,150.7 L77.7,147.2 L62.3,147.2 Z"/><circle fill="#f2c7a5" cx="70.0" cy="133.5" r="18.9"/><path fill="#5a3a22" d="M50.2,133.5 A19.8,19.8 0 0 1 89.8,133.5 Q90.6,124.9 83.8,121.4 Q71.7,130.0 58.0,126.6 Q51.9,128.3 50.2,133.5 Z"/><g class="p__eyes" fill="#16213a"><circle cx="63.1" cy="135.2" r="2.0"/><circle cx="76.9" cy="135.2" r="2.0"/></g><path fill="none" stroke="#16213a" stroke-width="1.7" stroke-linecap="round" d="M64.0,142.9 Q70.0,149.0 76.0,142.9"/></g><g class="say say--dots"><path class="card" d="M96,30 h54 a12,12 0 0 1 12,12 v20 a12,12 0 0 1 -12,12 h-34 l-16,13 l4,-13 h-8 a12,12 0 0 1 -12,-12 v-20 a12,12 0 0 1 12,-12 z"/><circle class="dot" cx="111" cy="52" r="4.5"/><circle class="dot" cx="126" cy="52" r="4.5"/><circle class="dot" cx="141" cy="52" r="4.5"/></g><g class="note"><rect class="card" x="178" y="34" width="124" height="134" rx="12"/><g class="row row--1"><rect class="label" x="192" y="52" width="34" height="6" rx="3"/><rect class="value" x="192" y="66" width="70" height="7" rx="3.5"/><g class="tick" transform="translate(286 64)"><circle r="9"/><path d="M-4,0 L-1,3 L4,-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="row row--2"><rect class="label" x="192" y="90" width="46" height="6" rx="3"/><rect class="value" x="192" y="104" width="82" height="7" rx="3.5"/><g class="tick" transform="translate(286 102)"><circle r="9"/><path d="M-4,0 L-1,3 L4,-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g><g class="row row--3"><rect class="label" x="192" y="128" width="30" height="6" rx="3"/><rect class="value" x="192" y="142" width="58" height="7" rx="3.5"/><g class="tick" transform="translate(286 140)"><circle r="9"/><path d="M-4,0 L-1,3 L4,-3" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></g></g></g></svg></div><span class="flow__link"><i></i></span></div>
-            <span class="step__n">3</span>
-            <h3>It takes the details</h3>
-            <p>Name, the best number to call back, what they need, and your own questions for that job — like which day suits them.</p>
-          </li>
-          <li class="step">
-            <div class="flow" aria-hidden="true"><div class="flow__screen" data-scene="4"><svg class="fig" viewBox="0 0 320 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><circle class="blob" cx="70" cy="40" r="70"/><g class="p "><path fill="#5b6b8c" d="M42.0,204.0 C42.0,168.0 60.0,152.0 79.0,150.0 L105.0,150.0 C124.0,152.0 142.0,168.0 142.0,204.0 Z"/><path fill="#b9794f" d="M83.0,138.0 L101.0,138.0 L101.0,150.0 Q92.0,160.0 83.0,150.0 Z"/><path fill="#000" opacity="0.12" d="M83.0,142.0 Q92.0,150.0 101.0,142.0 L101.0,138.0 L83.0,138.0 Z"/><circle fill="#b9794f" cx="92.0" cy="122.0" r="22.0"/><path fill="#2b1d16" d="M69.0,122.0 A23.0,23.0 0 0 1 115.0,122.0 Q116.0,112.0 108.0,108.0 Q94.0,118.0 78.0,114.0 Q71.0,116.0 69.0,122.0 Z"/><g class="p__eyes" fill="#16213a"><circle cx="84.0" cy="124.0" r="2.3"/><circle cx="100.0" cy="124.0" r="2.3"/></g><g fill="none" stroke="#16213a" stroke-width="1.8"><circle cx="84.0" cy="124.0" r="6.0"/><circle cx="100.0" cy="124.0" r="6.0"/><path d="M90.0,124.0 L94.0,124.0"/></g><path fill="none" stroke="#16213a" stroke-width="2.0" stroke-linecap="round" d="M85.0,133.0 Q92.0,140.0 99.0,133.0"/></g><path fill="none" stroke="#5b6b8c" stroke-width="17" stroke-linecap="round" d="M132,198 Q154,184 148,160"/><g class="handset"><rect fill="#16213a" x="134" y="108" width="34" height="56" rx="7"/><rect fill="#1d2d52" x="137" y="113" width="28" height="46" rx="4"/><rect class="ping" x="140" y="118" width="22" height="13" rx="5"/><rect fill="#7aa8ff" opacity="0.5" x="140" y="136" width="16" height="4" rx="2"/></g><circle fill="#b9794f" cx="150" cy="162" r="9"/><g class="msg msg--text"><rect x="196" y="38" width="108" height="50" rx="12"/><rect fill="#fff" x="210" y="52" width="56" height="6" rx="3"/><rect fill="#fff" opacity="0.75" x="210" y="65" width="78" height="5" rx="2.5"/><rect fill="#fff" opacity="0.75" x="210" y="75" width="50" height="5" rx="2.5"/></g><g class="msg msg--mail"><rect class="card" x="212" y="102" width="92" height="46" rx="10"/><rect class="env" x="224" y="113" width="32" height="24" rx="4"/><path class="flap" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M226,116 L240,127 L254,116"/><rect class="label" x="264" y="117" width="28" height="5" rx="2.5"/><rect class="label" x="264" y="128" width="20" height="5" rx="2.5"/></g></svg></div><span class="flow__link"><i></i></span></div>
-            <span class="step__n">4</span>
-            <h3>You get a text and an email</h3>
-            <p>When the call ends, the details are texted and emailed to you. They also wait in your dashboard with a button to call them back.</p>
-          </li>
+      <span class="st-mark" id="how"></span>
+      <div class="st-stage" id="st-stage">
+        <div class="st-film"><canvas id="st-film" aria-hidden="true"></canvas><div class="st-load" id="st-load"></div></div>
+        <div class="st-floor" id="st-floor"></div>
+        <canvas id="st-voice" aria-hidden="true"></canvas>
+        <ol class="st-copy" id="st-copy" role="list" aria-label="What happens when someone calls">
+          <li><div class="st-in"><p class="st-label">Step one</p><h2>A customer calls. You can't pick up.</h2><p class="st-lede">You're with a client, so the call passes to YAP Voice.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step two</p><h2>It answers in your business's name.</h2><p class="st-lede">It tells the caller it's an AI assistant, then answers their questions.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step three</p><h2>It takes down what matters.</h2><p class="st-lede">The job, the name and the number, asked the way you'd ask.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step four</p><h2>The details land on your phone.</h2><p class="st-lede">A text and an email, moments after the call. Nothing is recorded.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step five</p><h2>You call back while the job is still open.</h2><p class="st-lede">Hear it answer for yourself: <a href="tel:+18314327547"><b>831-432-7547</b></a></p></div></li>
         </ol>
+        <p class="st-credit">Example. The business and the caller are made up.</p>
+        <div class="st-line" id="st-line"></div>
       </div>
+
+      <div class="st-lift" id="st-lift">
+        <button class="st-skip" id="st-skip" type="button">Skip the story</button>
+        <a class="st-cta" id="st-cta" href="tel:+18314327547" aria-label="Call the demo line, 831-432-7547"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3h3l1.4 4.4-2 1.4a12 12 0 0 0 6.2 6.2l1.4-2L21 14.4v3A3.6 3.6 0 0 1 17.4 21 14.4 14.4 0 0 1 3 6.6 3.6 3.6 0 0 1 6.6 3z"/></svg><span>831-432-7547</span></a>
+        <div class="st-rig" id="st-rig" aria-hidden="true">
+          <div class="st-glow"></div>
+          <div class="st-pivot" id="st-pivot">
+          <div class="st-waves" id="st-waves"></div>
+          <div class="st-handset" id="st-handset"><div class="st-rim" id="st-rim"></div><div class="st-screen">
+        <div class="st-island"></div>
+        <div class="st-view st-v0" data-time="4:12">
+          <div class="st-kind">Incoming call</div>
+          <div class="st-face"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21c0-4.6 3.8-7.3 8.5-7.3s8.500 2.700 8.500 7.300z"/></svg></div>
+          <div class="st-who">(619) 555-0142</div><div class="st-where">San Diego, CA</div>
+          <div class="st-mid">
+            <div class="st-ringing" data-until=".42">Ringing<i></i><i></i><i></i></div>
+            <div class="st-pass" data-at=".46"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#mark)"/><g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g></svg><div><b>No answer</b><small>YAP Voice is picking up</small></div></div>
+          </div>
+          <div class="st-btns"><div><i class="st-no"><svg viewBox="0 0 24 24"><path d="M3 15c5-5 13-5 18 0l-2.5 2.5-3.5-2v-2.2a9 9 0 0 0-6 0v2.2l-3.5 2z"/></svg></i><span>Decline</span></div><div><i class="st-yes"><svg viewBox="0 0 24 24"><path d="M6.6 3h3l1.4 4.4-2 1.4a12 12 0 0 0 6.2 6.2l1.4-2L21 14.4v3A3.6 3.6 0 0 1 17.4 21 14.4 14.4 0 0 1 3 6.6 3.6 3.6 0 0 1 6.6 3z"/></svg></i><span>Accept</span></div></div>
+        </div>
+        <div class="st-view st-v1" data-time="4:12">
+          <div class="st-bar"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#mark)"/><g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g></svg><div><b>Northside IT</b><small>Answered by YAP Voice</small></div><em>0:12</em></div>
+          <div class="st-talk">
+            <div class="st-b st-yap">Thanks for calling Northside IT. I'm the AI assistant here, and I'll take down what you need.</div>
+            <div class="st-b st-them" data-at=".3">Hi, my laptop won't turn on and I need it for work.</div>
+            <div class="st-b st-yap" data-at=".58">Sure. What kind of device is it?</div>
+          </div>
+        </div>
+        <div class="st-view st-v2" data-time="4:13">
+          <div class="st-bar"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#mark)"/><g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g></svg><div><b>Northside IT</b><small>Taken down so far</small></div><em>0:41</em></div>
+          <div class="st-got">
+            <div><small>The job</small><b>Laptop repair</b><span>device: Dell laptop</span></div>
+            <div data-at=".28"><small>Name</small><b>Sam Patel</b></div>
+            <div data-at=".54"><small>Number</small><b>(619) 555-0142</b></div>
+          </div>
+        </div>
+        <div class="st-view st-v3" data-time="4:14">
+          <div class="st-date">Thursday, November 19</div><div class="st-time">4:14</div>
+          <div class="st-note" data-at=".2"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></i>Messages<span>now</span></div>
+          <p><b>YAP Voice: New enquiry for Northside IT</b><br>Services: Laptop repair<br>Name: Sam Patel<br>Phone: +16195550142<br>device: Dell laptop</p></div>
+        </div>
+        <div class="st-view st-v4" data-time="4:15">
+          <h4>Callbacks</h4><div class="st-sub">Northside IT · today</div>
+          <div class="st-row st-first"><b>Sam Patel</b><span>Laptop repair · 4:12 PM</span><a>Call back</a></div>
+          <div class="st-row st-done"><b>Renee Clark</b><span>Office Wi-Fi down · Yesterday 5:40 PM</span><a>Called</a></div>
+          <div class="st-row st-done"><b>Omar Haddad</b><span>New PC setup · Mon 9:05 AM</span><a>Called</a></div>
+        </div>
+        <div class="st-glass" id="st-glass"></div><div class="st-shine" id="st-shine"></div>
+          </div></div>
+          </div>
+        </div>
+      </div>
+      <template id="st-status"><div class="st-status"><b></b><span>
+        <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+        <svg viewBox="0 0 16 12"><circle cx="8" cy="10.2" r="1.5"/><path d="M3.3 7.2a6.6 6.6 0 0 1 9.4 0l-1.4 1.4a4.6 4.6 0 0 0-6.6 0zM.5 4.3a10.6 10.6 0 0 1 15 0l-1.4 1.4a8.6 8.6 0 0 0-12.2 0z"/></svg>
+        <svg viewBox="0 0 27 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="24" y="4" width="2" height="4" rx="1" fill-opacity="0.5"/></svg>
+      </span></div></template>
     </section>
 
     <section class="section section--tint section--photo band--office" id="features" aria-labelledby="features-title">
@@ -541,5 +505,6 @@
 
   <script src="types.js?v=20261123c"></script>
   <script src="script.js?v=20261123c"></script>
+  <script src="story.js?v=20261128a"></script>
 </body>
 </html>
