@@ -56,7 +56,7 @@
   // the phone's pose from the scroll; where the mouse is; and four springs that follow it
   var pose={rx:0,ry:0,rz:0},ptr={x:0,y:0,on:false,over:false},sp={tx:0,ty:0,sc:1,gl:0},sp2=0,vel={tx:0,ty:0,sc:0,gl:0},alive=0;
   // H is the scene's height; lead is how far the page has scrolled when the phone gets home
-  var img=[],ready=0,last='',goal=0,now=0,running=false,begun=false,home={x:0,y:0},H=1,lead=1,seam=300,box={l:0,r:0,w:1,cx:0,cy:0,pw:1},zoom=1.3;
+  var img=[],ready=0,last='',goal=0,now=0,running=false,begun=false,arrived=false,home={x:0,y:0},H=1,lead=1,seam=300,box={l:0,r:0,w:1,cx:0,cy:0,pw:1},zoom=1.3;
   var vis={t:0,h:0};
 
   // each screen gets the phone's status row and its home bar
@@ -142,7 +142,7 @@
     var span=story.offsetHeight-H;
     // How far the phone has come: 0 while it is still under the foot of the screen, 1 when it is
     // home. The browser moves it; this only tells the words when to arrive.
-    var e=Math.max(0,Math.min(1,1-(lead-y)/(H-home.y)));
+    var e=Math.max(0,Math.min(1,1-(lead-y)/(H-home.y)));arrived=e>=.999;
     var whole=Math.max(0,Math.min(1,(y-lead)/(span-lead))),q=y<lead?-1:whole;
     floor.style.opacity=ease((e-.45)/.5).toFixed(3);
     skip.style.opacity=(ease((e-.8)/.2)*(1-ease((whole-.9)/.08))).toFixed(3);skip.style.pointerEvents=e>.9&&whole<.94?'auto':'none';
@@ -186,11 +186,15 @@
   // dying away with distance, as sound does, and swelling and falling the way speech does.
   function voice(dt){
     var W=vc.width,h0=vc.height;vx.clearRect(0,0,W,h0);
-    if(sp2<.004)return;
+    // The voice's lines start at the phone's sides. So nothing is drawn until the phone is in its
+    // place (a finger on it while it rises must not light them up where it is not yet), nor on a
+    // screen too narrow to have room beside the phone, where they would be two stubs.
+    if(sp2<.004||!arrived||(box.w-box.pw)/2<110)return;
     tv+=dt;
     var d=W/box.w,mx=box.cx*d,my=box.cy*d,start=box.pw*.42*d,reach=W*.3,A=Math.min(h0*.085,78*d)*sp2;
     var talk=.42+.58*Math.abs(Math.sin(tv*2.3)*Math.sin(tv*1.07+.8))+.12*Math.sin(tv*7.3);
-    vx.globalCompositeOperation='lighter';vx.lineCap='round';vx.lineJoin='round';
+    // the lines fade as the voice dies away, so a line gone flat is never left on the scene
+    vx.globalCompositeOperation='lighter';vx.lineCap='round';vx.lineJoin='round';vx.globalAlpha=Math.min(1,sp2*3);
     for(var n=0;n<LINES.length;n++){var l=LINES[n];
       for(var side=-1;side<=1;side+=2){
         vx.beginPath();
@@ -205,7 +209,7 @@
         vx.strokeStyle=g;vx.lineWidth=l.t*d;vx.shadowColor='rgba(90,150,255,.9)';vx.shadowBlur=l.g*d;vx.stroke();
       }
     }
-    vx.globalCompositeOperation='source-over';vx.shadowBlur=0;
+    vx.globalCompositeOperation='source-over';vx.shadowBlur=0;vx.globalAlpha=1;
   }
   // the phone as it stands: the scroll's pose, leaned toward the mouse, swollen by the touch
   function apply(){
@@ -220,7 +224,7 @@
     var want={tx:ptr.on?ptr.x*(ptr.over?12:6):0,ty:ptr.on?-ptr.y*(ptr.over?9:4):0,sc:ptr.over?1.05:1,gl:ptr.over?1:0},moving=false;
     for(var k in want){vel[k]=(vel[k]+(want[k]-sp[k])*.13)*.8;sp[k]+=vel[k];if(Math.abs(vel[k])>.0004||Math.abs(want[k]-sp[k])>.0006)moving=true}
     // the voice rises quickly and dies away slowly; a touch brings it to full
-    var loud=Math.max(calling*.5,ptr.over?1:0);sp2+=(loud-sp2)*(loud>sp2?.1:.04);
+    var loud=arrived?Math.max(calling*.5,ptr.over?1:0):0;sp2+=(loud-sp2)*(loud>sp2?.1:(arrived?.04:.5));
     return moving||sp2>.004;
   }
   // the mark of a touch: one ring from the phone's edge
