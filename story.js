@@ -28,13 +28,28 @@
   // stand them on. `cut` marks a step whose next step is a different shot.
   // `pose` is how the phone is turned at that step: around its upright, its
   // level, and flat.
-  var STEPS=[
-    {from:1,  to:36, x:.72,y:.3, side:1, cut:true, pose:[-5,2,-1]},
-    {from:37, to:72, x:.47,y:.4, side:-1,          pose:[5,1.5,.9]},
-    {from:73, to:108,x:.47,y:.4, side:-1,cut:true, pose:[-4,1.5,-.7]},
-    {from:109,to:156,x:.72,y:.66,side:1, cut:true, pose:[4,1.5,.8]},
-    {from:157,to:198,x:.42,y:.36,side:-1,          pose:[0,0,0]}];
-  var FILM=story.dataset.film||'',TOTAL=FILM?198:0,N=STEPS.length;
+  // `call` marks the steps during which the call is on: that is when the voice is heard.
+  //
+  // Two ways the story ends, so two ways the film is cut (data-flow on the section):
+  //   "booked"  the visit is booked on the call, and nobody calls back: the caller stays on
+  //             screen through steps two to four, and the last shot is the owner's phone.
+  //             The film's fourth shot, a man making a call, is left out: it was the call back.
+  //   (none)    a request the owner confirms afterwards (a restaurant): all four shots.
+  var FLOWS={
+    booked:[
+      {from:1,  to:36, x:.72,y:.3, side:1, cut:true,            pose:[-5,2,-1]},
+      {from:37, to:60, x:.47,y:.4, side:-1,          call:true, pose:[5,1.5,.9]},
+      {from:61, to:84, x:.47,y:.4, side:-1,          call:true, pose:[-4,1.5,-.7]},
+      {from:85, to:108,x:.47,y:.4, side:-1,cut:true, call:true, pose:[4,1.5,.8]},
+      {from:109,to:156,x:.72,y:.66,side:1,                      pose:[0,0,0]}],
+    request:[
+      {from:1,  to:36, x:.72,y:.3, side:1, cut:true,            pose:[-5,2,-1]},
+      {from:37, to:72, x:.47,y:.4, side:-1,          call:true, pose:[5,1.5,.9]},
+      {from:73, to:108,x:.47,y:.4, side:-1,cut:true, call:true, pose:[-4,1.5,-.7]},
+      {from:109,to:156,x:.72,y:.66,side:1, cut:true,            pose:[4,1.5,.8]},
+      {from:157,to:198,x:.42,y:.36,side:-1,                     pose:[0,0,0]}]};
+  var STEPS=FLOWS[story.dataset.flow]||FLOWS.request;
+  var FILM=story.dataset.film||'',TOTAL=FILM?STEPS[STEPS.length-1].to:0,N=STEPS.length;
   var SHOT=.24;    // how much of a step's end the next shot takes to dissolve in
   var WORDS=.13;   // how much of a step its words take to arrive, and to leave
   var SCREEN=.2;   // how much of a step's end the phone's next screen takes to dissolve in
@@ -164,7 +179,7 @@
     // each screen fills in as its step is scrolled; the one arriving shows as it will at its start
     fill(i,f);if(nx)fill(i+1,0);
     // the call is on during steps two and three: that is when the voice is heard
-    calling=q<0?0:(i===1||i===2?1:(i===0?ease((f-.5)/.4)*.55:0));
+    calling=q<0?0:(s.call?1:(i===0?ease((f-.5)/.4)*.55:0));
     // the phone turns from this step's pose to the next, and drifts a little while it waits
     var t=nx?ease((f-(1-TURN))/TURN):0,a=s.pose,b=nx?nx.pose:a,sway=Math.sin(p*Math.PI*2)*.8;
     pose.ry=a[0]+(b[0]-a[0])*t+sway;pose.rx=a[1]+(b[1]-a[1])*t;pose.rz=a[2]+(b[2]-a[2])*t;apply();

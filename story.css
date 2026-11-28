@@ -263,6 +263,24 @@
 .st-keys svg{width:1.95em;height:1.95em;fill:#fff;max-width:none}
 .st-keys .st-end{background:#e5484d}
 .st-v1 .st-home{margin-top:1.5em}
+/* STEP FOUR, on a trade's page: the visit is booked while the caller is still on the line. The
+   owner's open times as three chips, the one the caller takes lit, then the booking itself. */
+.st-open-times{font-size:1em;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--st-sky);margin:1.5em 1.5em 0;line-height:1.4}
+.st-slots{display:grid;gap:.7em;margin:.95em 1.3em 0}
+.st-slots span{position:relative;display:block;border:.08em solid rgba(255,255,255,.14);border-radius:1.1em;padding:.85em 1.1em;background:#16233f}
+.st-slots b{position:relative;font-size:1.5em;font-weight:600;font-variant-numeric:tabular-nums}
+.st-slots i{position:absolute;inset:-.08em;border-radius:1.1em;background:rgba(31,102,229,.38);box-shadow:inset 0 0 0 .14em #5c98ff;translate:none!important}
+.st-say--line{position:static;margin:1.1em 1.5em 0;font-size:1.45em}
+.st-booked{display:flex;align-items:center;gap:1em;margin:1.2em 1.3em 0;padding:1.1em 1.2em;border-radius:1.3em;background:linear-gradient(180deg,#143d2b,#0f2f22);border:.08em solid rgba(110,231,160,.4)}
+.st-booked i{flex:none;display:grid;place-items:center;width:3.4em;height:3.4em;border-radius:50%;background:#30a46c}
+.st-booked svg{width:1.9em;height:1.9em;max-width:none;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.st-booked small{display:block;font-size:.95em;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#6ee7a0}
+.st-booked b{display:block;font:600 1.75em/1.2 var(--font-display);margin-top:.3em}
+.st-booked span{display:block;font-size:1.12em;opacity:.78;margin-top:.25em}
+/* STEP FIVE, on a trade's page: under the text, the visit as it sits in the owner's calendar */
+.st-cal{margin-top:.9em}
+.st-note.st-cal .st-hd i{background:#1a73e8}
+.st-note.st-cal .st-hd i svg{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 /* in the next step's heading: three small bars that keep moving, because the call is still on */
 .st-live{display:inline-flex;align-items:center;gap:.16em;height:1em;margin-right:.45em;vertical-align:-.1em}
 .st-live i{width:.18em;height:100%;border-radius:.1em;background:currentColor;animation:st-sound 1s ease-in-out infinite}

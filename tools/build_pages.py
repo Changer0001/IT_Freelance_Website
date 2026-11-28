@@ -40,6 +40,11 @@ SITE = 'https://yap-itsupport.com/'
 OPENING = "Thanks for calling {biz}. I'm the AI assistant here, and I'll take down what you need."
 CALLER = '(619) 555-0142'       # the made-up caller on every page: 555-01xx, the block kept for examples
 DEMO_LINE = ('+18314327547', '831-432-7547')   # the one real number on the site
+# The visit the story's caller books, on a trade's page and the home page. Made up, like the
+# caller: the day after the story's own date (Thursday, November 19). OFFERED is what the
+# assistant reads out from the owner's calendar; the caller takes the first.
+OFFERED = ['Fri 10:00 AM', 'Fri 2:30 PM', 'Mon 9:00 AM']
+VISIT = dict(sms='Fri 11/20, 10:00 AM', card='Fri, Nov 20 · 10:00 AM', said='Friday at ten works.')
 FILMED = {'restaurants', 'handyman', 'cleaning', 'auto', 'it'}   # the trades whose page plays the film; index.html plays it too
 
 
@@ -173,8 +178,17 @@ def later(clock, minutes):
 
 
 def story_words(t, home=False):
-    """The five steps said over the phone. Only what the product does: it says it is an AI
-    assistant, it takes requests and never confirms a booking, and nothing is recorded."""
+    """The five steps said over the phone. Only what the product does.
+
+    A TRADE'S STORY ENDS WITH THE VISIT BOOKED AND NOBODY CALLING BACK (the owner's choice,
+    28 Nov: "call back" made it sound like a better voicemail). That is what the product does
+    with the owner's Google Calendar connected and visits set to "book it straight in", and the
+    step says so. Without the calendar it takes the request for the owner to confirm; the price
+    block says that. A restaurant's story still ends with a request the owner confirms: nothing
+    connects to a table-booking system, so it says "requested", never "booked".
+
+    NOT SAID, BECAUSE NOT TRUE YET: that the caller is texted a confirmation. That is built but
+    switched off until the carriers approve it (docs/a2p-10dlc-submission.md in the product)."""
     hear = f'Hear it answer for yourself: <a href="tel:{DEMO_LINE[0]}"><b>{DEMO_LINE[1]}</b></a>'
     if t['kind'] == 'restaurant':
         steps = [('A guest calls during service. Nobody can get to the phone.', 'So the call passes to YAP Voice.'),
@@ -186,9 +200,9 @@ def story_words(t, home=False):
         busy = 'Your hands are full' if home else "You're " + esc(t['short'])
         steps = [("A customer calls. You can't pick up.", busy + ', so the call passes to YAP Voice.'),
                  ("It answers in your business's name.", "It tells the caller it's an AI assistant, then answers their questions."),
-                 ('It takes down what matters.', "The job, the name and the number, asked the way you'd ask."),
-                 ('The details land on your phone.', 'A text and an email, moments after the call. Nothing is recorded.'),
-                 ('You call back while the job is still open.', hear)]
+                 ('It takes down what matters.', "The job, the name and the number, asked the way you'd ask. Nothing is recorded."),
+                 ('It books the visit, on the call.', 'With your Google Calendar connected, it offers your open times and puts the visit straight in.'),
+                 ('You get the details. Nobody has to call back.', 'A text and an email, moments after the call. ' + hear)]
     names = ['one', 'two', 'three', 'four', 'five']
     return ''.join(f'          <li><div class="st-in"><p class="st-label">Step {n}</p><h2>{head}</h2><p class="st-lede">{lede}</p></div></li>\n'
                    for n, (head, lede) in zip(names, steps))
@@ -212,14 +226,40 @@ def story_phone(t):
         title, rows = 'Requests', [(esc(n), esc(d), 'Confirm' if i == 0 else 'Confirmed') for i, (n, d) in enumerate(t['requests'])]
     else:
         took = [('The job', esc(t['job']), f'{esc(t["field"])}: {esc(t["value"])}'), ('Name', esc(t['person']), ''), ('Number', CALLER, '')]
-        title, rows = 'Callbacks', ([(esc(t['person']), f'{esc(t["job"])} · {clock} PM', 'Call back')]
-                                    + [(esc(r[1]), f'{esc(r[3])} · {r[2]}', 'Called') for r in t['rows']])
     cards = ''.join(f'            <div{at}><small>{label}</small><b>{value}</b>{"<span>" + more + "</span>" if more else ""}</div>\n'
                     for at, (label, value, more) in zip(['', ' data-at=".28"', ' data-at=".54"'], took))
-    lines = ''.join(f'          <div class="st-row {"st-first" if i == 0 else "st-done"}"><b>{name}</b><span>{what}</span><a>{go}</a></div>\n'
-                    for i, (name, what, go) in enumerate(rows))
     sms = [esc(x) for x in t['sms']]
-    text = f'<b>{sms[0]}</b><br>' + '<br>'.join(sms[1:]) if len(sms) > 1 else sms[0]
+    note = lambda body: ('<div class="st-note" data-at=".2"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></i>'
+                         f'Messages<span>now</span></div>\n          <p>{body}</p></div>')
+    lock = lambda minutes, inside: (f'        <div class="st-view st-v3" data-time="{later(clock, minutes)}">\n'
+                                    f'          <div class="st-date">Thursday, November 19</div><div class="st-time">{later(clock, minutes)}</div>\n'
+                                    f'          {inside}\n        </div>\n')
+    if t['kind'] == 'restaurant':
+        # the request lands on the owner's phone; then the owner's list, to confirm or decline from
+        lines = ''.join(f'          <div class="st-row {"st-first" if i == 0 else "st-done"}"><b>{name}</b><span>{what}</span><a>{go}</a></div>\n'
+                        for i, (name, what, go) in enumerate(rows))
+        ending = lock(2, note(sms[0])) + f'''        <div class="st-view st-v4" data-time="{later(clock, 3)}">
+          <h4>{title}</h4><div class="st-sub">{biz} · today</div>
+{lines}        </div>
+'''
+    else:
+        # The visit is booked while the caller is still on the line, from the owner's own open
+        # times; then the owner's phone shows the text (with its "Visit:" line, in the shape the
+        # product sends it) and the visit in the calendar. Nothing is left to call back about.
+        picked = '<i data-at=".3"></i>'   # the chip the caller takes lights up as they say so
+        slots = ''.join(f'<span>{picked if i == 0 else ""}<b>{esc(s)}</b></span>' for i, s in enumerate(OFFERED))
+        tick = '<svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg>'
+        cal = ('<div class="st-note st-cal" data-at=".5"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg></i>'
+               f'Calendar<span>now</span></div>\n          <p><b>{esc(t["job"])} · {esc(t["person"])}</b><br>{VISIT["card"]}</p></div>')
+        text = f'<b>{sms[0]}</b><br>' + '<br>'.join(sms[1:] + ['Visit: ' + VISIT['sms']])
+        ending = f'''        <div class="st-view st-v2 st-book" data-time="{later(clock, 1)}">
+          {bar('Still on the call', 48, 66)}
+          <p class="st-open-times">Your open times, from your Google Calendar</p>
+          <div class="st-slots">{slots}</div>
+          <p class="st-say st-say--line" data-at=".3"><small>The {them} says</small>{VISIT["said"]}</p>
+          <div class="st-booked" data-at=".56"><i>{tick}</i><div><small>Booked in your Google Calendar</small><b>{VISIT["card"]}</b><span>{esc(t["job"])} · {esc(t["person"])}</span></div></div>
+        </div>
+''' + lock(2, note(text) + '\n          ' + cal)
     return f'''        <div class="st-view st-v0" data-time="{clock}">
           <div class="st-kind">Incoming call</div>
           <div class="st-face"><svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="4.2"/><path d="M3.5 21c0-4.6 3.8-7.3 8.5-7.3s8.500 2.700 8.500 7.300z"/></svg></div>
@@ -252,15 +292,7 @@ def story_phone(t):
           <div class="st-got">
 {cards}          </div>
         </div>
-        <div class="st-view st-v3" data-time="{later(clock, 2)}">
-          <div class="st-date">Thursday, November 19</div><div class="st-time">{later(clock, 2)}</div>
-          <div class="st-note" data-at=".2"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></i>Messages<span>now</span></div>
-          <p>{text}</p></div>
-        </div>
-        <div class="st-view st-v4" data-time="{later(clock, 3)}">
-          <h4>{title}</h4><div class="st-sub">{biz} · today</div>
-{lines}        </div>
-'''
+''' + ending
 
 
 def put_story(p, t, home=False):
@@ -286,6 +318,9 @@ def common(p, t, key):
     # Only the home page opens slowly, the headline coming out of the dark letter by letter.
     # On a trade's page the headline is simply there.
     p.swap(' data-open="slow"', '')
+    # A restaurant's story ends with a request the owner confirms, not a visit booked on the call.
+    if t['kind'] == 'restaurant':
+        p.swap(' data-flow="booked"', '')
     # A trade that is not in FILMED shows its own picture, held still, and says "Example".
     if key not in FILMED:
         p.swap(' data-film="img/story/"', '')
@@ -415,7 +450,7 @@ def restaurant_page(p, t):
     p.between('        <div class="plans">', '        <div class="plans__go">', '''        <div class="plans plans--one">
           <article class="plan">
             <h3 class="plan__name">Answering + Booking</h3>
-            <p class="plan__amount">$99<span class="plan__per">/month</span></p>
+            <p class="plan__amount">$49<span class="plan__per">/month</span></p>
             <p class="plan__sub">per business line · up to 300 calls a month</p>
             <p class="plan__trial">30-day free trial</p>
             <ul class="ticks plan__list" role="list">

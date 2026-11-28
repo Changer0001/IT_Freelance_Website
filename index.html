@@ -41,7 +41,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css?v=20261128f" />
-  <link rel="stylesheet" href="story.css?v=20261128h" />
+  <link rel="stylesheet" href="story.css?v=20261128i" />
 
   <!-- What search engines are told. Only what the product does: no
        spam filtering and no daily recap, because it has neither. -->
@@ -162,7 +162,7 @@
          It used to be a phone beside the headline that played the call by
          itself, and a "How it works" section of four drawings further
          down. The owner chose this instead (28 Nov). -->
-    <section class="story hero--work" id="top" aria-labelledby="hero-title" data-film="img/story/" data-open="slow">
+    <section class="story hero--work" id="top" aria-labelledby="hero-title" data-film="img/story/" data-open="slow" data-flow="booked">
       <div class="st-cover">
         <div class="st-panel">
           <div class="wrap st-intro">
@@ -234,9 +234,9 @@
           <!-- STORY WORDS: written by tools/build_pages.py, do not edit here -->
           <li><div class="st-in"><p class="st-label">Step one</p><h2>A customer calls. You can't pick up.</h2><p class="st-lede">Your hands are full, so the call passes to YAP Voice.</p></div></li>
           <li><div class="st-in"><p class="st-label">Step two</p><h2>It answers in your business's name.</h2><p class="st-lede">It tells the caller it's an AI assistant, then answers their questions.</p></div></li>
-          <li><div class="st-in"><p class="st-label">Step three</p><h2>It takes down what matters.</h2><p class="st-lede">The job, the name and the number, asked the way you'd ask.</p></div></li>
-          <li><div class="st-in"><p class="st-label">Step four</p><h2>The details land on your phone.</h2><p class="st-lede">A text and an email, moments after the call. Nothing is recorded.</p></div></li>
-          <li><div class="st-in"><p class="st-label">Step five</p><h2>You call back while the job is still open.</h2><p class="st-lede">Hear it answer for yourself: <a href="tel:+18314327547"><b>831-432-7547</b></a></p></div></li>
+          <li><div class="st-in"><p class="st-label">Step three</p><h2>It takes down what matters.</h2><p class="st-lede">The job, the name and the number, asked the way you'd ask. Nothing is recorded.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step four</p><h2>It books the visit, on the call.</h2><p class="st-lede">With your Google Calendar connected, it offers your open times and puts the visit straight in.</p></div></li>
+          <li><div class="st-in"><p class="st-label">Step five</p><h2>You get the details. Nobody has to call back.</h2><p class="st-lede">A text and an email, moments after the call. Hear it answer for yourself: <a href="tel:+18314327547"><b>831-432-7547</b></a></p></div></li>
           <!-- /STORY WORDS -->
         </ol>
         <p class="st-credit">Stock footage. The business and the caller are made up.</p>
@@ -292,16 +292,19 @@
             <div data-at=".54"><small>Number</small><b>(619) 555-0142</b></div>
           </div>
         </div>
+        <div class="st-view st-v2 st-book" data-time="4:13">
+          <div class="st-bar"><svg viewBox="0 0 40 40"><rect width="40" height="40" rx="11" fill="url(#mark)"/><g fill="#fff"><rect x="6.5" y="16" width="3" height="8" rx="1.5"/><rect x="12.5" y="12" width="3" height="16" rx="1.5"/><rect x="18.5" y="8" width="3" height="24" rx="1.5"/><rect x="24.5" y="13" width="3" height="14" rx="1.5"/><rect x="30.5" y="16.5" width="3" height="7" rx="1.5"/></g></svg><div><b>Harbor View Handyman</b><small>Still on the call</small></div><em><i class="st-live"><i></i><i></i><i></i></i><span data-clock="48,66">0:48</span></em></div>
+          <p class="st-open-times">Your open times, from your Google Calendar</p>
+          <div class="st-slots"><span><i data-at=".3"></i><b>Fri 10:00 AM</b></span><span><b>Fri 2:30 PM</b></span><span><b>Mon 9:00 AM</b></span></div>
+          <p class="st-say st-say--line" data-at=".3"><small>The customer says</small>Friday at ten works.</p>
+          <div class="st-booked" data-at=".56"><i><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></i><div><small>Booked in your Google Calendar</small><b>Fri, Nov 20 · 10:00 AM</b><span>TV mounting · Jordan Blake</span></div></div>
+        </div>
         <div class="st-view st-v3" data-time="4:14">
           <div class="st-date">Thursday, November 19</div><div class="st-time">4:14</div>
           <div class="st-note" data-at=".2"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></i>Messages<span>now</span></div>
-          <p><b>YAP Voice: New enquiry for Harbor View Handyman</b><br>Services: TV mounting<br>Name: Jordan Blake<br>Phone: +16195550142<br>tv size: 65 inch</p></div>
-        </div>
-        <div class="st-view st-v4" data-time="4:15">
-          <h4>Callbacks</h4><div class="st-sub">Harbor View Handyman · today</div>
-          <div class="st-row st-first"><b>Jordan Blake</b><span>TV mounting · 4:12 PM</span><a>Call back</a></div>
-          <div class="st-row st-done"><b>Sam Okafor</b><span>Basic plumbing · Yesterday 5:40 PM</span><a>Called</a></div>
-          <div class="st-row st-done"><b>Priya Natarajan</b><span>Drywall repair · Mon 9:05 AM</span><a>Called</a></div>
+          <p><b>YAP Voice: New enquiry for Harbor View Handyman</b><br>Services: TV mounting<br>Name: Jordan Blake<br>Phone: +16195550142<br>tv size: 65 inch<br>Visit: Fri 11/20, 10:00 AM</p></div>
+          <div class="st-note st-cal" data-at=".5"><div class="st-hd"><i><svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg></i>Calendar<span>now</span></div>
+          <p><b>TV mounting · Jordan Blake</b><br>Fri, Nov 20 · 10:00 AM</p></div>
         </div>
         <!-- /STORY PHONE -->
         <div class="st-glass" id="st-glass"></div><div class="st-shine" id="st-shine"></div>
@@ -343,7 +346,7 @@
         <div class="plans">
           <article class="plan">
             <h3 class="plan__name">Answering + Booking</h3>
-            <p class="plan__amount">$99<span class="plan__per">/month</span></p>
+            <p class="plan__amount">$49<span class="plan__per">/month</span></p>
             <p class="plan__sub">per business line · up to 300 calls a month</p>
             <p class="plan__trial">30-day free trial</p>
             <ul class="ticks plan__list" role="list">
@@ -380,15 +383,15 @@
         <details class="billing" id="billing">
           <summary>Billing and cancelling, in plain words</summary>
           <div class="billing__body">
-          <p class="updated">Last updated: November 24, 2026</p>
+          <p class="updated">Last updated: November 28, 2026</p>
 
           <p>YAP VOICE is a product of <strong>YAP-AI Solutions</strong> ("I", "me", or "my"), San Diego, CA. This says what a business pays for YAP VOICE, when it pays, how to cancel, and what happens when it does. It is written to be read in a few minutes.</p>
 
           <h3 id="billing-plans">Plans and Prices</h3>
           <ul>
-          <li><strong>Answering + Booking: $99 a month</strong> for each business phone line. The assistant answers the calls you send it, takes the caller's name, number and what they need, takes the day and time they would like as a booking request for you to confirm, answers questions from the information you give it, and texts and emails you after each call.</li>
+          <li><strong>Answering + Booking: $49 a month</strong> for each business phone line. The assistant answers the calls you send it, takes the caller's name, number and what they need, takes the day and time they would like as a booking request for you to confirm, answers questions from the information you give it, and texts and emails you after each call.</li>
           <li><strong>Answering + Booking + Integration: $149 a month</strong> for each business phone line. Everything in Answering + Booking, with your own Google Calendar connected: the assistant offers callers your real open times and books, moves and cancels visits in your calendar.</li>
-          <li>A restaurant's line is on the $99 plan. Its booking requests are table requests, which you confirm.</li>
+          <li>A restaurant's line is on the $49 plan. Its booking requests are table requests, which you confirm.</li>
           </ul>
           <p>There is no setup fee and no minimum term. Prices are in US dollars. If the law requires me to collect a tax on the service, it is shown before you pay.</p>
 
@@ -627,7 +630,7 @@
           </details>
           <details>
             <summary>How is it set up, and what does it cost?</summary>
-            <p>We set it up with you: your services, hours, the questions you want asked, and where callbacks should go. It's <a href="#pricing">$99 a month per line</a>, or $149 with your Google Calendar connected so visits are booked straight into it, and the first 30 days are free. Each plan covers up to 300 calls a month; if your line regularly takes more, we agree a price that fits before anything changes.</p>
+            <p>We set it up with you: your services, hours, the questions you want asked, and where callbacks should go. It's <a href="#pricing">$49 a month per line</a>, or $149 with your Google Calendar connected so visits are booked straight into it, and the first 30 days are free. Each plan covers up to 300 calls a month; if your line regularly takes more, we agree a price that fits before anything changes.</p>
           </details>
         </div>
       </div>
@@ -715,6 +718,6 @@
 
   <script src="types.js?v=20261123c"></script>
   <script src="script.js?v=20261128f"></script>
-  <script src="story.js?v=20261128f"></script>
+  <script src="story.js?v=20261128i"></script>
 </body>
 </html>
