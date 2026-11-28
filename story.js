@@ -128,6 +128,7 @@
     seam=phoneTop+(foot-phoneTop)*.42;
     box={l:(W-pw)/2,r:(W+pw)/2,w:W,cx:W/2,cy:phoneTop+(foot-phoneTop)*.4,pw:pw};zoom=small?1:1.3;
     var d=Math.min(1.5,devicePixelRatio||1);cv.width=Math.round(cv.clientWidth*d);cv.height=Math.round(cv.clientHeight*d);
+    if(bc){bc.width=Math.round(innerWidth*d);bc.height=Math.round(innerHeight*d);blast='';pnow=scrollY}
     vc.width=Math.round(W*d);vc.height=Math.round(H*d);
     last='';wake();
   }
@@ -272,15 +273,40 @@
   // The page glides toward where the scroll is, a little each frame, so a
   // mouse wheel's jumps become one continuous movement. The same loop runs
   // the springs, and stops when the scroll and the springs have both settled.
+  // THE FILM GOES ON BEHIND THE REST OF THE PAGE. When the story has been scrolled through, the
+  // same frames go on playing, by the scroll, on a layer that fills the window behind the page:
+  // behind the price, what it does, the dashboard, the questions (story.css makes those sections
+  // let it show through). The whole film goes by in two and a half screens of scrolling and
+  // starts again; one shot dissolves into the next. Nothing is drawn while the story still
+  // covers the screen.
+  var bc=null,bx=null,pgoal=0,pnow=0,blast='',SHOTS=[[1,36],[37,108],[109,156],[157,198]].filter(function(s){return s[1]<=TOTAL});
+  if(FILM){
+    var back=document.createElement('div');back.className='st-back';back.setAttribute('aria-hidden','true');
+    bc=document.createElement('canvas');bx=bc.getContext('2d');back.appendChild(bc);
+    document.body.insertBefore(back,document.body.firstChild);document.documentElement.classList.add('st-through');
+  }
+  function behind(im,a){
+    if(!im||a<=0)return;var W=bc.width,h0=bc.height,z=Math.max(W/im.naturalWidth,h0/im.naturalHeight)*1.04,w=im.naturalWidth*z,h=im.naturalHeight*z;
+    bx.globalAlpha=a;bx.drawImage(im,(W-w)/2,(h0-h)*.35,w,h);bx.globalAlpha=1;
+  }
+  function backdrop(y){
+    if(!bc||story.getBoundingClientRect().bottom>=innerHeight)return;
+    var p=y/(innerHeight*RUN);p-=Math.floor(p);
+    var pos=1+p*TOTAL,lo=Math.min(TOTAL,Math.floor(pos)),t=pos-lo,k=0;while(lo>SHOTS[k][1])k++;
+    var end=SHOTS[k][1],hi=Math.min(end,lo+1),next=SHOTS[(k+1)%SHOTS.length][0],mix=ease((pos-(end-6))/7);
+    var key=pos.toFixed(2)+'|'+bc.width+'x'+bc.height+'|'+ready;if(key===blast)return;blast=key;
+    behind(near(lo),1);if(hi>lo)behind(near(hi),t);if(mix>0)behind(near(next),mix);
+  }
   function tick(t){
     var d=goal-now,gliding=Math.abs(d)>=.4,dt=then?Math.min(.05,(t-then)/1000):.016;then=t;
     now=gliding?now+d*.14:goal;
-    var live=springs();draw(now);voice(dt);
+    var d2=pgoal-pnow,rolling=Math.abs(d2)>=.4;pnow=rolling?pnow+d2*.14:pgoal;
+    var live=springs();draw(now);voice(dt);backdrop(pnow);
     // the voice only keeps the page working while the story is on screen
     var r=story.getBoundingClientRect(),seen=r.bottom>0&&r.top<innerHeight;
-    if(gliding||(live&&seen))requestAnimationFrame(tick);else{running=false;then=0}
+    if(gliding||rolling||(live&&seen))requestAnimationFrame(tick);else{running=false;then=0}
   }
-  function wake(){read();if(!running){running=true;requestAnimationFrame(tick)}}
+  function wake(){read();pgoal=scrollY;if(!running){running=true;requestAnimationFrame(tick)}}
   // Which part of the screen can be seen. A page inside a frame cannot ask how far the page around
   // it has scrolled, but the browser will say how much of each strip is in view; together the
   // strips give the top and bottom of the visible part, and the layout follows it. On the site
