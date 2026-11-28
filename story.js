@@ -20,7 +20,7 @@
   // Less motion asked for: leave the page as the plain section it already is.
   if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   story.classList.add('is-live');document.documentElement.classList.add('st-go','st-ready');
-  // the home page opens slowly; a trade's page has its headline there at once
+  // a page that asks for it (data-open="slow": the home page and every trade's) opens slowly
   var SLOW=story.dataset.open==='slow';if(SLOW)story.classList.add('st-slow');
 
   // Each of the five steps plays a run of frames. `x`,`y` say where the

@@ -82,7 +82,7 @@
 @keyframes st-drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes st-settle{from{opacity:0}to{opacity:1}}
 
-/* ON THE HOME PAGE ONLY (.st-slow): the opening, slow, the way an old console woke up: a moment of dark, a soft light that
+/* ON THE HOME PAGE AND EVERY TRADE'S PAGE (.st-slow, from data-open="slow"): the opening, slow, the way an old console woke up: a moment of dark, a soft light that
    swells behind where the words will be, and then the headline coming out of a blur, glowing,
    every letter in its own time and none of them in a hurry. Afterwards each letter lights up
    as the mouse crosses it, and fades slowly, so a glow trails the cursor. The rest of the
@@ -364,7 +364,7 @@
    THE FILM BEHIND THE SMALL PAGES (film.js). The film fills the window behind
    the page and moves as the page is scrolled. The page's headline stands over
    it at the top; everything meant to be read lies on a solid panel in front.
-   No slow headline here: that is the home page's alone.
+   No slow headline here: that is for the home page and the trades' pages.
    ========================================================================== */
 .st-back{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#0a1222}
 .st-back canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none;display:block;filter:brightness(.66) saturate(.92)}

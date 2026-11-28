@@ -315,9 +315,9 @@ def common(p, t, key):
     # the home page, and each type's own picture on its page (img/hero-<type>.jpg, named in
     # site.css). A new type needs its picture and its line there, or it shows no photo at all.
     p.swap('<section class="story hero--work" id="top"', f'<section class="story hero--{key}" id="top"')
-    # Only the home page opens slowly, the headline coming out of the dark letter by letter.
-    # On a trade's page the headline is simply there.
-    p.swap(' data-open="slow"', '')
+    # Every trade's page opens the way the home page does (data-open="slow" is left on): the
+    # headline comes out of the dark letter by letter, and each letter lights up under the mouse.
+    # For a while only the home page did; the owner asked for it on every business type (28 Nov).
     # A restaurant's story ends with a request the owner confirms, not a visit booked on the call.
     if t['kind'] == 'restaurant':
         p.swap(' data-flow="booked"', '')
