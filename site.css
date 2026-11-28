@@ -1003,6 +1003,26 @@ p { margin: 0; }
 .plan__fine { margin-top: 20px; font-size: 0.875rem; color: var(--ink-3); max-width: 62em; }
 .plan__list { margin: 22px 0 28px; }
 .plan__note { margin-top: 18px; font-size: 0.9375rem; color: var(--ink-3); }
+/* One button for both plans (the trial is the same on either), with the demo line under it. */
+.plan__list:last-child { margin-bottom: 0; }
+.plans__go { margin-top: 32px; display: grid; justify-items: center; gap: 14px; text-align: center; }
+.plans__hear { font-size: var(--step--1); color: var(--ink-2); max-width: 34em; }
+.plans__hear a { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+/* The billing and cancelling terms, folded up under the plans: a native details, so it opens
+   with no script. They used to be a page of their own (billing.html, which now forwards here). */
+.billing { margin-top: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0 22px; max-width: 62em; }
+.billing summary { cursor: pointer; padding: 16px 28px 16px 0; font-weight: 600; list-style: none; position: relative; }
+.billing summary::-webkit-details-marker { display: none; }
+.billing summary::after { content: '+'; position: absolute; right: 2px; top: 50%; transform: translateY(-50%); font-size: 1.35rem; font-weight: 400; color: var(--ink-3); transition: transform 0.2s; }
+.billing[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.billing__body { padding: 4px 0 24px; border-top: 1px solid var(--line); }
+.billing__body > * + * { margin-top: 0.9em; }
+.billing__body .updated { margin-top: 16px; font-size: var(--step--1); color: var(--ink-3); }
+.billing__body h3 { font-size: 1.125rem; font-weight: 600; margin-top: 1.7em; }
+.billing__body p, .billing__body li { color: var(--ink-2); line-height: 1.65; font-size: 0.975rem; }
+.billing__body ul { display: grid; gap: 6px; margin: 0.6em 0 0; padding-left: 1.3rem; }
+.billing__body strong { color: var(--ink); font-weight: 600; }
+.billing__body a { text-underline-offset: 2px; overflow-wrap: anywhere; }
 
 /* IT & cabling: deliberately quieter than the product above it. */
 .it { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding: 40px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }

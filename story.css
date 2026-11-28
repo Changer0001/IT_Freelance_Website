@@ -20,7 +20,7 @@
    sizes the phone to the room that is left, and sets every position.
    Every class here starts "st-" so nothing collides with site.css.
    ========================================================================== */
-.story,.st-outro,.st-open,.st-filmed[data-film="hero"] .hero,.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{
+.story,.st-open,.st-filmed[data-film="hero"] .hero,.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{
   --bg:#0a1222; --surface:#121b2d; --tint:#0e1626; --line:#2a3854; --ink:#f3efe6; --ink-2:#b9c4da; --ink-3:#8a99b5;
   --accent:#7aa8ff; --accent-hover:#9bbdff; --accent-soft:#16264a; --on-accent:#0a101d;
   --st-bg:#0a1222; --st-navy:#0e1b33; --st-cream:#f3efe6; --st-muted:#aab6cf; --st-accent:#1f66e5; --st-sky:#a9c6ff; --st-sms:#1f9d55;
@@ -33,7 +33,7 @@
   /* the page's bar lies over the top of the story, as it lies over every section */
   margin-top:calc(-1 * var(--st-bar) - 1px);   /* the bar, and the line under it */
 }
-.story .hero__facts li::before,.st-outro .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
+.story .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
 
 /* ------------------------------------------------- the opening (the cover) */
 .st-cover{position:relative;z-index:4}
@@ -43,9 +43,9 @@
 .st-intro .hero__lede,.st-intro .hero__demo{margin-inline:auto}
 .st-intro .hero__actions,.st-intro .hero__facts{justify-content:center}
 /* the opening's main button is the same blue as the phone's own call button */
-.story .btn--primary,.st-outro .btn--primary{background:var(--st-accent);color:#fff}
-.story .btn--primary:hover,.st-outro .btn--primary:hover{background:#3b7cf0}
-.st-hint,.st-sub,.st-outro{display:none}
+.story .btn--primary{background:var(--st-accent);color:#fff}
+.story .btn--primary:hover{background:#3b7cf0}
+.st-hint,.st-sub{display:none}
 .st-more{display:contents}
 
 /* ------------------------------------------------- the five steps, as a list */
@@ -110,12 +110,10 @@
 /* Until story.js has taken over (see the note in the page's head): dark and empty, one screen tall. */
 .st-go .story:not(.is-live){min-height:100vh}
 .st-go .story:not(.is-live) > *{visibility:hidden}
-/* The foot of the story: the opening's own words and buttons, moved here by story.js. The
-   second button ("See how a call goes") would only send the visitor back up, so it is left out. */
-.st-outro.is-on{display:block;background:var(--st-bg);padding:64px 0 84px}
-.st-outro .eyebrow{margin-bottom:6px}
-.st-outro .hero__lede{margin-top:0;font-size:1.25rem}
-.st-outro .btn--ghost{display:none}
+/* While the story is live the opening is the headline and one line. The rest of the opening's
+   words and its buttons are not shown: the story says what they say, and the block straight
+   after it (the price, in the page) carries the button and the demo line. */
+.is-live .st-more,.is-live .st-intro > .eyebrow{display:none}
 
 /* ------------------------------------------------- the scene */
 .is-live .st-stage{position:sticky;top:0;height:100vh;padding:0;overflow:hidden;background:var(--st-bg)}

@@ -325,7 +325,8 @@ const landAt = hash => {
   let target = null;
   try { target = document.querySelector(hash); } catch (e) { return null; }
   if (!target) return null;
-  const first  = target.matches('.eyebrow, h1, h2, h3') ? target : (target.querySelector('.eyebrow, h1, h2, h3') || target);
+  // A fold (details) is landed by its own top, so its heading line is what shows, not a heading inside it.
+  const first  = target.matches('.eyebrow, h1, h2, h3, details') ? target : (target.querySelector('.eyebrow, h1, h2, h3') || target);
   const header = document.getElementById('site-header');
   const under  = window.matchMedia('(max-width: 860px)').matches ? 32 : 68;
   const top    = first.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0) - under;
@@ -380,6 +381,20 @@ document.addEventListener('click', e => {
     target.focus({ preventScroll: true });
   }
 });
+
+// The billing and cancelling terms are folded up under the plans. A link to them
+// (#billing: the footer's, or the old billing.html address, which forwards here)
+// opens the fold, so nobody lands on a closed box.
+const openBilling = hash => {
+  const fold = document.getElementById('billing');
+  if (fold && /^#billing(-|$)/.test(hash)) fold.open = true;
+};
+document.addEventListener('click', e => {
+  const link = e.target.closest && e.target.closest('a[href*="#billing"]');
+  if (link) openBilling(link.hash);
+}, true);
+window.addEventListener('hashchange', () => openBilling(location.hash));
+openBilling(location.hash);
 
 // Arriving from another page on a link that names a section.
 window.addEventListener('load', () => {

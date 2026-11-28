@@ -288,13 +288,6 @@
   cta.addEventListener('click',function(e){if(!cta.classList.contains('open')&&matchMedia('(hover: none)').matches){e.preventDefault();cta.classList.add('open')}});
   // "Skip the story" lands the next section under the page's bar
   skip.addEventListener('click',function(){scrollTo({top:Math.round(story.getBoundingClientRect().bottom+scrollY-(header?header.offsetHeight:0)),behavior:'smooth'})});
-  // The opening is the headline and one line. The rest of the opening's words and its buttons
-  // wait at the foot of the story, for a visitor who has just watched the call.
-  (function(){
-    var more=$('st-more'),outro=$('st-outro'),tag=story.querySelector('.st-intro > .eyebrow');
-    if(!more||!outro)return;
-    var box=outro.firstElementChild;if(tag)box.appendChild(tag);box.appendChild(more);outro.classList.add('is-on');
-  })();
   // The headline, one element to a letter, so each can come out of the dark in its own time
   // (the times are scattered, not left to right) and light up by itself. Words stay whole, so a
   // line never breaks inside one; a reader of the page still gets the sentence.

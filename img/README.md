@@ -18,7 +18,7 @@ required. Each was cropped, made smaller, and blurred before it was saved here.
 
 The story at the top of the home page and every trade's page (`story.css`, `story.js`)
 plays a short film behind the phone, and the same film plays behind the small
-pages as they are scrolled (`film.js`: IT services, billing, the policies,
+pages as they are scrolled (`film.js`: IT services, the policies,
 "page not found"): 198 frames, `001.webp` to `198.webp`,
 800 by 450, cut at 12 frames a second from four stock clips of tradespeople
 and joined in the order the story tells. About 2.3 MB in all. The script

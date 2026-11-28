@@ -412,7 +412,7 @@ def restaurant_page(p, t):
     # are part of answering its calls and need no calendar.
     p.swap('<h2 id="pricing-title" class="section__title">Two plans, one line each</h2>',
            '<h2 id="pricing-title" class="section__title">One line, one price</h2>')
-    p.between('        <div class="plans">', '        <p class="plan__fine">', '''        <div class="plans plans--one">
+    p.between('        <div class="plans">', '        <div class="plans__go">', '''        <div class="plans plans--one">
           <article class="plan">
             <h3 class="plan__name">Answering + Booking</h3>
             <p class="plan__amount">$99<span class="plan__per">/month</span></p>
@@ -426,7 +426,6 @@ def restaurant_page(p, t):
               <li>Answers guests' questions from your own hours and answers</li>
               <li>Set up with you, usually in one sitting</li>
             </ul>
-            <a href="#contact" class="btn btn--primary btn--lg">Start 30-day free trial</a>
           </article>
         </div>
 ''')
