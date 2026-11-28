@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-open="screen">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,6 +26,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="site.css?v=20261119i" />
+  <link rel="stylesheet" href="story.css?v=20261128b" />
+  <!-- The same opening as the product pages, without the phone story: the
+       headline in a dark block, arriving slowly (opening.js, story.css).
+       Kept dark and empty until opening.js has built it, so the page is
+       never seen the other way first; shown as written if it has not
+       started within three seconds. Not for visitors who asked for less
+       motion. -->
+  <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var h=document.documentElement;h.classList.add('st-wait');setTimeout(function(){h.classList.remove('st-wait')},3000)}}catch(e){}</script>
 
   <script type="application/ld+json">
   {
@@ -216,5 +224,6 @@
   </footer>
 
   <script src="script.js?v=20261119i"></script>
+  <script src="opening.js?v=20261128b"></script>
 </body>
 </html>

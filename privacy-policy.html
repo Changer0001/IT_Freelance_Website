@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-open="band">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,14 @@
   <meta name="theme-color" content="#f4f7fc" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0a101d" media="(prefers-color-scheme: dark)" />
   <link rel="stylesheet" href="site.css?v=20261119i" />
+  <link rel="stylesheet" href="story.css?v=20261128b" />
+  <!-- The same opening as the product pages, without the phone story: the
+       headline in a dark block, arriving slowly (opening.js, story.css).
+       Kept dark and empty until opening.js has built it, so the page is
+       never seen the other way first; shown as written if it has not
+       started within three seconds. Not for visitors who asked for less
+       motion. -->
+  <script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var h=document.documentElement;h.classList.add('st-wait');setTimeout(function(){h.classList.remove('st-wait')},3000)}}catch(e){}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -268,5 +276,6 @@
   </footer>
 
   <script src="script.js?v=20261119i"></script>
+  <script src="opening.js?v=20261128b"></script>
 </body>
 </html>

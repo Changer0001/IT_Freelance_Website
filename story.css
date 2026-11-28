@@ -20,7 +20,7 @@
    sizes the phone to the room that is left, and sets every position.
    Every class here starts "st-" so nothing collides with site.css.
    ========================================================================== */
-.story,.st-outro,.site-header.st-over,.st-go:not(.st-ready) .site-header{
+.story,.st-outro,.st-open,.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{
   --bg:#0a1222; --surface:#121b2d; --tint:#0e1626; --line:#2a3854; --ink:#f3efe6; --ink-2:#b9c4da; --ink-3:#8a99b5;
   --accent:#7aa8ff; --accent-hover:#9bbdff; --accent-soft:#16264a; --on-accent:#0a101d;
   --st-bg:#0a1222; --st-navy:#0e1b33; --st-cream:#f3efe6; --st-muted:#aab6cf; --st-accent:#1f66e5; --st-sky:#a9c6ff; --st-sms:#1f9d55;
@@ -31,7 +31,7 @@
 .story{
   position:relative; background:var(--st-bg);
   /* the page's bar lies over the top of the story, as it lies over every section */
-  margin-top:calc(-1 * var(--st-bar));
+  margin-top:calc(-1 * var(--st-bar) - 1px);   /* the bar, and the line under it */
 }
 .story .hero__facts li::before,.st-outro .hero__facts li::before{background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237aa8ff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");}
 
@@ -76,7 +76,7 @@
 /* the cover's lower edge is not a line: it thins out over a quarter of a screen */
 .is-live .st-cover::after{content:"";display:block;height:26vh;
   background:linear-gradient(180deg,var(--st-bg) 0,rgba(10,18,34,.86) 27%,rgba(10,18,34,.45) 65%,rgba(10,18,34,0) 100%)}
-.is-live .st-hint{display:flex;position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font:600 11px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--st-muted);flex-direction:column;align-items:center;gap:10px;animation:st-settle 2s ease backwards;animation-delay:5.4s}
+.is-live .st-hint,.st-open .st-hint{display:flex;position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font:600 11px/1 var(--font-body);letter-spacing:.16em;text-transform:uppercase;color:var(--st-muted);flex-direction:column;align-items:center;gap:10px;animation:st-settle 2s ease backwards;animation-delay:5.4s}
 .st-hint i{width:1px;height:34px;background:linear-gradient(180deg,var(--st-muted),rgba(170,182,207,0));animation:st-drip 1.8s ease-in-out infinite}
 @keyframes st-drip{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes st-settle{from{opacity:0}to{opacity:1}}
@@ -86,7 +86,7 @@
    every letter in its own time and none of them in a hurry. Afterwards each letter lights up
    as the mouse crosses it, and fades slowly, so a glow trails the cursor. The rest of the
    opening (the line under it, the buttons) follows once the headline is there. */
-.is-live .st-panel::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
+.is-live .st-panel::before,.st-open::before{content:"";position:absolute;left:50%;top:46%;width:min(1100px,150vw);height:min(560px,80vh);transform:translate(-50%,-50%);z-index:-1;pointer-events:none;
   background:radial-gradient(closest-side,rgba(70,125,235,.34),rgba(40,80,190,.12) 55%,rgba(10,18,34,0));
   animation:st-dawn 5.2s ease-out backwards,st-breathe 9s ease-in-out 5.2s infinite}
 @keyframes st-dawn{0%{opacity:0;transform:translate(-50%,-50%) scale(.6)}55%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}100%{opacity:.62;transform:translate(-50%,-50%) scale(1)}}
@@ -103,7 +103,7 @@
 /* While the story is under it, the page's bar is dark too (story.js adds .st-over), so the
    opening is one dark screen in the light theme as well. Its colours are set with the story's,
    at the top of this file. */
-.site-header.st-over,.st-go:not(.st-ready) .site-header{color:var(--ink)}
+.site-header.st-over,.st-go:not(.st-ready) .site-header,.st-wait .site-header{color:var(--ink)}
 /* Until story.js has taken over (see the note in the page's head): dark and empty, one screen tall. */
 .st-go .story:not(.is-live){min-height:100vh}
 .st-go .story:not(.is-live) > *{visibility:hidden}
@@ -278,3 +278,19 @@
   .is-live .st-credit{bottom:calc(14px + var(--vb,0px));font-size:10px}
   .st-panel{padding-top:calc(var(--st-bar) + 28px)}
 }
+
+/* ==========================================================================
+   THE SAME OPENING ON THE SMALL PAGES (opening.js): the page's own headline in
+   a dark block under the page's bar, arriving out of the glow letter by letter.
+   A whole screen on a page that sells; about half a screen ("band") on a page
+   people come to read, so its text starts on the first screen.
+   ========================================================================== */
+.st-open{position:relative;isolation:isolate;overflow:hidden;background:var(--st-bg);margin-top:calc(-1 * var(--st-bar) - 1px);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--st-bar) + 40px) max(18px,4vw) 72px}
+.st-open--band{min-height:min(56vh,520px);padding-bottom:44px}
+.st-open h1{font:600 clamp(32px,5vw,56px)/1.05 var(--font-display);letter-spacing:-.02em;max-width:900px;margin:0;color:var(--st-cream);cursor:default}
+.st-open--band::before{top:54%;height:min(420px,60vh)}
+/* Until opening.js has built the block (the page's head adds .st-wait and takes it away after
+   three seconds whatever happens): dark and empty, so the page is never seen the other way first. */
+.st-wait body{background:#0a1222}
+.st-wait main,.st-wait footer{visibility:hidden}
